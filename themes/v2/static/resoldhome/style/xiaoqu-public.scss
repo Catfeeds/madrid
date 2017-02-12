@@ -1,0 +1,191 @@
+$default-color: #d51938;
+$default-font: 14px;
+$default-width: 1150px;
+$font-color: #666;
+$border-color: #dfdfdf;
+
+
+
+
+
+.name .icon {
+  float: left;
+  width: 29px;
+  height: 29px;
+  margin-right: 5px;
+  background-image: url("../images/tel_icon.png") ;
+}
+.sp-1 {
+  font-size: 28px;
+  color: #333;
+}
+
+.sp-2 {
+  font-size: 20px;
+  color: #d51938;
+  margin-left: 10px;
+}
+
+.sp-3 {
+  font-size: 14px;
+  color: #666;
+}
+
+.tel {
+  font-size: 24px;
+  color: #d51938;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+/*  小区地址  */
+.adress {
+  //overflow: hidden;
+  height: 34px;
+  line-height: 34px;
+}
+
+.adress .adress-left {
+  float: left;
+}
+.adress .adress-left a {
+  color: #999;
+}
+.adress .adress-left a:hover {
+  color: #d51938;
+}
+
+.adress .adress-right {
+  float: right;
+  margin-right: 15px;
+}
+
+.but {
+  float: left;
+  width: 100px;
+  height: 32px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  line-height: 32px;
+  text-align: center;
+}
+.adress .but img {
+  margin-top: 6px;
+}
+
+.but2 {
+  float: left;
+  width: 32px;
+  height: 32px;
+  background-color: #f9f9f9;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.adress .adress-1 {
+  color: #999;
+  font-size: 14px;
+}
+
+.adress .adress-left .link-map {
+  color: #999;
+}
+
+.adress ul li {
+  font-size: 14px;
+  float: left;
+}
+
+/*  tab-xuanxianka  */
+.tab {
+  margin-top: 20px;
+  width: 100%;
+  background: #f9f9f9;
+  .tab-ul {
+    border-bottom: 2px solid $default-color;
+    border-top: 1px solid $border-color;
+    width: 100%;
+    li {
+      float: left;
+      border-right: 1px solid $border-color;
+      margin: 1px 0;
+    }
+
+    li :hover  {
+      color: #fff;
+      height: 44px;
+      line-height: 44px;
+      background-color: $default-color;
+      border-top: 1px solid $default-color;
+      border-bottom: 1px solid $default-color;
+      margin-top: -2px;
+      margin-bottom: -1px;
+    }
+    a {
+      display: block;
+      width: 129px;
+      height: 43px;
+      font-size: 15px;
+      color: #333;
+      text-align: center;
+      line-height: 43px;
+      background: #f9f9f9;
+    }
+    .active a {
+      color: #fff;
+      height: 44px;
+      line-height: 44px;
+      background-color: $default-color;
+      border-top: 1px solid $default-color;
+      border-bottom: 1px solid $default-color;
+      margin-top: -2px;
+      margin-bottom: -1px;
+    }
+  }
+  .tab-change {
+    display: none
+  }
+}
+
+
+.select {
+  overflow: hidden;
+  clear: both;
+  margin-top: 20px;
+  li {
+    float: left;
+    margin-right: 10px;
+  }
+  li :hover {
+    color: #fff;
+    height: 38px;
+    background-color: $default-color;
+    border: 1px solid $default-color;
+    //margin-left: -1px;
+    //margin-top: -1px;
+    //margin-bottom: -1px;
+  }
+  a {
+    display: block;
+    height: 38px;
+    font-size: 15px;
+    background-color: #f2f2f2;
+    color: #333;
+    text-align: center;
+    line-height: 38px;
+    border: 1px solid $border-color;
+    padding: 0 15px 0 15px;
+  }
+  .active a {
+    color: #fff;
+    height: 38px;
+    background-color: $default-color;
+    border: 1px solid $default-color;
+    margin-left: -1px;
+    margin-top: -1px;
+    margin-bottom: -1px;
+  }
+}
+

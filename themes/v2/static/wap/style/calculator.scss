@@ -1,0 +1,125 @@
+.calc-type{padding:10px 0;
+a{ float: left; display: block; width: 2.6rem; height: 30px; line-height: 30px; margin: 0 .3rem; color: #333; text-align: center; background-color: #e6e6e6; }
+a.current,a:hover{background-color: #d51938; color: #fff;}
+}
+.ui-tab-nav{
+  .ui-tab-link{height:36px;line-height:36px;font-size:15px;text-align:center;-webkit-box-flex:1;overflow:hidden;margin-left:5%;display:block;width:1%;color:#333}
+  .ui-tab-link:last-child{margin-right:5%}
+  .ui-tab-link.current{color:#d51938;border-bottom:2px solid #d51938;}
+}
+.ui-tab-item{display:none}
+.ui-tab-item.show{display:block;-webkit-animation:fadeIn .3s}
+.ui-tab-full{height:40px;display:-webkit-box;-webkit-box-orient:horizontal;width:100%;}
+.ui-tab-nav.ui-tab-full .ui-tab-link{margin-left:0;margin-right:0}
+.ui-form .ui-list-item{padding:0 10px;height:44px;line-height:44px;}
+.ui-form .ui-list-item:active{background:#fff}
+.ui-form-field{position:absolute;width:90px;padding-right:10px;overflow:hidden;font-size:15px;height:44px}
+.ui-form-controls{padding-left:90px;height:44px}
+.ui-form-controls .ui-form-label{width:45%;float:left}
+.ui-form-controls .ui-input-text{background:0;border:0;width:100%;height:44px;font-size:15px;}
+.ui-form-controls .ui-input-radio,.ui-form-controls .ui-input-checkbox{width:22px;height:22px;border:1px solid #d5d5d5;border-radius:11px;position:relative;float:left;margin-top:10px;margin-right:5px}
+.ui-form-controls .ui-input-radio:checked,.ui-form-controls .ui-input-checkbox:checked{border-color:#d51938;}
+.ui-form-controls .ui-input-radio:checked:after{content:" ";display:block;position:absolute;width:10px;height:10px;background:#d51938;border-radius:10px;top:0px;left:0px;border:5px solid #fff}
+.ui-form-controls .ui-input-checkbox:checked{background:#d51938 url(images/form-checked.png) no-repeat center}
+.ui-form-select{border:0;width:100%;height:44px;font-size:15px;background:url(images/list-arrows.png) no-repeat right center}
+.ui-form .ui-form-textarea{height:90px;padding:5px 10px}
+.ui-form .ui-form-textarea textarea{height:80px;font-size:15px;line-height:20px;border:0;width:100%;overflow:hidden;resize:none}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none!important;margin:0}
+.ui-custom-select select{display:none}
+
+ul.ui-list{
+  li{position: relative; display: -webkit-box;padding:0 10px; height: 40px; line-height: 40px; border-bottom: 1px solid #dfdfdf;
+  .ui-form-field{-webkit-box-flex:1;}
+   .ui-form-controls{-webkit-box-flex:3; text-align: left;
+    .ui-input-text {
+      background: 0;
+      border: 0;
+      width: 80%;
+      height: 39px;
+      font-size: 15px;
+      text-indent: 10px;
+    }
+    }
+    .unit{ position:absolute; top: 50%;right:10px;-webkit-box-flex:2;-webkit-transform:translate(0,-50%);
+    }
+  }
+}
+.ui-btn-danger{ display: block; width: 250px; height: 35px; line-height: 35px; margin: 10px auto;  text-align:center;color: #fff!important; background-color:#d51938; border: 0; }
+
+.persent {
+  span {
+    display: inline-block;
+    width: 60px;
+    height: 25px;
+    color: #d51938;
+    border: 1px solid #d51938;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 3px;
+    margin-left: 25px;}
+}
+.way-tip, .result-tip {
+  font-size: 13px;
+  color: #999;
+  line-height: 36px;
+  padding:5px 10px 20px;
+  background-color:#f5f5f5;
+}
+.ui-tips {
+  text-align: center;
+  position: fixed;
+  width: 320px;
+  left: 50%;
+  top: -18px;
+  margin-left: -160px;
+  height: 36px;
+  -webkit-transition: opacity .3s;
+  margin-top: -18px;
+  opacity: 0;
+  z-index: 10;
+  span {
+    display: inline-block;
+    height: 36px;
+    background: rgba(0,0,0,.7);
+    color: #fff;
+    line-height: 36px;
+    font-size: 15px;
+    padding: 0 20px;
+    border-radius: .12;
+  }
+}
+.ui-tips-show .ui-tips{top:100px;opacity:1}
+.check-detail {padding-left: 100px!important;
+  text-align: center;
+  font-size: 15px;
+  color: #666;
+  span{margin-right:10px;}
+  i{position: relative; top: 50%;-webkit-transform:translate(0,-50%);}
+}
+.detail-list{
+  padding: 0 10px;
+}
+.detail-list-tit {
+  font-size: 15px;
+  height: 32px;
+  color: #333;
+  line-height: 32px;
+  strong {
+    display: inline-block;
+    width: 33.3%;
+    font-weight: normal;
+  }
+}
+.per-year {
+  font-size: 13px;
+  color: #999;
+  line-height: 25px;
+  padding-bottom: 5px;
+  border: none;
+  background: #fff;
+  span {
+    display: inline-block;
+    width: 33.3%;
+  }
+}
+

@@ -1,0 +1,85 @@
+#allmap{
+    position:absolute;
+    bottom:0;
+    .mdetail-box{
+        border:1px solid #dfdfdf;
+    }
+}
+.map-marker{
+    &.map-area,&.map-street{
+        position:absolute;
+        width:90px;
+        height:50px;
+        line-height:25px;
+        background:url('../images/marker-bg.png') 0 0 no-repeat;
+        padding-top:20px;
+        padding-bottom:20px;
+        .name,.num{
+            text-align:center;
+            font-size:14px;
+            color:#fff;
+        }
+    }
+    &.map-plot{
+        position:absolute;
+        z-index:999!important;
+        &.mapopen{
+            .info{
+                background:#ff8888;
+            }
+        }
+        .info{
+            padding: 5px;
+            background:#5eb0ab;
+            line-height:1;
+            color:#fff;
+            white-space:nowrap;
+            border-radius:3px;
+            .name{
+                font-size:15px;
+            }
+            .plot-num{
+                font-size:15px;
+            }
+        }
+    }
+}
+.map-box{
+    .map-list{
+        border:0;
+    }
+    .map-list .map-list-box>.map-title{
+        margin:0;
+        padding:10px 20px 0 20px;
+    }
+    .area-container,.street-container,.plot-container{
+        width:285px;
+        border:1px solid #dfdfdf;
+        .map-content ul li{
+            position:relative;
+            .col-span-1{
+                padding-right:20px;
+            }
+            .col-span-2{
+                position:absolute;
+            }
+        }
+        .map-content ul li:last-child{
+            border:0;
+        }
+    }
+    .map-list .map-list-box .map-content ul .con-span-1{
+            display:inline-block!important;
+    }
+}
+.nicescroll-rails{
+    background-color:rgb(241, 241, 241);
+}
+.BMapLabel{
+    border:0!important;
+}
+.map-select-box{
+    .left-box{
+        display:none;
+    }
+}

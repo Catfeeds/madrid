@@ -1,0 +1,1 @@
+<?php $this->widget('CommonInfoWidget',['place'=>'image','model'=>$zf])?>

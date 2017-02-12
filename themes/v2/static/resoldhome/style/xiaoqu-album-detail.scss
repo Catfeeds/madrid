@@ -1,0 +1,414 @@
+$default-color: #d51938;
+$a-font-size: 14px;
+$border-color: #dfdfdf;
+a {
+
+  text-decoration: none;
+}
+
+a :hover {
+  text-decoration: none;
+}
+
+.wrap {
+  width: 100%;
+}
+
+.xiaoqu-name {
+  margin-top: 20px;
+}
+
+.main {
+  width: 1150px;
+  margin: 20px auto 0 auto;
+  /*  xiaoqumingzi  */
+  .xiaoqu-name .icon {
+    float: left;
+    width: 29px;
+    height: 29px;
+    margin-right: 5px;
+    background-image: url("../images/tel_icon.png");
+  }
+  .sp-1 {
+    font-size: 28px;
+    color: #333;
+  }
+
+  .sp-2 {
+    font-size: 20px;
+    color: #d51938;
+    margin-left: 10px;
+  }
+
+  .sp-3 {
+    font-size: 14px;
+    color: #666;
+  }
+
+
+
+  /*  小区地址  */
+  .adress {
+    overflow: hidden;
+    height: 34px;
+    line-height: 34px;
+  }
+  .adress .adress-left {
+    float: left;
+  }
+  .adress .adress-right {
+    float: right;
+  }
+  .but {
+    float: left;
+    width: 100px;
+    height: 32px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    line-height: 32px;
+    text-align: center;
+  }
+  .but img {
+    margin-top: 6px;
+  }
+
+  .but2 {
+    float: left;
+    width: 32px;
+    height: 32px;
+    background-color: #f9f9f9;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  .adress .adress-1 {
+    color: #999;
+    font-size: 14px;
+  }
+
+  .adress .adress-left .link-map {
+    color: #999;
+  }
+  .adress ul li {
+    font-size: 14px;
+    float: left;
+  }
+  /*  tab-xuanxianka  */
+
+  .select {
+    overflow: hidden;
+    clear: both;
+    margin-top: 20px;
+    li {
+      float: left;
+      margin-right: 10px;
+    }
+    li :hover {
+      color: #fff;
+      height: 38px;
+      background-color: $default-color;
+      border: 1px solid $default-color;
+      //margin-left: -1px;
+      //margin-top: -1px;
+      //margin-bottom: -1px;
+    }
+    a {
+      display: block;
+      height: 38px;
+      font-size: 15px;
+      background-color: #f2f2f2;
+      color: #333;
+      text-align: center;
+      line-height: 38px;
+      border: 1px solid $border-color;
+      padding: 0 15px 0 15px;
+    }
+    .active a {
+      color: #fff;
+      height: 38px;
+      background-color: $default-color;
+      border: 1px solid $default-color;
+      margin-left: -1px;
+      margin-top: -1px;
+      margin-bottom: -1px;
+    }
+  }
+  .select-change {
+    display: none;
+  }
+}
+
+.picFocus {
+  position: relative;
+  overflow: hidden;
+  width: 1150px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.picFocus > .title {
+  margin-top: 30px;
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+}
+
+.picFocus .pic-box {
+  margin: 0 auto;
+  background: #000;
+  position: relative;
+}
+
+.picFocus .pic-box .next {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -21px;
+}
+
+.picFocus .pic-box .next a {
+  display: block;
+  background: url("../images/next_.png") no-repeat center;
+  width: 42px;
+  height: 42px;
+
+}
+
+.picFocus .pic-box .prev {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  margin-top: -21px;
+}
+
+.picFocus .pic-box .prev a {
+  display: block;
+  background: url("../images/prev.png") no-repeat center;
+  width: 42px;
+  height: 42px;
+
+}
+
+.picFocus .bd {
+  height: 600px;
+  width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  background: #000;
+}
+
+.picFocus .bd li img {
+  vertical-align: middle;
+  width: 1000px;
+  height: 600px;
+}
+
+.picFocus .hd {
+  //height: 200px;
+  margin-bottom: 6px;
+  position: relative;
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.picFocus .small-img {
+  float: left;
+  margin-left: 75px;
+  display: inline;
+  width: 1000px;
+  overflow: hidden;
+}
+
+.picFocus .small-img ul {
+  /*height: 54px;*/
+  /*width: 9999px;*/
+  overflow: hidden;
+}
+
+.picFocus .small-img li {
+  float: left;
+  margin-right: 18px;
+  padding: 0 4px 0 0;
+  cursor: pointer;
+  display: inline;
+  //height: 200px;
+}
+
+.picFocus .small-img img {
+  border: 1px solid #dcdddd;
+  width: 180px;
+  height: 160px;
+}
+
+.picFocus .small-img .on img {
+  border-color: #d51938;
+}
+
+.picFocus .prev,
+.picFocus .next {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  display: block;
+}
+
+.picFocus .bd .next {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -21px;
+  background: url("../images/next_.png");
+  z-index: 1;
+}
+
+.picFocus .bd .prev {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  margin-top: -21px;
+  background: url("../images/prev.png");
+  z-index: 1;
+}
+
+.picFocus .hd .list-prev {
+  position: absolute;
+  width: 45px;
+  height: 80px;
+  background: #d51938;
+  //left: 10px;
+  top: 50%;
+  left: 0;
+  margin-top: -40px;
+  z-index: 1;
+}
+
+.picFocus .hd .list-next {
+  position: absolute;
+  width: 45px;
+  height: 80px;
+  background: #d51938;
+  right: 0;
+  top: 50%;
+  margin-top: -40px;
+  z-index: 1;
+}
+
+.picFocus .hd .list-prev a {
+  display: block;
+  background: url("../images/left_arrow.png") no-repeat center center;
+  width: 45px;
+  height: 80px;
+}
+
+.picFocus .hd .list-next a {
+  display: block;
+  background: url("../images/right_arrow.png") no-repeat center center;
+  width: 45px;
+  height: 80px;
+}
+
+$mainColor: #d51938;
+
+.search-wrap {
+  background-color: #f9f9f9;
+  width: 100%;
+  .search-box {
+    position: relative;
+    width: 1150px;
+    margin: 0 auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    .search-input {
+      border: 1px solid #ccc;
+      border-right: 0;
+      .input {
+        width: 350px;
+        height: 38px;
+        line-height: 38px;
+        font-size: 14px;
+        background: #fff;
+        font-size: 14px;
+        border: 0;
+        padding: 0 10px;
+
+        outline: none;
+
+      }
+
+    }
+    .btn {
+      display: inline-block;
+      background-color: $mainColor;
+      width: 98px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+    }
+    .search-list-box {
+      position: absolute;
+      top: 55px;
+      background-color: #fff;
+      display: none;
+      ul {
+        width: 369px;
+        border: 1px solid #ccc;
+        border-top: none;
+        li {
+          width: 349px;
+          padding: 0 10px;
+          height: 30px;
+          line-height: 30px;
+          overflow: hidden;
+          cursor: pointer;
+          span {
+            display: inline-block;
+            width: 49%;
+            em {
+              color: #999;
+              margin-left: 10px;
+            }
+            &.right {
+              text-align: right;
+              color: #666;
+            }
+          }
+          &:hover {
+            background-color: #ededed;
+          }
+
+        }
+      }
+    }
+
+    .hot-word {
+      height: 40px;
+      line-height: 40px;
+      float: left;
+      margin-left: 20px;
+      font-size: 14px;
+      a {
+        color: #666;
+        margin: 0 10px 0 0;
+        &:hover {
+          color: $mainColor;
+        }
+        &.new {
+          color: $mainColor;
+        }
+      }
+
+    }
+  }
+}
+
+.picFocus .hd .prevStop {
+  background: #bfbfbf !important;
+}
+
+.picFocus .hd .nextStop {
+  background: #bfbfbf !important;
+}

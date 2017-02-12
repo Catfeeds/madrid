@@ -1,0 +1,66 @@
+.wapper{ width: 1000px; margin: 0 auto;}
+.icon_tit_bg{ background: url("text.png") no-repeat;}
+.bor_red{border: 1px solid #CD321C;}
+.bor_green{border: 1px solid #B9CB97;}
+.bor_qgreen{ border: 1px solid #A2D450;}
+.bor_blue{border: 1px solid #A6CBF0;}
+.w270{ width: 268px;}
+.w250{ width: 248px;}
+.w190{ width: 188px;}
+.w750{ width: 748px;}
+.w960{ width: 958px;}
+.w225{ width:223px; }
+.hot_activ{position:relative;
+  ul{ float: left; padding:0 0 10px 20px;
+    li{ float: left; width: 220px; height: 26px; line-height: 26px; overflow: hidden;background-position:0 -79px; padding-left: 10px; margin-right:14px;
+      a{ color: #444;}
+      a:hover{color: #005EAC;}
+    }
+  }
+  ul.bbs{
+    li{ width: 218px;}
+  }
+  ul.haofang{
+    li{ width: 210px;}
+  }
+}
+
+.hot_side_activ{position:relative;
+  ul{ float: left; padding:0 20px 15px;
+    li{ float: left; display: block; width: 220px; height: 26px; line-height: 26px; overflow: hidden;background-position:0 -79px; padding-left: 10px;
+      a{ color: #444;}
+      a:hover{color: #005EAC;}
+    }
+  }
+  ul.s_side{padding:0 10px 15px;}
+  ul.bs_side{
+    padding:0 10px 15px;
+    li{ width: 160px;}
+  }
+  ul.hf_side{
+    padding:0 9px 15px;
+    li{ width: 200px;}
+  }
+}
+.fang_activ_title{ position: relative; top: -11px; left:20px; width: 122px; height:23px; background-position:0 0; text-indent: -9999px;}
+.hfang_activ_title{ position: relative; top: -11px; left:20px; width: 122px; height:23px; background-position:0 -28px; text-indent: -9999px;}
+.bbs_activ_title{ position: relative; top: -11px; left:20px; width: 122px; height:23px; background-position:0 -57px; text-indent: -9999px;}
+.l14{ left:25%;}
+.l30{ left: 30px;}
+.l50{ left: 50px;}
+.rent{
+  width:998px;
+  td{ border: 1px solid #ccc; padding: 0 10px; height: 38px; line-height: 38px; overflow: hidden;}
+  .w740{ width: 740px;}
+  .w120{ width: 120px;}
+  .w130{ width: 130px;}
+  .w590{ width: 590px;}
+  .w150{ width: 150px;}
+  .w250{ width: 250px;}
+  .w650{ width: 650px;}
+}
+.answer_list{
+  td{border-bottom: 1px solid #ccc; padding: 10px;}
+  .w650{ width: 650px;}
+  .w150{ width: 150px;}
+}

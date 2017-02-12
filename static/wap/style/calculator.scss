@@ -1,0 +1,126 @@
+
+
+.calc-type{padding:20px 0;
+a{ float: left; display: block; width: 240px; height: 60px; line-height: 60px; margin: 0 30px; color: #333; text-align: center; background-color: #e6e6e6; }
+a.current,a:hover{background-color: #d51938; color: #fff;}
+}
+.ui-tab-nav{
+  .ui-tab-link{height:72px;line-height:72px;font-size:28px;text-align:center;-webkit-box-flex:1;overflow:hidden;margin-left:5%;display:block;width:1%;color:#333}
+  .ui-tab-link:last-child{margin-right:5%}
+  .ui-tab-link.current{color:#d51938;border-bottom:4px solid #d51938;}
+}
+.ui-tab-item{display:none}
+.ui-tab-item.show{display:block;-webkit-animation:fadeIn .3s}
+.ui-tab-full{height:78px;display:-webkit-box;-webkit-box-orient:horizontal;width:100%;}
+.ui-tab-nav.ui-tab-full .ui-tab-link{margin-left:0;margin-right:0}
+.ui-form .ui-list-item{padding:0 20px;height:87px;line-height:87px}
+.ui-form .ui-list-item:active{background:#fff}
+.ui-form-field{position:absolute;width:180px;padding-right:20px;overflow:hidden;font-size:30px;height:87px}
+.ui-form-controls{padding-left:180px;height:87px}
+.ui-form-controls .ui-form-label{width:45%;float:left}
+.ui-form-controls .ui-input-text{background:0;border:0;width:100%;height:87px;font-size:30px;}
+.ui-form-controls .ui-input-radio,.ui-form-controls .ui-input-checkbox{width:44px;height:44px;border:2px solid #d5d5d5;border-radius:22px;position:relative;float:left;margin-top:20px;margin-right:10px}
+.ui-form-controls .ui-input-radio:checked,.ui-form-controls .ui-input-checkbox:checked{border-color:#d51938;}
+.ui-form-controls .ui-input-radio:checked:after{content:" ";display:block;position:absolute;width:20px;height:20px;background:#d51938;border-radius:20px;top:0;left:0;border:10px solid #fff}
+.ui-form-controls .ui-input-checkbox:checked{background:#d51938 url(images/form-checked.png) no-repeat center}
+.ui-form-select{border:0;width:100%;height:87px;font-size:30px;background:url(images/list-arrows.png) no-repeat right center}
+.ui-form .ui-form-textarea{height:180px;padding:10px 20px}
+.ui-form .ui-form-textarea textarea{height:160px;font-size:30px;line-height:40px;border:0;width:100%;overflow:hidden;resize:none}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none!important;margin:0}
+.ui-custom-select select{display:none}
+
+ul.ui-list{
+  li{position: relative; display: -webkit-box;padding:0 20px; height: 80px; line-height: 80px; border-bottom: 2px solid #dfdfdf;
+  .ui-form-field{-webkit-box-flex:1;}
+   .ui-form-controls{-webkit-box-flex:3; text-align: left;
+    .ui-input-text {
+      background: 0;
+      border: 0;
+      width: 80%;
+      height: 77px;
+      font-size: 30px;
+      text-indent: 20px;
+    }
+    }
+    .unit{ position:absolute; top: 50%;right:20px;-webkit-box-flex:2;-webkit-transform:translate(0,-50%);
+    }
+  }
+}
+.ui-btn-danger{ display: block; width: 500px; height: 70px; line-height: 70px; margin: 20px auto;  text-align:center;color: #fff!important; background-color:#d51938; border: 0; }
+
+.persent {
+  span {
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+    color: #d51938;
+    border: 1px solid #d51938;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 6px;
+    margin-left: 50px;}
+}
+.way-tip, .result-tip {
+  font-size: 26px;
+  color: #999;
+  line-height: 36px;
+  padding:10px 20px 40px;
+  background-color:#f5f5f5;
+}
+.ui-tips {
+  text-align: center;
+  position: fixed;
+  width: 640px;
+  left: 50%;
+  top: -36px;
+  margin-left: -320px;
+  height: 72px;
+  -webkit-transition: opacity .3s;
+  margin-top: -36px;
+  opacity: 0;
+  z-index: 10;
+  span {
+    display: inline-block;
+    height: 72px;
+    background: rgba(0,0,0,.7);
+    color: #fff;
+    line-height: 72px;
+    font-size: 28px;
+    padding: 0 40px;
+    border-radius: 12px;
+  }
+}
+.ui-tips-show .ui-tips{top:200px;opacity:1}
+.check-detail {padding-left: 200px!important;
+  text-align: center;
+  font-size: 30px;
+  color: #666;
+  span{margin-right:20px;}
+  i{position: relative; top: 50%;-webkit-transform:translate(0,-50%);}
+}
+.detail-list{
+  padding: 0 20px;
+}
+.detail-list-tit {
+  font-size: 30px;
+  height: 64px;
+  color: #333;
+  line-height: 64px;
+  strong {
+    display: inline-block;
+    width: 33.3%;
+    font-weight: normal;
+  }
+}
+.per-year {
+  font-size: 26px;
+  color: #999;
+  line-height: 50px;
+  padding-bottom: 10px;
+  border: none;
+  background: #fff;
+  span {
+    display: inline-block;
+    width: 33.3%;
+  }
+}

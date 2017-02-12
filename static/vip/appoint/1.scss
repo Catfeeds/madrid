@@ -1,0 +1,49 @@
+.ui-yuyue{
+    font-size:14px;
+    min-width:1150px;
+    .ui-yuyue-timehour{
+        overflow:hidden;
+        .time-hour{
+            background-color:#f3f3f3;
+            border-right:1px solid #e5e5e5;
+            border-bottom:1px solid #e5e5e5;
+            float:left;
+            height:38px;
+            line-height:38px;
+            width:69px;
+            text-align:center;
+            font-size:13px;
+            color:#1e1e1e;
+        }
+    }
+    .ui-yuyue-timehourminutes{
+        ul{
+            overflow:hidden;
+            margin:0;
+        }
+        ul>li{
+            background-color:#fff;
+            border-right:1px solid #e5e5e5;
+            border-bottom:1px solid #e5e5e5;
+            float:left;
+            height:38px;
+            line-height:38px;
+            width:69px;
+            text-align:center;
+            font-size:13px;
+            color:#1e1e1e;
+        }
+    }
+    .time-hour{
+        &.on{
+            background-color:#1caf9b;
+            color:#fff;
+        }
+    }
+    .time-minutes{
+        &.on{
+            color:#f60;
+            font-weight:bold;
+        }
+    }
+}

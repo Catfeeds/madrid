@@ -1,0 +1,462 @@
+$default-color: #d51938;
+$default-font: 14px;
+$default-width: 1150px;
+$font-color: #666;
+$border-color: #dfdfdf;
+
+a {
+  text-decoration: none;
+  font-size: $default-font;
+  color: #999;
+}
+
+.wrap {
+  width: 100%;
+}
+
+.search-wrap {
+  background-color: #f2f2f2;
+  width: 100%;
+  .search-box {
+    width: 1150px;
+    margin: 0 auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    .search-input {
+      border: 1px solid #ccc;
+      border-right: 0;
+      background: #fff;
+      .input {
+        width: 350px;
+        height: 34px;
+        line-height: 34px;
+        font-size: 14px;
+        background: none;
+        //padding-left: 15px;
+        margin: 2px 2px;
+        font-size: 14px;
+        border: 0;
+        padding: 0 10px 0 10px;
+        box-shadow: 0 0 0;
+        outline: none;
+      }
+
+    }
+    .btn {
+      display: inline-block;
+      background-color: $default-color;
+      width: 98px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .hot-word {
+      height: 40px;
+      line-height: 40px;
+      float: left;
+      margin-left: 20px;
+      a {
+        color: #666;
+        font-size: 14px;
+        margin-right: 15px;
+      }
+      .new {
+        color: $default-color;
+      }
+    }
+  }
+}
+
+.index-main {
+  background-color: #ffffff;
+  width: 1154px;
+  margin: 0 auto 45px auto;
+  //font-size: 14px;
+}
+/*  XIAQOMIN  */
+.name {
+  margin-top: 10px;
+}
+.name .icon{
+  float: left;
+  width:29px;
+  height: 29px;
+  margin-right: 5px;
+  background-image: url("../images/tel_icon.png");
+}
+.sp-1 {
+  font-size: 28px;
+  color: #333;
+}
+
+.sp-2 {
+  font-size: 20px;
+  color: #d51938;
+  margin-left: 10px;
+}
+
+.sp-3 {
+  font-size: 14px;
+  color: #666;
+}
+
+.tel {
+  font-size: 24px;
+  color: #d51938;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+/*DIZHI*/
+.adress {
+  overflow: hidden;
+  height: 34px;
+  line-height: 34px;
+}
+
+.adress .adress-left {
+  float: left;
+}
+
+.adress .adress-right {
+  float: right;
+  margin-right: 15px;
+}
+
+.but{
+  float: left;
+  width: 100px;height: 32px; background-color: #f9f9f9;
+  border: 1px solid #ccc; cursor: pointer;
+  line-height: 32px;text-align: center;
+}
+.but2{
+  float: left;
+  width: 32px;height: 32px;
+  background-color: #f9f9f9;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.adress .adress-1 {
+  color: #999;
+  font-size: 14px;
+}
+
+.adress ul li {
+  font-size: 14px;
+  float: left;
+}
+
+/*tabXUANXIANGKA*/
+
+.tab {
+  margin-top: 20px;
+  width: 100%;
+  .tab-ul {
+    border-bottom: 2px solid $default-color;
+    border-top: 1px solid $border-color;
+    width: 100%;
+    li {
+      float: left;
+      border-right: 1px solid $border-color;
+      margin: 1px 0;
+    }
+    a {
+      display: block;
+      width: 129px;
+      height: 42px;
+      font-size: 15px;
+      color: #333;
+      text-align: center;
+      line-height: 44px;
+    }
+    .active a {
+      color: #fff;
+      height: 44px;
+      background-color: $default-color;
+      border-top: 1px solid $default-color;
+      border-bottom: 1px solid $default-color;
+      margin-top: -2px;
+      margin-bottom: -1px;
+    }
+  }
+  .tab-change {
+    display: none
+  }
+}
+
+.index-main  .house-box {
+  overflow: hidden;
+  font-size: 14px;
+  margin-top: 20px;
+}
+.index-main > .house-box img {
+  width: 486px;
+  height: 326px;
+  margin-right: 45px;
+  display: block;
+  float: left;
+}
+.index-main .fang-list .info .aside .price {
+  font-size: 16px;
+  margin-right: 0;
+}
+
+
+b {
+  color: #d51938;
+  font-size: 22px;
+}
+
+.house-box b {
+  color: #d51938;
+  font-size: 22px;
+}
+
+.index-main .index-info {
+  overflow: hidden;
+  line-height: 30px;
+}
+.index-main .index-info div p{
+  font-size: 14px;
+}
+
+.index-main .index-info > div {
+  float: left;
+  line-height: 25px;
+  color: #333;
+}
+
+.index-main .index-info > div:first-child {
+  margin-right: 120px;
+}
+
+.index-main .index-info label {
+  color: #666666;
+  font-weight: normal;
+}
+
+.index-main .index-btn {
+  margin-top: 22px;
+  overflow: hidden;
+}
+
+
+.pic-more-link li a{ color: #333; list-style: none;  padding-left: 10px; padding-right: 10px; border-right: solid 1px #333;}
+.pic-more-link li:nth-last-of-type(1) a, .pic-more-link li:nth-last-of-type(2) a{ border-right: none;}
+.pic-more-link li:last-child>a{ color: #666666;}
+
+
+.index-main .common-title .more-link {
+  float: right;
+  margin-right: 5px;
+}
+.index-main .common-title .more-link a{
+  font-size: 12px;
+  color: #999;
+}
+.index-main .common-title .pic-more-link {
+  float: right;
+}
+.index-main .common-title .pic-more-link li{
+  float: left;
+}
+.index-main .index-btn > div {
+  float: left;
+  background-color: #ffffff;
+  border: solid 1px rgb(223, 223, 223);
+  padding: 15px 50px;
+  font-size: 18px;
+}
+
+.index-main .index-btn > div:first-child {
+  background-color: rgb(242, 242, 242);
+  border-right: 0px none;
+}
+
+.house-list {
+  overflow: hidden;
+}
+
+.list-nav {
+  border-bottom: solid 1px #ddd;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.list-nav ul li {
+  display: inline-block;
+  list-style: none;
+  font-size: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: solid 1px #ddd;
+}
+
+.index-main .list-nav ul li > a {
+  color: #333;
+}
+
+.list-nav ul li:last-child > a {
+  color: #666666;
+}
+
+.list-nav ul li:nth-last-of-type(1), .list-nav ul li:nth-last-of-type(2) {
+  border-right: none;
+}
+
+.list-nav > div:first-child {
+  float: left;
+  padding: 15px 0px;
+  font-size: 16px;
+  border-bottom: solid 3px rgb(213, 24, 59);
+  position: relative;
+  bottom: -1px;
+}
+
+.list-nav > div:last-child {
+  float: right;
+  padding: 15px 0px;
+}
+
+.list-nav > div:last-child a {
+  font-size: 12px;
+  color: #999999;
+}
+
+.index-main .list-box {
+  float: left;
+  margin-right: 36px;
+  line-height: 24px;
+  overflow: hidden;
+  margin-top: 30px;
+  font-size: 14px;
+}
+
+.index-main .list-box:last-child {
+  margin-right: 0px;
+}
+
+.index-main .list-box > img {
+  width: 202px;
+  height: 150px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.index-main .list-box > div p {
+  font-size: 16px;
+}
+
+.index-main .list-box span {
+  font-size: 14px;
+  color: #666666;
+}
+
+.house-list b {
+  color: #d51938;
+  font-size: 16px;
+  display: inline-block;
+  float: right;
+}
+
+.house-img .list-box {
+  width: 358px;
+}
+
+.house-img .list-box img {
+  width: 358px;
+  height: 268px;
+  border:1px solid #dfdfdf;
+}
+
+.index-main .house-warning {
+  color: #666666;
+  padding: 20px 15px;
+  border: solid 1px #ddd;
+  margin-bottom: 45px;
+}
+
+.fang-list .info .huxing{
+  float: left;
+  font-size: 14px;
+  color: #666;
+}
+
+.fang-list .info .huxing span{
+  margin-right: 10px;
+}
+.fang-list .info .price-1{
+  float: right;
+  font-size: 16px;
+  font-weight: bold;
+  color: $default-color;
+}
+
+
+/*  map  */
+
+.map{
+  width: 1150px;
+  margin:0 auto;
+  position: relative;
+  border-bottom:1px solid #dfdfdf;
+}
+
+
+.map .esf-map {
+  margin-top: 20px;
+}
+.map .esf-map .map-tab li{
+  float: left;
+  width: 115px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  background-color: #f2f2f2;
+}
+.map .esf-map .map-tab .map-active{
+  background-color: #fa9d70;
+}
+.map .esf-map #allmap{
+  width: 1150px;
+  height: 453px;
+  position: relative;
+}
+.map .esf-map .map-tip {
+  width: 1150px;
+  height: 50px;
+  background-image: url("../images/map_tip.png") ;
+}
+
+.map .esf-map #allmap .list-header {
+  padding-left: 50px;
+  height: 55px;
+  width: 250px;
+  line-height: 55px;
+  font-size: 16px;
+  border-bottom:1px solid #dfdfdf;
+  background-image: url("../images/school.png");
+  background-repeat: no-repeat;
+  background-position: 15px;
+}
+
+.map .esf-map #allmap ul {
+  margin-left: 15px;
+  margin-top: 10px;
+
+}
+.map .esf-map #allmap ul li a{
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #333;
+}
+.map .esf-map #allmap >.adress-list {
+  position: absolute;
+  right: 20px;
+  top: 40px;
+}

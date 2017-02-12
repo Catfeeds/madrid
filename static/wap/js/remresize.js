@@ -1,0 +1,14 @@
+    function init_rem(){
+        var irate=625;
+        var iw=640;
+        var win = window;
+        var w= win.innerWidth;
+        var doc = document;
+        var irate= 625/(iw/w);
+        doc.documentElement.style.fontSize = irate + "%";
+    }
+    init_rem();
+    window.onresize=function(){  
+        init_rem();
+    }
+

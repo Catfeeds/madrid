@@ -1,0 +1,157 @@
+.top-nav-bg{height:35px; line-height:35px;*line-height:50px;background-color: #f6f6f6; border-bottom: 1px solid #dfdfdf;  }
+.login_msg{display: none;}
+.head_ul,.login{_margin-top:15px;
+  li { float:left; display:inline-block;padding:0 10px; height:35px;_height:20px;
+    a{color:#333;
+      i{position:relative; top:8px;*top:-12px;display:inline-block;width: 20px; height:20px;_margin-right:0; overflow: hidden;}
+    }
+  }
+  li.pr0{ padding-right: 0;}
+  .home{ background-position: 0 0;}
+  .community{ background-position: 0 -27px;}
+  .message{ background-position: 0 -54px;}
+  .client{ background-position: 0 -81px;}
+  .user{ background-position: 0 -108px;}
+  .login-label{ width: 27px; height: 27px; top:4px;*top:-12px;}
+  .qq{background-position: 0 -135px;}
+  .sina-weibo{ background-position: 0 -174px; margin-right: 0;}
+  .arrowdown{background-position: 0 -253px; *position: relative; *top:-33px;*left:5px;}
+ .vertical{padding:0 10px;}
+}
+#userlogin .avatar{  width: 30px;height: 30px;margin-top: 2px;margin-right: 5px; border-radius:50%; *position: relative; *top: -9px; }
+#userlogin > li .dropdown_info_box {
+  position: absolute;z-index: 888; right:0;top:35px;*top:42px;
+  width: 82px;
+  border-top: 1px solid #cfcfcf;
+  background: #ffffff;
+  display: none;
+  overflow: hidden;
+  border: 1px solid #cfcfcf;
+  border-top: none;
+  background-color: #fff;
+  li{line-height: 30px;
+    height: 30px;
+    padding: 0;
+    border-bottom: 1px dashed #d7d7d7;
+    overflow: hidden;
+    a{width: 63px;
+      line-height: 30px;
+      height: 30px;
+      overflow: hidden;
+      display: inline-block;
+      padding: 0 10px;
+      color: #666;
+    }
+    &.last{border-bottom: 0;}
+  }
+  &:hover{display: block;}
+}
+#userlogin > .personal-select{ position: relative;*margin-top:-7px;
+  width: 82px;text-align:center;
+  &:hover ul{
+    display:block;
+  }
+}
+  .login-pop-up{display: none;position: absolute;z-index: 1000;right: 0;top:39px;background: #fff;border: 1px solid #cdcdcd;box-shadow: 0 0 8px #cdcdcd;
+    .loginframe {margin: 25px 30px 20px;color: #333;width:215px;
+      .loginframe-blank{position:relative;
+        span.wrap-placeholder{position: absolute;display: inline-block;width:209px;left:0px;top:0;line-height: 30px;padding-left: 6px;color: #999;}
+        input.loginframe-label-ipt{border: 1px solid #cdcdcd;width: 203px;height: 16px;padding: 6px 5px;}
+        span.loginframe-label{display: inline-block;line-height: 30px;width: 100%;
+          .loginframe-checkbox{margin:9px 5px 0 0;cursor: pointer;*margin:4px 5px 0 0;}
+          span{cursor: pointer;}
+        }
+        .loginframe-btn{border: none;width: 100%;height: 30px;line-height: 30px;text-align: center;background-color: #D51938;color: #fff;cursor: pointer;}
+      }
+      .msg-box{line-height:24px;
+        .login-msg{color: red;}
+      }
+    }
+  }
+
+.logo-tel{ width:380px;
+  a{
+    img:hover{opacity:1;}
+  }
+  div{height: 44px;border-left: 1px solid #cfcfcf;padding-left: 12px; margin-left: 12px;
+    .t-phone{ display: inline-block; width: 24px; height: 24px; background-position: 0 -287px; margin-right: 8px;}
+    .nub{ font-family: 'impact'; font-size: 20px; color: #D51938;}
+    .mt4{ margin-top: 4px;}
+  }
+}
+.search-box{ margin-left:20px; width: 530px;}
+div.head-search{
+  border: 1px #D51938 solid; width:528px; height:36px;position:relative;
+  #search-select{
+    background-position:right -245px; background-color: #fff; width: 66px; height: 36px;line-height: 36px; padding:0 10px; cursor: pointer;position: relative;font-size:14px;
+    span{display: block;}
+    .action-select{
+      display: none;background: #fff;border: 1px solid #D51938;border-top: 0px;position: absolute;top:36px;left: -1px;z-index: 9999; color:#333;
+      li{
+        float: left;display: block;height: 34px;width: 66px;line-height: 34px;padding: 0 10px;
+      }
+      li:hover{
+        background: #f0f0f0;
+      }
+    }
+  }
+  .search-about{
+    position: relative; 
+    ul{background: #fff; position: absolute;border: 1px solid #c9c9c9;width: 360px;left:86px;top:36px;z-index: 999;
+      li{height: 30px;line-height: 30px;padding:0 10px;
+        p{color: #666;span{color: #999;}}
+        &:hover{background-color: #eee;}
+      }
+    }
+  }
+  input#searchtxt{
+    outline:0px;border: 0px;width:341px;padding: 4px 10px; height: 28px;line-height: 28px;border-left:1px #c9c9c9 solid;font-size: 14px; background-color: #fff;
+  }
+  .searchbut{
+    position:absolute; right:0;border:0px;background-color: #D51938;cursor: pointer;width: 80px;height: 37px;background-position: 26px -324px;
+  }
+}
+.hot-search{ height:26px; line-height:26px;overflow:hidden;
+  a{ color: #333; margin-right:10px;}
+}
+.head-ad{
+  img{ width: 200px; height: 80px; overflow: hidden;}
+}
+.result-list{width:479px;position:absolute;right: 0;background-color: #fff;border-left:1px solid #ddd;border-right:1px solid #ddd;margin-right: -2px;display: none;z-index:100;
+	li{height: 35px;line-height: 35px;border-bottom: 1px solid #ddd;text-indent: 15px;
+		a{color: #333;display: block;padding-right: 15px;}
+	}
+}
+.nav-bg{ height: 50px; line-height: 50px; overflow: hidden; background-color: #D51938;}
+.nav{  background-color: #D51938!important;
+  li{ float: left;}
+  a{color: #fff;display: block;float: left;font-size: 16px;
+    height: 50px;line-height: 50px;padding: 0 20px 0 18px; margin-right:2px; }
+  a.sep {width: 1px; height: 41px;background-color: #DA5C4F;padding: 0;margin: 5px 0px 0 -2px; overflow: hidden;}
+  .current,.on{ background-color: #AA142D;}
+  a:hover{background-color: #AA142D; color: #fff!important; }
+  .lis{ position: absolute;width: 102px; display:none; top:50px;left:0; z-index:999;
+    li{
+      a{ width: 102px; padding: 0; text-align: center; display: block; height: 32px; line-height: 32px; overflow: hidden; font-size: 14px; background-color: #D51938;color: #fff!important;
+
+      }
+      a:hover{background-color: #AA142D;}
+    }
+  }
+ }
+
+.z-index{z-index: 100;}
+
+
+div.other-web{ padding-left:30px; position: relative;
+  .check-now{ font-size: 24px; color: #666; height: 44px; line-height: 44px; cursor: pointer;
+    i{background-position: 0 -787px;width: 15px; height: 9px;display: inline-block; vertical-align: middle; margin-left: 8px;}
+  }
+   ul{display:none;width:84px;padding:0 8px;background-color: #e9304e;z-index:1000000; position: absolute;top:40px;left:27px;
+     li{height:38px; line-height: 38px;  border-bottom: 1px solid #eb8e9d; padding: 0 10px;
+       a{color: #fff; font-size: 14px;}
+       a:hover{color: #fff!important;}
+     }
+     li.last{ border: none;}
+   }
+}

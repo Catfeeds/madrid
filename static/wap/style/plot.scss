@@ -1,0 +1,65 @@
+.gcal{
+  height:74px;
+  line-height:74px;
+  font-size:28px;
+  color:#666;
+}
+
+.plot-list{
+  ul{
+    li{position: relative;background-color: #fff;margin-bottom:30px; line-height:1.8;
+        overflow:hidden;
+      .pic{
+        float:left;width:200px;
+        img{width: 200px; height: 140px;}
+      }
+      .info{
+        margin-left:230px;
+
+      }
+      .right-float{
+        position:absolute;
+        right:10px;
+        top:0;
+      }
+    }
+    .has-no-img{ padding:20px;
+      .info{ margin-left: 0;}
+    }
+  }
+}
+.school-list{
+  ul{
+    li{line-height:2.4;
+      .pic{
+        float:left;width:195px;
+      }
+      .info{
+        margin-left:225px;
+        height:130px;
+      }
+    }
+  }
+}
+.search-list{position: absolute;top:90px;left:0;width:100%;z-index:1000;display:none;
+  ul{ background-color:#fff;
+    li{ height: 66px; line-height: 66px; border-bottom: 2px solid #D7D7D7; padding:0 20px;font-size: 28px;
+      p{width:68%; }
+    }
+  }
+}
+.mt30{ margin-top: 30px;}
+.lineh40{ line-height: 40px;}
+
+
+
+.detail-box{ background-color: #fff;margin: 20px;
+  .detail-title{border-bottom:1px solid #dfdfdf;padding:20px;line-height:48px;
+    h3{ font-size: 30px;}
+    p{ font-size: 24px; color: #878787;}
+  }
+  .detail-content{padding:20px;
+    p{ font-size: 28px!important; color: #333; line-height:2;}
+    img{ display: block; max-width: 560px!important;margin: 0 auto;}
+  }
+}

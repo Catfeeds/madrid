@@ -1,0 +1,22 @@
+.sale-content{ width: 580px; margin: 0 auto;
+  .box{background: #fff; margin-bottom:30px;
+    .title{ height: 64px; line-height: 64px; border:2px solid #eee;text-align: center; font-size:28px;}
+    .pic-img{position: relative; height: 350px;
+      img{ width: 100%;}
+      p{ position: absolute; bottom:0; width: 560px; padding:0 10px;height: 60px; line-height: 60px; background: rgba(0,0,0,.3); color: #fff;
+      span{margin-top: -5px;}
+      }
+    }
+    .info{
+    p{height:68px; line-height: 68px;padding:0 16px; overflow:hidden;
+      i{ position: relative;top: 18px;margin-right: 10px;}
+    }
+    p:first-child{border-bottom:2px solid #f5f5f5;}
+  }
+    .bottom-btn{
+      span,a{display:block; float:left;width: 50%; height: 66px; line-height: 66px; text-align: center;}
+      span{ background-color: #ddd; color: #333;}
+      a{ background-color: #D51938;color: #fff;}
+    }
+  }
+}

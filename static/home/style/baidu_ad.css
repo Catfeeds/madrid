@@ -1,0 +1,159 @@
+/* 广告*/
+
+._ad_red {
+    color: #ff0000 !important;
+}
+
+._ad_red2636 {
+    color: #ba2636 !important;
+}
+
+._ad_blue {
+    color: #005EAC !important;
+}
+
+._ad_green {
+    color: #008000 !important;
+}
+
+._ad_violet {
+    color: #4b0082 !important;
+}
+/*--通栏模式--*/
+
+ul.ad li {
+    display: block;
+    overflow: hidden;
+    float: left;
+}
+
+ul.ad li.ad-0 {
+    margin-bottom: 5px;
+}
+
+ul.ad1 li {
+    display: block;
+    height: 60px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+ul.ad14 li {
+    display: block;
+    height: 40px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+/*--两栏模式--*/
+
+ul.ad2 li {
+    float: left;
+    display: inline;
+    height: 60px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+ul.ad2 li.ad-0,
+ul.ad2 li.ad-2,
+ul.ad2 li.ad-4,
+ul.ad2 li.ad-6 {
+    margin-right: 10px;
+}
+
+.nad2 li {
+    float: left;
+    display: inline;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.nad2 li.last {
+    margin-right: 0;
+}
+/*--三栏模式--*/
+
+ul.ad3 li {
+    float: left;
+    display: inline;
+    width: 325px;
+    height: 60px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+ul.ad3 li.ad-0,
+ul.ad3 li.ad-1,
+ul.ad3 li.ad-3,
+ul.ad3 li.ad-4,
+ul.ad3 li.ad-6,
+ul.ad3 li.ad-7 {
+    margin-right: 10px;
+}
+
+ul.ad3 li.ad-1,
+ul.ad3 li.ad-3,
+ul.ad3 li.ad-7 {
+    width: 330px;
+}
+/*--四栏模式--*/
+
+ul.ad4 {
+    width: 1010px;
+}
+
+ul.ad4 li {
+    float: left;
+    display: inline;
+    width: 245px;
+    height: 60px;
+    margin-bottom: 5px;
+    margin-right: 7px;
+    overflow: hidden;
+}
+/*--五栏模式--*/
+
+ul.ad5 li {
+    float: left;
+    display: inline;
+    width: 192px;
+    height: 80px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+ul.ad5 li.ad-0,
+ul.ad5 li.ad-1,
+ul.ad5 li.ad-2,
+ul.ad5 li.ad-3 {
+    margin-right: 10px;
+}
+
+.nad5 li {
+    float: left;
+    display: inline;
+    margin-right: 10px;
+}
+
+.nad5 li.last {
+    margin-right: 0;
+}
+/*--六栏模式--*/
+
+ul.ad6 li {
+    float: left;
+    display: inline;
+    width: 160px;
+    height: 160px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+ul.ad6 li.ad-0,
+ul.ad6 li.ad-1,
+ul.ad6 li.ad-2,
+ul.ad6 li.ad-3,
+ul.ad6 li.ad-4,
+ul.ad6 li.ad-5 {
+    margin-right: 8px;
+}
