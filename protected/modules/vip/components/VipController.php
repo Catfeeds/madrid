@@ -47,9 +47,8 @@ class VipController extends Controller {
             ['label'=>'管理中心','icon'=>'icon-settings','url'=>'/vip/common/index','active'=>$this->route=='vip/common/index'],
             ['label' => '文章管理','icon' => 'icon-speedometer', 'url' => ['/vip/news/list'],'active'=>$this->route=='vip/news/edit'||$this->route=='vip/news/list'],
             ['label' => '产品管理', 'icon' => 'icon-speedometer', 'items' => [
-                ['label' => '发布租房', 'url' => ['/vip/zf/publish']],
-                ['label' => '上架租房', 'url' => ['/vip/zf/saleUp'],'active'=>$this->route=='vip/zf/setAppoint'||$this->route=='vip/zf/appointList'],
-                ['label' => '下架租房', 'url' => ['/vip/zf/saleDown']],
+                ['label' => '发布产品', 'url' => ['/vip/product/edit']],
+                ['label' => '产品列表', 'url' => ['/vip/product/list']],
             ]],
             ['label' => '酒庄管理','icon' => 'icon-speedometer', 'url' => ['/vip/house/list'],'active'=>$this->route=='vip/house/edit'||$this->route=='vip/house/list'],
             ['label'=>'标签管理','icon'=>'icon-speedometer','url'=>['/vip/tag/list'],'active'=>$this->route=='vip/tag/edit'],

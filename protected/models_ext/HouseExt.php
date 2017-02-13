@@ -77,8 +77,8 @@ class HouseExt extends House{
         $alias = $this->getTableAlias();
         return array(
             'sorted' => array(
-                'order' => 'sort desc',
-            )
+                'order' => 'sort desc,eng asc',
+            ),
         );
     }
 

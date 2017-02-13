@@ -12,6 +12,7 @@
  * @property integer $ptpz
  * @property string $price
  * @property integer $age
+ * @property string $image
  * @property string $country
  * @property string $area
  * @property integer $house
@@ -43,13 +44,13 @@ class Product extends CActiveRecord
 		return array(
 			array('created', 'required'),
 			array('cid, xl, ptpz, age, house, sort, status, deleted, created, updated', 'numerical', 'integerOnly'=>true),
-			array('name, eng', 'length', 'max'=>255),
+			array('name, eng, image', 'length', 'max'=>255),
 			array('price', 'length', 'max'=>20),
 			array('country, area', 'length', 'max'=>100),
 			array('content, data_conf', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, eng, cid, xl, ptpz, price, age, country, area, house, content, sort, data_conf, status, deleted, created, updated', 'safe', 'on'=>'search'),
+			array('id, name, eng, cid, xl, ptpz, price, age, image, country, area, house, content, sort, data_conf, status, deleted, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -78,6 +79,7 @@ class Product extends CActiveRecord
 			'ptpz' => '葡萄品种',
 			'price' => 'Price',
 			'age' => 'Age',
+			'image' => 'Image',
 			'country' => '产地',
 			'area' => '产地',
 			'house' => '酒庄',
@@ -117,6 +119,7 @@ class Product extends CActiveRecord
 		$criteria->compare('ptpz',$this->ptpz);
 		$criteria->compare('price',$this->price,true);
 		$criteria->compare('age',$this->age);
+		$criteria->compare('image',$this->image,true);
 		$criteria->compare('country',$this->country,true);
 		$criteria->compare('area',$this->area,true);
 		$criteria->compare('house',$this->house);

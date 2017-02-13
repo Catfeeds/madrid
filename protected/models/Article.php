@@ -9,8 +9,8 @@
  * @property string $author
  * @property string $source
  * @property string $desc
- * @property string $content
  * @property string $image
+ * @property string $content
  * @property integer $cid
  * @property integer $sort
  * @property integer $status
@@ -43,7 +43,7 @@ class Article extends CActiveRecord
 			array('content, data_conf', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, author, source, desc, content, image, cid, sort, status, data_conf, deleted, created, updated', 'safe', 'on'=>'search'),
+			array('id, title, author, source, desc, image, content, cid, sort, status, data_conf, deleted, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,8 +69,8 @@ class Article extends CActiveRecord
 			'author' => 'Author',
 			'source' => 'Source',
 			'desc' => 'Desc',
-			'content' => 'Content',
 			'image' => 'Image',
+			'content' => 'Content',
 			'cid' => 'Cid',
 			'sort' => 'Sort',
 			'status' => 'Status',
@@ -104,8 +104,8 @@ class Article extends CActiveRecord
 		$criteria->compare('author',$this->author,true);
 		$criteria->compare('source',$this->source,true);
 		$criteria->compare('desc',$this->desc,true);
-		$criteria->compare('content',$this->content,true);
 		$criteria->compare('image',$this->image,true);
+		$criteria->compare('content',$this->content,true);
 		$criteria->compare('cid',$this->cid);
 		$criteria->compare('sort',$this->sort);
 		$criteria->compare('status',$this->status);

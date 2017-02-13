@@ -12,7 +12,7 @@ function callback(data){
     } else {
         // 指定区域出现图片
         var html = "";
-        image_html = "<div class='image-div' style='width: 150px;display:inline-table;height:180px'><a href='javascript::void(0)' class='btn green btn-xs fm-btn' style='position: absolute;display:none'>已设置封面</a><a onclick='del_img(this)' class='btn red btn-xs' style='position: absolute;margin-left: 94px;'><i class='fa fa-trash'></i></a><img src='"+data.msg.url+"' style='width: 120px;height: 90px'><input name='image_des[]' type='text' style='width: 80px'></input><a class='btn btn-xs green' onclick='setFm(this)' style='width: 40px;'>封面</a><input type='hidden' class='trans_img' name='images[]' value='"+data.msg.pic+"'></input><input type='hidden' class='fm'></input></div>";
+        image_html = "<div class='image-div' style='width: 150px;display:inline-table;height:180px'><a onclick='del_img(this)' class='btn red btn-xs' style='position: absolute;margin-left: 94px;'><i class='fa fa-trash'></i></a><img src='"+data.msg.url+"' style='width: 120px;height: 90px'><input name='image_des[]' type='text' style='width: 120px'></input><input type='hidden' class='trans_img' name='images[]' value='"+data.msg.pic+"'></input></div>";
         $('.images-place').append(image_html);
     }
 }

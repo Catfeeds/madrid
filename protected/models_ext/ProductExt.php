@@ -11,7 +11,8 @@ class ProductExt extends Product{
     public function relations()
     {
         return array(
-            // 'baike'=>array(self::BELONGS_TO, 'BaikeExt', 'bid'),
+            'houseInfo'=>array(self::BELONGS_TO, 'HouseExt', 'house'),
+            'images'=>array(self::HAS_MANY, 'AlbumExt', 'pid'),
         );
     }
 
@@ -57,6 +58,20 @@ class ProductExt extends Product{
             'sorted' => array(
                 'order' => 'sort desc',
             )
+        );
+    }
+
+    /**
+     * 绑定行为类
+     */
+    public function behaviors() {
+        return array(
+            'CacheBehavior' => array(
+                'class' => 'application.behaviors.CacheBehavior',
+                'cacheExp' => 0, //This is optional and the default is 0 (0 means never expire)
+                'modelName' => __CLASS__, //This is optional as it will assume current model
+            ),
+            'BaseBehavior'=>'application.behaviors.BaseBehavior',
         );
     }
 }
