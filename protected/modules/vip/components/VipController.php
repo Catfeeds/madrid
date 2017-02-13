@@ -52,10 +52,8 @@ class VipController extends Controller {
             ]],
             ['label' => '酒庄管理','icon' => 'icon-speedometer', 'url' => ['/vip/house/list'],'active'=>$this->route=='vip/house/edit'||$this->route=='vip/house/list'],
             ['label'=>'标签管理','icon'=>'icon-speedometer','url'=>['/vip/tag/list'],'active'=>$this->route=='vip/tag/edit'],
-            ['label' => '系统管理', 'icon' => 'icon-speedometer','items' => [
-                ['label' => '商家档案', 'url' => ['/vip/shop/info']],
-                ['label' => '职员管理', 'url' => ['/vip/shop/staff'],'active'=>$this->route=='vip/shop/staffEdit'],
-            ]],
+            ['label'=>'站点配置','icon'=>'icon-speedometer','url'=>['/vip/site/list']],
+            
         ];
     }
 

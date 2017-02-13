@@ -3,6 +3,8 @@ class IndexController extends HomeController
 {
     public function actionIndex()
     {
-        $this->redirect('/vip/common/index');
+    	// 首页轮播图片
+    	$images = [];
+        $this->render('index');
     }
 }

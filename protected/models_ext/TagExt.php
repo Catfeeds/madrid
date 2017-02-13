@@ -19,7 +19,8 @@ class TagExt extends Tag
             'ptpz' => '葡萄品种',
             'hjxl' => '红酒系列',
             'jzdq' => '酒庄地区',
-            'jzdj' => '酒庄等级'
+            'jzdj' => '酒庄等级',
+            // 'zdpz' => '站点配置'
         ],
     ];
 

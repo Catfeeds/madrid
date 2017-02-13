@@ -71,6 +71,14 @@ $this->breadcrumbs = array('产品管理', $this->pageTitle);
     </div>
 </div>
 <div class="form-group">
+    <label class="col-md-2 control-label">售价<span class="required" aria-required="true">*</span></label>
+    <div class="col-md-4">
+        <?php echo $form->textField($article, 'price', array('class' => 'form-control')); ?>
+        <span class="help-inline">元</span>
+    </div>
+    <div class="col-md-2"><?php echo $form->error($article, 'price') ?></div>
+</div>
+<div class="form-group">
     <label class="col-md-2 control-label">产品介绍</label>
     <div class="col-md-8">
         <?php echo $form->textArea($article, 'content', array('id'=>'ArticleExt_content')); ?>
