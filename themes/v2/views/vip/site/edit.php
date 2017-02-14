@@ -19,7 +19,7 @@ $this->breadcrumbs = array('站点配置', $this->pageTitle);
         <label class="col-md-2 control-label text-nowrap"><?=$value['name']?></label>
         <div class="col-md-8">
         <?php if($value['type'] == 'image'):?>
-            <?php $this->widget('FileUpload',array('model'=>$model,'attribute'=>$key,'inputName'=>'img','width'=>400,'height'=>300)); ?>
+            <?php $this->widget('FileUpload',array('model'=>$model,'attribute'=>$key,'inputName'=>'img','width'=>400,'height'=>300)); ?><span class="help-block">130*40</span>
         <?php elseif($value['type'] == 'multiImage'):?>
                     <?php $this->widget('FileUpload',array('inputName'=>'img','multi'=>true,'callback'=>'function(data){callback(data);}')); ?>
                     <div class="form-group images-place" style="margin-left: 220px">
