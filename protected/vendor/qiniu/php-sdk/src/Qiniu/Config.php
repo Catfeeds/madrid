@@ -5,7 +5,7 @@ final class Config
 {
     const SDK_VER = '7.0.4';
 
-    const BLOCK_SIZE = 4194304; //4*1024*1024 分块上传块大小，该参数为接口规格，不能修改
+    const BLOCK_SIZE = 4194304000; //4*1024*1024 分块上传块大小，该参数为接口规格，不能修改
 
     const IO_HOST  = 'http://iovip.qbox.me';            // 七牛源站Host
     const RS_HOST  = 'http://rs.qbox.me';               // 文件元信息管理操作Host
