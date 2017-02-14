@@ -23,14 +23,18 @@ class SiteController extends VipController
 		// post请求
 		if(Yii::app()->request->getIsPostRequest()) {
 			$values = Yii::app()->request->getPost('SiteExt',[]);
-			$model = new SiteExt;
-			var_dump($values);exit;
-			$model->attributes = $values;
-			if($model->save()) {
-				$this->setMessage('操作成功！','success');
-				$this->redirect('index');
-				Yii::app()->end();
+			
+			// var_dump($values);exit;
+			if($values) {
+				$model = new SiteExt;
+				$model->name = $type;
+				$model->value = json_encode($values);
+				if(!$model->save())
+					$this->setMessage(array_values($model->errors)[0][0],'error');
 			}
+			$this->setMessage('操作成功！','success');
+			$this->redirect('list');
+			Yii::app()->end();
 		}
 
 		if($type) {
