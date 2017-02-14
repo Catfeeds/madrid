@@ -22,6 +22,13 @@ $this->breadcrumbs = array('资讯管理', $this->pageTitle);
     <div class="col-md-2"><?php echo $form->error($article, 'title') ?></div>
 </div>
 <div class="form-group">
+    <label class="col-md-2 control-label">副标题/职位<span class="required" aria-required="true">*</span></label>
+    <div class="col-md-4">
+        <?php echo $form->textField($article, 'sub_title', array('class' => 'form-control')); ?>
+    </div>
+    <div class="col-md-2"><?php echo $form->error($article, 'sub_title') ?></div>
+</div>
+<div class="form-group">
     <label class="col-md-2 control-label">分类</label>
     <div class="col-md-4">
         <?php echo $form->dropDownList($article, 'cid', $cates, array('class' => 'form-control', 'encode' => false)); ?>

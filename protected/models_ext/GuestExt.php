@@ -1,18 +1,17 @@
 <?php 
 /**
- * 产品l类
+ * 客户类
  * @author steven.allen <[<email address>]>
- * @date(2017.2.12)
+ * @date(2017.2.14)
  */
-class ProductExt extends Product{
+class GuestExt extends Guest{
 	/**
      * 定义关系
      */
     public function relations()
     {
         return array(
-            'houseInfo'=>array(self::BELONGS_TO, 'HouseExt', 'house'),
-            'images'=>array(self::HAS_MANY, 'AlbumExt', 'pid'),
+            // 'baike'=>array(self::BELONGS_TO, 'BaikeExt', 'bid'),
         );
     }
 
@@ -57,24 +56,7 @@ class ProductExt extends Product{
         return array(
             'sorted' => array(
                 'order' => 'sort desc',
-            ),
-            'normal' => array(
-                'order' => 'status=1 and deleted=0',
-            ),
-        );
-    }
-
-    /**
-     * 绑定行为类
-     */
-    public function behaviors() {
-        return array(
-            'CacheBehavior' => array(
-                'class' => 'application.behaviors.CacheBehavior',
-                'cacheExp' => 0, //This is optional and the default is 0 (0 means never expire)
-                'modelName' => __CLASS__, //This is optional as it will assume current model
-            ),
-            'BaseBehavior'=>'application.behaviors.BaseBehavior',
+            )
         );
     }
 }

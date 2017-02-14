@@ -78,7 +78,10 @@ class ArticleExt extends Article{
         return array(
             'sorted' => array(
                 'order' => 'sort desc',
-            )
+            ),
+            'normal' => array(
+                'order' => 'sort desc',
+            ),
         );
     }
 
@@ -94,5 +97,35 @@ class ArticleExt extends Article{
             ),
             'BaseBehavior'=>'application.behaviors.BaseBehavior',
         );
+    }
+
+    public function getTeam()
+    {
+        $this->getDbCriteria()->mergeWith(array(
+            'condition' => 'cid=:cate',
+            'order' => 'id ASC',
+            'params' => array(':cate'=>'19')
+        ));
+        return $this;
+    }
+
+    public function getServe()
+    {
+        $this->getDbCriteria()->mergeWith(array(
+            'condition' => 'cid=:cate',
+            'order' => 'id ASC',
+            'params' => array(':cate'=>'20')
+        ));
+        return $this;
+    }
+
+    public function getNormal()
+    {
+        $this->getDbCriteria()->mergeWith(array(
+            'condition' => 'cid!=:cate1 and cid!=:cate2',
+            'order' => 'id ASC',
+            'params' => array(':cate1'=>'19',':cate2'=>'20')
+        ));
+        return $this;
     }
 }
