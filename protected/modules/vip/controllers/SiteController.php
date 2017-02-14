@@ -20,13 +20,14 @@ class SiteController extends VipController
 
 	public function actionEdit($type='')
 	{
+		$model = SiteExt::model()->find(['condition'=>'name=:name','params'=>[':name'=>$type]]) ? SiteExt::model()->find(['condition'=>'name=:name','params'=>[':name'=>$type]]) : new SiteExt;
+		$model->name = $type;
 		// post请求
 		if(Yii::app()->request->getIsPostRequest()) {
 			$values = Yii::app()->request->getPost('SiteExt',[]);
 			
 			// var_dump($values);exit;
 			if($values) {
-				$model = new SiteExt;
 				$model->name = $type;
 				$model->value = json_encode($values);
 				if(!$model->save())
@@ -38,8 +39,7 @@ class SiteController extends VipController
 		}
 
 		if($type) {
-			$model = SiteExt::model()->find(['condition'=>'name=:name','params'=>[':name'=>$type]]) ? SiteExt::model()->find(['condition'=>'name=:name','params'=>[':name'=>$type]]) : new SiteExt;
-			$model->name = $type;
+			
 
 			$this->render('edit',['cate'=>$type,'model'=>$model]);
 		} else {

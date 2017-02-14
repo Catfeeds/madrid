@@ -515,6 +515,10 @@ transform: translate3d(0, -2px, 0);}
 
 #shares a#sweixin:hover { background-color: transparent; }
 
+#shares a#sweixin1 { background-color: transparent; transition: all 0.3s ease-out 0s; }
+
+#shares a#sweixin1:hover { background-color: transparent; }
+
 #online_lx { border-radius: 0px; bottom: 36px; margin-right: -10px; }
 
 #olx_head { background: #292929; border-radius: 0; }

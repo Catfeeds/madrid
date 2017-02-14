@@ -54,7 +54,7 @@ $this->breadcrumbs = array('资讯管理', $this->pageTitle);
     <label class="col-md-2 control-label text-nowrap">封面图</label>
     <div class="col-md-8">
         <?php $this->widget('FileUpload',array('model'=>$article,'attribute'=>'image','inputName'=>'img','width'=>400,'height'=>300)); ?>
-        <!-- <span class="help-block">建议尺寸：240*300</span>  -->
+        <span class="help-block">建议尺寸：430*230</span> 
     </div>
 </div>
 <div class="form-group">

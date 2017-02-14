@@ -1,6 +1,7 @@
 <?php 
 /**
  * 站点配置类
+ * 数据结构为 name为 qjpz value为 属性分类的key-value组成的json数据
  * @author steven.allen <[<email address>]>
  * @date(2017.2.13)
  */
@@ -12,6 +13,13 @@ class SiteExt extends Site{
         'pcIndexImages'=>[],
         // pcLogo
         'pcLogo'=>'',
+        // 站点客服
+        'sitePhone'=>'',
+        // 联系qq
+        'qq'=>'',
+        // 微信二维码
+        'wxQr'=>'',
+
     ];
     public static $cateName = [
         'qjpz' => '全局配置',
@@ -21,7 +29,10 @@ class SiteExt extends Site{
     public static $cateTag = [
         'qjpz'=> [
             'pcIndexImages'=>['type'=>'multiImage','max'=>3,'name'=>'pc首页轮播图'],
-            'pcLogo'=>['type'=>'image','max'=>1,'name'=>'pc版logo']
+            'pcLogo'=>['type'=>'image','max'=>1,'name'=>'pc版logo'],
+            'sitePhone'=>['type'=>'text','name'=>'站点客服'],
+            'qq'=>['type'=>'text','name'=>'联系qq'],
+            'wxQr'=>['type'=>'image','max'=>1,'name'=>'pc版logo','name'=>'微信二维码'],
             ],
     ];
 
@@ -110,16 +121,23 @@ class SiteExt extends Site{
     }
 
     /**
-     * 通过cid获取
+     * 通过name获取
      */
     public function getSiteByCate($cate)
     {
         $this->getDbCriteria()->mergeWith(array(
-            'condition' => 'cid=:cate',
+            'condition' => 'name=:cate',
             'order' => 'id ASC',
             'params' => array(':cate'=>$cate)
         ));
         return $this;
+    }
+
+    public static function getAttr($cate='',$attr='')
+    {
+        $model = self::model()->getSiteByCate($cate)->find();
+        return $model->$attr?$model->$attr:'';
+
     }
 
 }

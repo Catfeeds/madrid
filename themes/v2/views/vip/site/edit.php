@@ -23,10 +23,13 @@ $this->breadcrumbs = array('站点配置', $this->pageTitle);
         <?php elseif($value['type'] == 'multiImage'):?>
                     <?php $this->widget('FileUpload',array('inputName'=>'img','multi'=>true,'callback'=>'function(data){callback(data);}')); ?>
                     <div class="form-group images-place" style="margin-left: 220px">
-                  <?php if($model->pcIndexImages) foreach ($model->pcIndexImages as $key => $value) {?>
-                      <div class='image-div' style='width: 150px;display:inline-table;height:180px'><a onclick='del_img(this)' class='btn red btn-xs' style='position: absolute;'><i class='fa fa-trash'></i></a><img src='<?=ImageTools::fixImage($value)?>' style='width: 150px;height: 120px'><input type='hidden' class='trans_img' name='SiteExt[pcIndexImages][]' value='"+data.msg.pic+"'></input></div>
+                  <?php if($model->pcIndexImages) foreach ($model->pcIndexImages as $key => $v) {?>
+                      <div class='image-div' style='width: 150px;display:inline-table;height:180px'><a onclick='del_img(this)' class='btn red btn-xs' style='position: absolute;'><i class='fa fa-trash'></i></a><img src='<?=ImageTools::fixImage($v)?>' style='width: 150px;height: 120px'><input type='hidden' class='trans_img' name='SiteExt[pcIndexImages][]' value='<?=$v?>'></input></div>
                   <?php }?>
                 </div>
+        <?php elseif($value['type'] == 'text'):?>
+            <?php echo $form->textField($model, $key, array('class' => 'form-control')); ?>
+
         <?php endif;?>
         </div>
     </div>
