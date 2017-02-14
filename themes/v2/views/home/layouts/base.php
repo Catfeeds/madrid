@@ -20,19 +20,19 @@
         <div id="header" class="index_nav">
           <div class="content"><a href="" id="logo"><img src="<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcLogo'),40,20)?>" height="40" /></a>
             <ul id="nav">
-                    <li class="navitem"><a class="nav-a  active " href="<?=$this->createUrl('/home/index/index')?>" target="_self"><span  data-title="首页">首页</span></a></li>
-                    <li class="navitem"><a class="nav-a " href="<?=$this->createUrl('index')?>" target="_self"><span data-title="酒款">酒款</span></a></li>
-                    <li class="navitem"><a class="nav-a " href="<?=$this->createUrl('index')?>" target="_self"><span data-title="酒庄">酒庄</span></a></li>
-                    <li class="navitem"><a class="nav-a " href="<?=$this->createUrl('index')?>" target="_self"><span data-title="资讯">资讯</span></a></li>
+                    <li class="navitem"><a class="nav-a <?=trim(Yii::app()->request->getPathInfo(),'/')=='home/index/index'?'active':''?>" href="<?=$this->createUrl('/home/index/index')?>" target="_self"><span  data-title="首页">首页</span></a></li>
+                    <li class="navitem"><a class="nav-a <?=trim(Yii::app()->request->getPathInfo(),'/')=='home/product/list'?'active':''?>" href="<?=$this->createUrl('/home/product/list')?>" target="_self"><span data-title="酒款">酒款</span></a></li>
+                    <li class="navitem"><a class="nav-a <?=trim(Yii::app()->request->getPathInfo(),'/')=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="酒庄">酒庄</span></a></li>
+                    <li class="navitem"><a class="nav-a <?=trim(Yii::app()->request->getPathInfo(),'/')=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="资讯">资讯</span></a></li>
                     <!-- <li class="navitem"><a class="nav-a " href="javascript:;" target=""><span data-title="关于">关于</span><i class="fa fa-angle-down"></i></a>        <ul class="subnav">
                             <li><a href="" target="_self"><span data-title="关于">关于</span><i class="fa fa-angle-right"></i></a></li>
                             <li><a href="" target="_self"><span data-title="团队">团队</span><i class="fa fa-angle-right"></i></a></li>
                             <li><a href="" target="_self"><span data-title="新闻">新闻</span><i class="fa fa-angle-right"></i></a></li>
                           </ul>
                 </li> -->
-                    <li class="navitem"><a class="nav-a " href="<?=$this->createUrl('index')?>" target="_self"><span data-title="图册">图册</span></a></li>
-                    <li class="navitem"><a class="nav-a " href="<?=$this->createUrl('index')?>" target="_self"><span data-title="服务">服务</span></a></li>
-                    <li class="navitem"><a class="nav-a " href="<?=$this->createUrl('index')?>" target="_self"><span data-title="联系">联系</span></a></li>
+                    <li class="navitem"><a class="nav-a <?=trim(Yii::app()->request->getPathInfo(),'/')=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="图册">图册</span></a></li>
+                    <li class="navitem"><a class="nav-a <?=trim(Yii::app()->request->getPathInfo(),'/')=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="服务">服务</span></a></li>
+                    <li class="navitem"><a class="nav-a <?=trim(Yii::app()->request->getPathInfo(),'/')=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="联系">联系</span></a></li>
                   </ul>
             <div class="clear"></div>
           </div>

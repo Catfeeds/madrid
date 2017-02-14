@@ -22,7 +22,7 @@ class HomeController extends Controller
     /**
      * @var string 布局文件路径
      */
-    public $layout = '/layouts/base_white';
+    public $layout = '/layouts/base';
 
     /**
      * 这个方法在被执行的动作之前、在所有过滤器之后调用

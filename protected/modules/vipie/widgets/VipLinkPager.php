@@ -24,8 +24,8 @@ class VipLinkPager extends CLinkPager{
 		$buttons=$this->createPageButtons();
 		if(empty($buttons))
 			return;
-		echo '<div class="m-page m-page-rt my-m-page-rt f-fr">';
-		echo '<span class="tip">'.$this->header.'</span>';
+		echo '<div id="pages">';
+		// echo '<span class="tip">'.$this->header.'</span>';
 		if($buttons)
 			foreach ($buttons as $key => $value) {
 				echo $value;
