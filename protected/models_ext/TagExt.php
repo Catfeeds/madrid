@@ -171,6 +171,9 @@ class TagExt extends Tag
             //正常启用的
             'normal' => array(
                 'condition' => "{$alias}.status=1"
+            ),
+            'sorted' => array(
+                'order' => "{$alias}.sort desc,{$alias}.updated desc"
             )
         );
     }

@@ -23,17 +23,17 @@
             <?php $path = trim(Yii::app()->request->getPathInfo(),'/');?>
                     <li class="navitem"><a class="nav-a <?=$path=='home/index/index'?'active':''?>" href="<?=$this->createUrl('/home/index/index')?>" target="_self"><span  data-title="首页">首页</span></a></li>
                     <li class="navitem"><a class="nav-a <?=$path=='home/product/list'||$path=='home/product/info'?'active':''?>" href="<?=$this->createUrl('/home/product/list')?>" target="_self"><span data-title="酒款">酒款</span></a></li>
-                    <li class="navitem"><a class="nav-a <?=$path=='home/house/index'||$path=='home/house/info'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="酒庄">酒庄</span></a></li>
-                    <li class="navitem"><a class="nav-a <?=$path=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="资讯">资讯</span></a></li>
-                    <!-- <li class="navitem"><a class="nav-a " href="javascript:;" target=""><span data-title="关于">关于</span><i class="fa fa-angle-down"></i></a>        <ul class="subnav">
-                            <li><a href="" target="_self"><span data-title="关于">关于</span><i class="fa fa-angle-right"></i></a></li>
-                            <li><a href="" target="_self"><span data-title="团队">团队</span><i class="fa fa-angle-right"></i></a></li>
-                            <li><a href="" target="_self"><span data-title="新闻">新闻</span><i class="fa fa-angle-right"></i></a></li>
-                          </ul>
-                </li> -->
+                    <li class="navitem"><a class="nav-a <?=$path=='home/house/list'||$path=='home/house/info'?'active':''?>" href="<?=$this->createUrl('/home/house/list')?>" target="_self"><span data-title="酒庄">酒庄</span></a></li>
+                    <li class="navitem"><a class="nav-a <?=$path=='home/news/list'||$path=='home/news/info'?'active':''?>" href="<?=$this->createUrl('/home/news/list')?>" target="_self"><span data-title="资讯">资讯</span></a></li>
+                    
                     <li class="navitem"><a class="nav-a <?=$path=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="图册">图册</span></a></li>
-                    <li class="navitem"><a class="nav-a <?=$path=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="服务">服务</span></a></li>
-                    <li class="navitem"><a class="nav-a <?=$path=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="联系">联系</span></a></li>
+                    <!-- <li class="navitem"><a class="nav-a <?=$path=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="服务">服务</span></a></li> -->
+                    <li class="navitem"><a class="nav-a " href="javascript:;" target=""><span data-title="关于">关于</span><i class="fa fa-angle-down"></i></a>        
+                        <ul class="subnav">
+                            <li><a href="" target="_self"><span data-title="团队">团队</span><i class="fa fa-angle-right"></i></a></li>
+                            <li><a href="<?=$this->createUrl('/home/contact/index')?>" target="_self"><span data-title="联系">联系</span><i class="fa fa-angle-right"></i></a></li>
+                      </ul>
+                    </li>
                   </ul>
             <div class="clear"></div>
           </div>

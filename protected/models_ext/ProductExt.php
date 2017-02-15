@@ -56,10 +56,10 @@ class ProductExt extends Product{
         $alias = $this->getTableAlias();
         return array(
             'sorted' => array(
-                'order' => 'sort desc,updated desc',
+                'order' => "{$alias}.sort desc,{$alias}.updated desc",
             ),
             'normal' => array(
-                'order' => 'status=1 and deleted=0',
+                'condition' => "{$alias}.status=1 and {$alias}.deleted=0",
             ),
         );
     }

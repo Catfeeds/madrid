@@ -1,5 +1,5 @@
 <?php 
-	$this->pageTitle = '红酒详情';
+	$this->pageTitle = '酒庄详情';
 ?>
 <div id="sitecontent">
 	<div class="npagePage " id="npagePage">
@@ -7,7 +7,7 @@
 	        <div id="projectwrap" class="fw">
 	            <div id="projectbody">
 	                <ul id="projectimages">
-	                    <li><img src="<?=ImageTools::fixImage($info->image,1200,800)?>" /></li>
+	                    <li><img src="<?=ImageTools::fixImage($info->image)?>" /></li>
 	                </ul>
 	                <div class="clear"></div>
 	                <div class="postbody">
@@ -19,19 +19,14 @@
 	                    <div class="header">
 	                        <p class="title"><?=$info->name?></p>
 	                        <p class="subtitle"><?=$info->eng?></p>
-	                        <p class="subtitle"><?=$info->price?></p>
+	                        <p class="subtitle"><?=$info->place?></p>
 	                        <div class="description">
-	                        <?php $tags = $info->getTagName();?>
-	                            <p>类型: <?=$tags['cid']?></p>
-	                            <p>葡萄品种: <?=$tags['ptpz']?></p>
-	                            <p>系列: <?=$tags['xl']?></p>
-	                            <p>酒庄: <?=$info->houseInfo?$info->houseInfo->name:'-'?></p>
-	                            <p>等级: <?=$info->houseInfo?TagExt::getNameByTag($info->houseInfo->level):'-'?></p>
+	                            <p>等级: <?=TagExt::getNameByTag($info->level)?></p>
+	                            <p>酒款数量: <?=count($info->products)?>款</p>
 	                            <p>
 	                                <br />
 	                            </p>
-	                            <p><a href="tencent://message/?uin=<?=SiteExt::getAttr('qjpz','qq')?>&Site=uelike&Menu=yes">在线预定</a></p>
-	                            <p><a href="<?=$this->createUrl('album',['id'=>$info->id])?>">查看相册</a></p>
+	                            <p><a href="<?=$this->createUrl('/home/product/list',['house'=>$info->id])?>">查看全部酒款</a></p>
 	                            <p>
 	                                <br />
 	                            </p>
@@ -42,15 +37,15 @@
 	            </div>
 	            <div id="projectshow">
 	                <div id="projecttags">
-	                <!-- 此处是红酒类型 -->
-	                <?php $xls = TagExt::getTagArrayByCate('hjlx'); if($xls) foreach ($xls as $key => $value) {?>
-	                	<a href="<?=$this->createUrl('list',['cate'=>$key])?>" target="_blank"><?=$value?></a>
+	                <!-- 此处是酒庄等级 -->
+	                <?php $xls = TagExt::getTagArrayByCate('jzdj'); if($xls) foreach ($xls as $key => $value) {?>
+	                	<a href="<?=$this->createUrl('list',['level'=>$key])?>" target="_blank"><?=$value?></a>
 	                <?php } ?></div>
 	                <div id="projectib">
-	                <!-- 同一个系列 -->
-	                <?php if($info->xl) foreach (ProductExt::model()->normal()->sorted()->findAll(['condition'=>'xl=:xl','params'=>[':xl'=>$info->xl],'limit'=>8]) as $key => $value) {?>
+	                <!-- 酒庄酒款 -->
+	                <?php if($wines = $info->products) foreach (array_slice($wines, 0, 8) as $key => $value) {?>
 	                	<div class="projectitem">
-	                        <a href="<?=$this->createUrl('info',['id'=>$value->id])?>" target="_blank">
+	                        <a href="<?=$this->createUrl('/home/product/info',['id'=>$value->id])?>" target="_blank">
 	                            <span class="propost_img"><img src="<?=ImageTools::fixImage($value->image,600,400)?>"/></span>
 	                            <div class="project_info">
 	                                <div>

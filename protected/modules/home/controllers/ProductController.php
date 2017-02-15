@@ -14,6 +14,7 @@ class ProductController extends HomeController{
 	{
 		$criteria = new CDbCriteria;
 		$criteria->order = 'sort desc,updated desc';
+		$criteria->addCondition('status=1 and deleted=0');
 		if($cate){
 			$criteria->addCondition('cid=:cid');
 			$criteria->params[':cid'] = $cate;
@@ -43,5 +44,11 @@ class ProductController extends HomeController{
 			$this->redirect('list');
 		}
 		$this->render('info',['info'=>$info]);
+	}
+
+	public function actionAlbum($id='')
+	{
+		$info = ProductExt::model()->findByPk($id);
+		$this->render('album',['images'=>$info->images]);
 	}
 }

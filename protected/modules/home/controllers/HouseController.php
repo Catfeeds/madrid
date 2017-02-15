@@ -10,26 +10,18 @@ class HouseController extends HomeController{
 	 * @param  string $house [description]
 	 * @return [type]        [description]
 	 */
-	public function actionList($cate='')
+	public function actionList($level='')
 	{
 		$criteria = new CDbCriteria;
 		$criteria->order = 'sort desc,updated desc';
-		if($cate){
-			$criteria->addCondition('cid=:cid');
-			$criteria->params[':cid'] = $cate;
+		if($level){
+			$criteria->addCondition('level=:cid');
+			$criteria->params[':cid'] = $level;
 		}
-		if($ptpz){
-			$criteria->addCondition('ptpz=:cid');
-			$criteria->params[':cid'] = $ptpz;
-		}
-		if($house){
-			$criteria->addCondition('house=:cid');
-			$criteria->params[':cid'] = $house;
-		}
-		$infos = ProductExt::model()->normal()->getList($criteria,12);
+		$infos = HouseExt::model()->getList($criteria,12);
 		$data = $infos->data;
 		$pager = $infos->pagination;
-		$this->render('list',['infos'=>$data,'pager'=>$pager,'cate'=>$cate,'ptpz'=>$ptpz,'house'=>$house]);
+		$this->render('list',['infos'=>$data,'pager'=>$pager,'level'=>$level]);
 	}
 	/**
 	 * [actionInfo 产品详情]
@@ -38,7 +30,7 @@ class HouseController extends HomeController{
 	 */
 	public function actionInfo($id='')
 	{
-		$info = ProductExt::model()->findByPk($id);
+		$info = HouseExt::model()->findByPk($id);
 		if(!$info) {
 			$this->redirect('list');
 		}
