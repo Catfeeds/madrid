@@ -56,7 +56,7 @@ class ProductExt extends Product{
         $alias = $this->getTableAlias();
         return array(
             'sorted' => array(
-                'order' => 'sort desc',
+                'order' => 'sort desc,updated desc',
             ),
             'normal' => array(
                 'order' => 'status=1 and deleted=0',
@@ -76,5 +76,18 @@ class ProductExt extends Product{
             ),
             'BaseBehavior'=>'application.behaviors.BaseBehavior',
         );
+    }
+
+    public function getTagName($attr='')
+    {
+        if($attr) {
+            return TagExt::getNameByTag($attr);
+        } else {
+            $arr = [];
+            foreach (['cid','xl','ptpz'] as $key => $value) {
+                $arr[$value] = TagExt::getNameByTag($this->$value);
+            }
+            return $arr;
+        }
     }
 }

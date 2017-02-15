@@ -6,6 +6,7 @@
  */
 class HomeController extends Controller
 {
+    public $banner = 'nobanner';
     /**
      * @var string 页面底部
      */

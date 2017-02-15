@@ -36,7 +36,7 @@
                     </div>
                     <div id="category" class="hide wow">
                       <?php if($cates) foreach ($cates as $key => $value) {?>
-                        <a href=""><?=$value?></a>
+                        <a href="<?=$this->createUrl('/home/product/list',['cate'=>$key])?>"><?=$value?></a>
                       <?php }?>
                     </div>
                     <!--yyLayout masonry-->
@@ -50,7 +50,7 @@
                                 <ul class="content_list" data-options-sliders="4" data-options-margin="20" data-options-ease="cubic-bezier(.73,-0.03,.24,1.01)" data-options-speed="0.5">
                                 <?php if($wines) foreach ($wines as $key => $value) {?>
                                  <li id="projectitem_<?=$key?>" class="projectitem wow">
-                                        <a href="" class="projectitem_content" target="_blank">
+                                        <a href="<?=$this->createUrl('/home/product/info',['id'=>$value->id])?>" class="projectitem_content" target="_blank">
                                             <div class="projectitem_wrapper">
                                                 <div class="project_img"><img src="<?=ImageTools::fixImage($value->image,600,400)?>" width="650" height="385" /></div>
                                                 <div class="project_info">
@@ -69,7 +69,7 @@
                             <!--wrapper-->
                         </div>
                         <!--projectSubList-->
-                        <a href="http://mo004_376.mo4.line1.jsmo.xin/project/" class="more wow">MORE<i class="fa fa-angle-right"></i></a>
+                        <a href="<?=$this->createUrl('/home/product/info',['id'=>$value->id])?>" class="more wow">MORE<i class="fa fa-angle-right"></i></a>
                     </div>
                     <!--projectlist-->
                     <div class="clear"></div>

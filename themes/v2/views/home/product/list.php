@@ -8,7 +8,7 @@
                 <p class="title">菜品</p>
                 <p class="subtitle">PRODUCTS</p>
             </div> -->
-            <ul id="category" style="height: 20px;margin-bottom: 10px;margin-top:75px;padding: 0">
+            <ul id="category"  style="height: 20px;margin-bottom: 10px;margin-top: 10px;padding: 0">
             <?php $cateArr = $_GET;unset($cateArr['cate'])?>
             <li><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$cate?'active':''?>">全部类型</a></li>
             <?php if($cates = CHtml::listData(TagExt::model()->getTagByCate('hjlx')->findAll(),'id','name')) foreach ($cates as $key => $value) {?>

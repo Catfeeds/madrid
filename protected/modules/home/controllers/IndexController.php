@@ -3,6 +3,7 @@ class IndexController extends HomeController
 {
     public function actionIndex()
     {
+        $this->banner = '';
     	if(Yii::app()->request->getIsPostRequest()) {
     		$guest = new GuestExt;
     		$data['name'] = Yii::app()->request->getPost('name','');
