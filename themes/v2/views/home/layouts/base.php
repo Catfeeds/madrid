@@ -23,7 +23,7 @@
             <?php $path = trim(Yii::app()->request->getPathInfo(),'/');?>
                     <li class="navitem"><a class="nav-a <?=$path=='home/index/index'?'active':''?>" href="<?=$this->createUrl('/home/index/index')?>" target="_self"><span  data-title="首页">首页</span></a></li>
                     <li class="navitem"><a class="nav-a <?=$path=='home/product/list'||$path=='home/product/info'?'active':''?>" href="<?=$this->createUrl('/home/product/list')?>" target="_self"><span data-title="酒款">酒款</span></a></li>
-                    <li class="navitem"><a class="nav-a <?=$path=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="酒庄">酒庄</span></a></li>
+                    <li class="navitem"><a class="nav-a <?=$path=='home/house/index'||$path=='home/house/info'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="酒庄">酒庄</span></a></li>
                     <li class="navitem"><a class="nav-a <?=$path=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="资讯">资讯</span></a></li>
                     <!-- <li class="navitem"><a class="nav-a " href="javascript:;" target=""><span data-title="关于">关于</span><i class="fa fa-angle-down"></i></a>        <ul class="subnav">
                             <li><a href="" target="_self"><span data-title="关于">关于</span><i class="fa fa-angle-right"></i></a></li>

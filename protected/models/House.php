@@ -65,7 +65,7 @@ class House extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'Name',
 			'eng' => 'Eng',
-			'place' => 'Place',
+			'place' => '地区',
 			'level' => 'Level',
 			'image' => 'Image',
 			'data_conf' => 'Data Conf',

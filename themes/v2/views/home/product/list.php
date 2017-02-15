@@ -53,7 +53,6 @@
             </div>
             <div class="clear"></div>
             <?php $this->widget('HomeLinkPager',['pages'=>$pager])?>
-            <div id="pages"><a href="http://mo004_376.mo4.line1.jsmo.xin/project/page/1/" class="active">1</a></div>
         </div>
     </div>
 </div>
