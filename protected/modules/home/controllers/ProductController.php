@@ -20,12 +20,12 @@ class ProductController extends HomeController{
 			$criteria->params[':cid'] = $cate;
 		}
 		if($ptpz){
-			$criteria->addCondition('ptpz=:cid');
-			$criteria->params[':cid'] = $ptpz;
+			$criteria->addCondition('ptpz=:cid1');
+			$criteria->params[':cid1'] = $ptpz;
 		}
 		if($house){
-			$criteria->addCondition('house=:cid');
-			$criteria->params[':cid'] = $house;
+			$criteria->addCondition('house=:cid2');
+			$criteria->params[':cid2'] = $house;
 		}
 		$infos = ProductExt::model()->normal()->getList($criteria,12);
 		$data = $infos->data;
