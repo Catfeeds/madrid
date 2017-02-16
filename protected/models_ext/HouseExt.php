@@ -33,7 +33,7 @@ class HouseExt extends House{
     public function relations()
     {
         return array(
-            'products'=>array(self::HAS_MANY, 'ProductExt', 'house','order'=>'products.sort desc,products.updated desc'),
+            'products'=>array(self::HAS_MANY, 'ProductExt','house','condition'=>'products.status=1 and products.deleted=0', 'order'=>'products.sort desc,products.updated desc'),
         );
     }
 

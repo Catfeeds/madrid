@@ -18,7 +18,7 @@
 </head>
     <body class="<?=$this->banner?>">
         <div id="header" class="<?=$this->banner?'':'index_nav'?>">
-          <div class="content"><a href="" id="logo"><img src="<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcLogo'),40,20)?>" height="40" /></a>
+          <div class="content"><a href="" id="logo"><img src="<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcLogo'))?>" height="40" /></a>
             <ul id="nav">
             <?php $path = trim(Yii::app()->request->getPathInfo(),'/');?>
                     <li class="navitem"><a class="nav-a <?=$path=='home/index/index'?'active':''?>" href="<?=$this->createUrl('/home/index/index')?>" target="_self"><span  data-title="首页">首页</span></a></li>
