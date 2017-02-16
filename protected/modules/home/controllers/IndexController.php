@@ -27,7 +27,9 @@ class IndexController extends HomeController
     	$news = ArticleExt::model()->getNormal()->sorted()->normal()->findAll(['limit'=>4]);
     	// 三个团队
     	$teams = ArticleExt::model()->getTeam()->normal()->findAll(['limit'=>3]);
+        // 三个服务
+        $serves = ArticleExt::model()->getServe()->normal()->findAll();
     	// var_dump(SiteExt::getAttr('qjpz','qq'));exit;
-        $this->render('index',['images'=>$images,'cates'=>$cates,'wines'=>$wines,'news'=>$news,'teams'=>$teams]);
+        $this->render('index',['images'=>$images,'cates'=>$cates,'wines'=>$wines,'news'=>$news,'teams'=>$teams,'serves'=>$serves]);
     }
 }

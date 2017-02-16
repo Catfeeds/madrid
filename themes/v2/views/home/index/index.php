@@ -76,7 +76,7 @@
                 </div>
             </div>
             <!--project-->
-            <!-- <div id="mservice" class="module bgShow" style="background-image:url(http://resources.jsmo.xin/templates/upload/376/201607/1468488692500.png);">
+            <div id="mservice" class="module bgShow" style="background-image:url(<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcIndexServe'),1200,1000)?>);">
                 <div class="bgmask"></div>
                 <div class="content layoutslider">
                     <div class="header wow fw" data-wow-delay=".1s">
@@ -86,67 +86,29 @@
                     <div class="module-content fw" id="servicelist">
                         <div class="wrapper">
                             <ul class="content_list" data-options-sliders="3" data-options-margin="0" data-options-ease="1" data-options-speed="0.5">
-                                <li id="serviceitem_0" class="serviceitem wow">
-                                    <a href="http://mo004_376.mo4.line1.jsmo.xin/service/post/1423/" target="_blank">
-                                        <p class="service_img"><img src="http://resources.jsmo.xin/templates/upload/376/201607/1468579304436.png" width="320" height="120" /></p>
+                            <?php if($serves) foreach ($serves as $key => $value) {?>
+                                <li id="serviceitem_<?=$key?>" class="serviceitem wow">
+                                    <a href="<?=$this->createUrl('/home/serve/info',['id'=>$value->id])?>" target="_blank">
+                                        <p class="service_img"><img src="<?=ImageTools::fixImage($value->image,320,120)?>" width="320" height="120" /></p>
                                         <div class="service_info">
-                                            <p class="title">西餐服务知识</p>
-                                            <p class="description">在西餐中最具有代表性的食物，那就非牛排莫属了，精致菜式大放送!全部都出自世界 ...</p>
+                                            <p class="title"><?=$value->title?></p>
+                                            <p class="description"><?=Tools::u8_title_substr($value->desc,30)?></p>
                                         </div>
                                     </a>
-                                    <a href="http://mo004_376.mo4.line1.jsmo.xin/service/post/1423/" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
+                                    <a href="<?=$this->createUrl('/home/serve/info',['id'=>$value->id])?>" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
                                 </li>
-                                <li id="serviceitem_1" class="serviceitem wow">
-                                    <a href="http://mo004_376.mo4.line1.jsmo.xin/service/post/1422/" target="_blank">
-                                        <p class="service_img"><img src="http://resources.jsmo.xin/templates/upload/376/201607/1468579312756.png" width="320" height="120" /></p>
-                                        <div class="service_info">
-                                            <p class="title">西餐礼仪细节</p>
-                                            <p class="description">吃沙拉时，通常会遇上较大片的菜叶，这时不要用刀子切开菜叶而应以刀叉将其折起来，再以 ...</p>
-                                        </div>
-                                    </a>
-                                    <a href="http://mo004_376.mo4.line1.jsmo.xin/service/post/1422/" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
-                                </li>
-                                <li id="serviceitem_2" class="serviceitem wow">
-                                    <a href="http://mo004_376.mo4.line1.jsmo.xin/service/post/1420/" target="_blank">
-                                        <p class="service_img"><img src="http://resources.jsmo.xin/templates/upload/376/201607/1468579319816.png" width="320" height="120" /></p>
-                                        <div class="service_info">
-                                            <p class="title">米其林精美菜式须知</p>
-                                            <p class="description">在法国，厨师属于艺术家的范畴，法国还有一家全球闻名、历史悠久的为这些艺术家及他们的 ...</p>
-                                        </div>
-                                    </a>
-                                    <a href="http://mo004_376.mo4.line1.jsmo.xin/service/post/1420/" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
-                                </li>
-                                <li id="serviceitem_3" class="serviceitem wow">
-                                    <a href="http://mo004_376.mo4.line1.jsmo.xin/service/post/1456/" target="_blank">
-                                        <p class="service_img"><img src="http://resources.jsmo.xin/templates/upload/376/201607/1468923364933.png" width="320" height="120" /></p>
-                                        <div class="service_info">
-                                            <p class="title">SPECIAL EVENTS</p>
-                                            <p class="description">For special events &amp; private functions in New York City please complete the below inquiry form ...</p>
-                                        </div>
-                                    </a>
-                                    <a href="http://mo004_376.mo4.line1.jsmo.xin/service/post/1456/" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
-                                </li>
-                                <li id="serviceitem_4" class="serviceitem wow">
-                                    <a href="http://mo004_376.mo4.line1.jsmo.xin/service/post/1451/" target="_blank">
-                                        <p class="service_img"><img src="http://resources.jsmo.xin/templates/upload/376/201607/1468921073499.png" width="320" height="120" /></p>
-                                        <div class="service_info">
-                                            <p class="title">NEW YORK CITY RESTAURANT</p>
-                                            <p class="description">Restaurant Week will be taking place in New York City from July 25 through August 19th...</p>
-                                        </div>
-                                    </a>
-                                    <a href="http://mo004_376.mo4.line1.jsmo.xin/service/post/1451/" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
-                                </li>
+                            <?php } ?>
                             </ul>
                         </div>
                     </div>
                     <div class="clear"></div>
-                    <a href="http://mo004_376.mo4.line1.jsmo.xin/service/" class="more wow">MORE<i class="fa fa-angle-right"></i></a></div>
-            </div> -->
+                    <a href="<?=$this->createUrl('/home/serve/list')?>" class="more wow">MORE<i class="fa fa-angle-right"></i></a></div>
+            </div>
             <div id="mnews" class="module bgShow" style="background-image:url(<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcIndexNews'),1300,900)?>);">
                 <div class="bgmask"></div>
                 <div class="content layoutnone">
                     <div class="header wow">
-                        <p class="title">新闻</p>
+                        <p class="title">资讯</p>
                         <p class="subtitle">NEWS</p>
                     </div>
                     <div class="module-content" id="newslist">
@@ -154,7 +116,7 @@
                             <ul class="content_list" data-options-sliders="4" data-options-margin="0" data-options-ease="cubic-bezier(.73,-0.03,.24,1.01)" data-options-speed="0.8" data-options-mode="horizontal" data-options-wheel="0">
                             <?php if($news) foreach ($news as $key => $value) {?>
                               <li id="newsitem_<?=$key?>" class="wow newstitem <?=$key%2==0?'right':'left'?>">
-                                    <a class="newscontent" target="_blank" href="">
+                                    <a class="newscontent" target="_blank" href="<?=$this->createUrl('/home/news/info',['id'=>$value->id])?>">
                                         <div class="news_wrapper">
                                             <div class="newsbody">
                                                 <p class="date"><span class="md"><?=date('Y',$value['created'])?><span>-</span></span><span class="year"><?=date('m',$value['created'])?>-<?=date('d',$value['created'])?></span></p>
@@ -165,7 +127,7 @@
                                         </div>
                                         <div class="newsimg" style="background-image:url(<?=ImageTools::fixImage($value['image'],600,400)?>)"></div>
                                     </a>
-                                    <a href="" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
+                                    <a href="<?=$this->createUrl('/home/news/info',['id'=>$value->id])?>" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
                                 </li>
                             <?php }?>
                             </ul>

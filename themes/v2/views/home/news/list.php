@@ -14,7 +14,9 @@
                 <div id="category">
                 <a href="<?=$this->createUrl('list')?>" class="<?=!$cate?'active':''?>">全部</a>
                 <?php foreach (TagExt::model()->getTagByCate('wzlm')->normal()->sorted()->findAll() as $key => $value) {?>
+                	<?php if($value->id != 19 && $value->id != 20):?>
                 	<a href="<?=$this->createUrl('list',['cate'=>$value->id])?>" class="<?=$value->id==$cate?'active':''?>"><?=$value->name?></a>
+                <?php endif;?>
                 <?php }?>
                 </div>
                 <div id="newslist">

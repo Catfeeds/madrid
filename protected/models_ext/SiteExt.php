@@ -23,12 +23,18 @@ class SiteExt extends Site{
         'pcIndexNews'=>'',
         // pc首页关于背景图
         'pcIndexAbout'=>'',
+        // pc首页服务背景图
+        'pcIndexServe'=>'',
         // pc首页关于
         'pcIndexAboutText'=>'',
         // pc资讯列表头图
         'pcNewsTop'=>'',
         // pc联系列表头图
-        'pcContactTop'=>''
+        'pcContactTop'=>'',
+        // pc服务列表头图
+        'pcServeTop'=>'',
+        // pc团队列表头图
+        'pcTeamTop'=>''
 
     ];
     public static $cateName = [
@@ -46,8 +52,11 @@ class SiteExt extends Site{
             'wxQr'=>['type'=>'image','max'=>1,'name'=>'微信二维码'],
             'pcIndexNews'=>['type'=>'image','max'=>1,'name'=>'pc首页新闻背景图'],
             'pcIndexAbout'=>['type'=>'image','max'=>1,'name'=>'pc首页关于背景图'],
+            'pcIndexServe'=>['type'=>'image','max'=>1,'name'=>'pc首页服务背景图'],
             'pcNewsTop'=>['type'=>'image','max'=>1,'name'=>'pc资讯列表头图'],
             'pcContactTop'=>['type'=>'image','max'=>1,'name'=>'pc联系列表头图'],
+            'pcServeTop'=>['type'=>'image','max'=>1,'name'=>'pc服务列表头图'],
+            'pcTeamTop'=>['type'=>'image','max'=>1,'name'=>'pc团队列表头图'],
             ],
     ];
 
