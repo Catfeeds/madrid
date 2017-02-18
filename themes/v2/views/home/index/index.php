@@ -88,21 +88,21 @@
                             <?php if($houses) foreach ($houses as $key => $value) {?>
                               <li id="teamitem_<?=$key?>" class="wow">
                                     <div class="header wow" data-wow-delay=".2s">
-                                        <a href="" target="_blank"><img src="<?=ImageTools::fixImage($value->image,180,180)?>" width="180" height="180" /></a>
+                                        <a href="<?=$this->createUrl('/home/house/info',['id'=>$value->id])?>" target="_blank"><img src="<?=ImageTools::fixImage($value->image,180,180)?>" width="180" height="180" /></a>
                                     </div>
                                     <div class="summary wow">
                                         <p class="title"><a href=""><?=$value->name?></a></p>
                                         <p class="subtitle"><?=$value->eng?></p>
                                         <p class="description wow"><?=Tools::u8_title_substr(strip_tags($value['content']),100)?></p>
                                     </div>
-                                    <a href="" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
+                                    <a href="<?=$this->createUrl('/home/house/info',['id'=>$value->id])?>" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
                                 </li>
                             <?php } ?>
                             </ul>
                         </div>
                     </div>
                     <div class="clear"></div>
-                    <a href="http://mo004_376.mo4.line1.jsmo.xin/team/" class="more wow">MORE<i class="fa fa-angle-right"></i></a>
+                    <a href="<?=$this->createUrl('/home/house/info',['id'=>$value->id])?>"></i></a>
                 </div>
             </div>
             <!--project-->
