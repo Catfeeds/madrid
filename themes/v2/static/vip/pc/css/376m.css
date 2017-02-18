@@ -19,6 +19,8 @@
 #projectpost .postbody a {background: #3B3B3B;color:#DADADA;}
 .postbody a {color:#E6E6E6;}
 #category .label { background: #313131; }
+#category1 .label { background: #313131; }
+#category2 .label { background: #313131; }
 #pages a.active, #pages a:hover { background: #03D522; }
 .dropmenu ul li a.active { color: #fff;background: #0c0c0c; }
 .dropmenu ul li a { color: #BBBBBB; background: rgba(17, 17, 17, 0.9); }

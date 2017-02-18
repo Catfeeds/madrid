@@ -15,16 +15,16 @@
             	<li><a href="<?=$this->createUrl('list',$cateArr+['cate'=>$key])?>" class="<?=$key==$cate?'active':''?>"><?=$value?></a></li>
             <?php } ?>
             </ul>
-            <ul id="category"  style="height: 20px;margin-bottom: 10px;padding: 0">
+            <ul id="category1"  style="height: 20px;margin-bottom: 10px;padding: 0">
             <?php $cateArr = $_GET;unset($cateArr['ptpz'])?>
-            <li><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$ptpz?'active':''?>">全部品种</a></li>
+            <li style="    display: inline-block;"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$ptpz?'active':''?>">全部品种</a></li>
             <?php if($cates = CHtml::listData(TagExt::model()->getTagByCate('ptpz')->findAll(),'id','name')) foreach ($cates as $key => $value) {?>
             	<li><a href="<?=$this->createUrl('list',$cateArr+['ptpz'=>$key])?>" class="<?=$key==$ptpz?'active':''?>"><?=$value?></a></li>
             <?php } ?>
             </ul>
-            <ul id="category">
+            <ul id="category2">
             <?php $cateArr = $_GET;unset($cateArr['house'])?>
-            <li><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$house?'active':''?>">全部酒庄</a></li>
+            <li style="    display: inline-block;"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$house?'active':''?>">全部酒庄</a></li>
             <?php if($cates = CHtml::listData(HouseExt::model()->findAll(),'id','name')) foreach ($cates as $key => $value) {?>
             	<li><a href="<?=$this->createUrl('list',$cateArr+['house'=>$key])?>" class="<?=$key==$house?'active':''?>"><?=$value?></a></li>
             <?php } ?>

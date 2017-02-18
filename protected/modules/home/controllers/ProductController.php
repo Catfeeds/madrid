@@ -27,7 +27,7 @@ class ProductController extends HomeController{
 			$criteria->addCondition('house=:cid2');
 			$criteria->params[':cid2'] = $house;
 		}
-		$infos = ProductExt::model()->normal()->getList($criteria,12);
+		$infos = ProductExt::model()->normal()->getList($criteria,8);
 		$data = $infos->data;
 		$pager = $infos->pagination;
 		$this->render('list',['infos'=>$data,'pager'=>$pager,'cate'=>$cate,'ptpz'=>$ptpz,'house'=>$house]);
