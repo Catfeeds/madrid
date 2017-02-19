@@ -1,29 +1,11 @@
 <?php
 /**
- * wap首页
+ * wap首页类 
  */
-class IndexController extends WapController
-{
-    /**
-     * 新版房产走{@see actions()}方法中，并且使用布局为nobody
-     * @return array
-     */
-    public function actions()
+class IndexController extends WapController{
+    public function actionIndex()
     {
-        $this->layout = '/layouts/nobody';
-        $alias = 'wap.controllers.index.';
-        return array(
-            'index' => $alias.'IndexAction',
-            'nav' => $alias.'NavAction',
-        );
+        $this->render('index');
     }
 
-    /**
-     * 跳转pc页面
-     */
-    public function actionRedirectPc()
-    {
-        $this->setStayInPc();
-        $this->redirect(array('/home/index/index'));
-    }
 }
