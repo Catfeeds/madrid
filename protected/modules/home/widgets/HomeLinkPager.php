@@ -10,11 +10,13 @@ class HomeLinkPager extends CLinkPager
 	{
 		parent::init();
 
-		$this->htmlOptions['class'] = 'm-page m-page-rt my-m-page-rt f-fr';
+		$this->htmlOptions['id'] = 'm-page m-page-rt my-m-page-rt f-fr';
 		// $this->htmlOptions['style'] = 'display:inline-block';
-		$this->selectedPageCssClass = 'z-crt';
+		$this->selectedPageCssClass = 'active';
 		$this->prevPageLabel = '&lt;';
 		$this->nextPageLabel = '&gt;';
+		$this->firstPageLabel = '<<';
+		$this->lastPageLabel = '>>';
 		$this->header = '共'.$this->pageCount.'页,'.$this->itemCount.'条记录,每页'.$this->pageSize.'条';
 		$this->internalPageCssClass = '';
 	}
@@ -25,8 +27,8 @@ class HomeLinkPager extends CLinkPager
 		$buttons=$this->createPageButtons();
 		if(empty($buttons))
 			return;
-		echo '<div class="m-page m-page-rt my-m-page-rt f-fr">';
-		echo '<span class="tip">'.$this->header.'</span>';
+		echo '<div id="pages">';
+		// echo '<span class="tip">'.$this->header.'</span>';
 		if($buttons)
 			foreach ($buttons as $key => $value) {
 				echo $value;

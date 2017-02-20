@@ -75,6 +75,36 @@
                     <div class="clear"></div>
                 </div>
             </div>
+            <div id="mteam" class="module">
+                <div class="bgmask"></div>
+                <div class="content layoutnone">
+                    <div class="header wow">
+                        <p class="title">酒庄</p>
+                        <p class="subtitle">Chateau</p>
+                    </div>
+                    <div class="module-content fw">
+                        <div class="wrapper">
+                            <ul class="content_list" data-options-sliders="3" data-options-margin="20" data-options-ease="cubic-bezier(.73,-0.03,.24,1.01)" data-options-speed="1">
+                            <?php if($houses) foreach ($houses as $key => $value) {?>
+                              <li id="teamitem_<?=$key?>" class="wow">
+                                    <div class="header wow" data-wow-delay=".2s">
+                                        <a href="<?=$this->createUrl('/home/house/info',['id'=>$value->id])?>" target="_blank"><img src="<?=ImageTools::fixImage($value->image,180,180)?>" width="180" height="180" /></a>
+                                    </div>
+                                    <div class="summary wow">
+                                        <p class="title"><a href=""><?=$value->name?></a></p>
+                                        <p class="subtitle"><?=$value->eng?></p>
+                                        <p class="description wow"><?=Tools::u8_title_substr(strip_tags($value['content']),100)?></p>
+                                    </div>
+                                    <a href="<?=$this->createUrl('/home/house/info',['id'=>$value->id])?>" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
+                                </li>
+                            <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <a href="<?=$this->createUrl('/home/house/info',['id'=>$value->id])?>"></i></a>
+                </div>
+            </div>
             <!--project-->
             <div id="mservice" class="module bgShow" style="background-image:url(<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcIndexServe'),1200,1000)?>);">
                 <div class="bgmask"></div>
@@ -161,36 +191,7 @@
                 </div>
             </div>
             
-            <div id="mteam" class="module">
-                <div class="bgmask"></div>
-                <div class="content layoutnone">
-                    <div class="header wow">
-                        <p class="title">团队</p>
-                        <p class="subtitle">Team</p>
-                    </div>
-                    <div class="module-content fw">
-                        <div class="wrapper">
-                            <ul class="content_list" data-options-sliders="3" data-options-margin="20" data-options-ease="cubic-bezier(.73,-0.03,.24,1.01)" data-options-speed="1">
-                            <?php if($teams) foreach ($teams as $key => $value) {?>
-                              <li id="teamitem_<?=$key?>" class="wow">
-                                    <div class="header wow" data-wow-delay=".2s">
-                                        <a href="" target="_blank"><img src="<?=ImageTools::fixImage($value->image,180,180)?>" width="180" height="180" /></a>
-                                    </div>
-                                    <div class="summary wow">
-                                        <p class="title"><a href=""><?=$value->title?></a></p>
-                                        <p class="subtitle"><?=$value->sub_title?></p>
-                                        <p class="description wow"><?=Tools::u8_title_substr($value['desc'],30)?></p>
-                                    </div>
-                                    <a href="" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
-                                </li>
-                            <?php } ?>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-                    <a href="http://mo004_376.mo4.line1.jsmo.xin/team/" class="more wow">MORE<i class="fa fa-angle-right"></i></a>
-                </div>
-            </div>
+            
             <!-- <div id="mpartner" class="module">
                 <div class="bgmask"></div>
                 <div class="content layoutslider">
