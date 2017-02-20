@@ -88,7 +88,7 @@ bx-wrapper .bx-pager.bx-default-pager a.active, .bx-wrapper .bx-pager.bx-default
 
 #indexPage #mnews .content .header p.title { color:#fff;}
 
-#projectlist .bx-viewport { padding-bottom: 90px; }
+#projectlist .bx-viewport { padding-bottom: 20px; }
 
 #projectlist .projectitem a:hover .project_info { background: rgba(0,0,0,.3); position:absolute;}
 
