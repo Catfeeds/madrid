@@ -121,6 +121,7 @@
                     <p class="subtitle">ABOUT US</p>
                 </div>
                 <p class="description"><?=Tools::u8_title_substr(SiteExt::getAttr('qjpz','pcIndexAboutText'),600)?></p>
+                <br>
             </div>
             <!-- <a href="http://mo004_376.mo4.line1.jsmo.xin/page/5738/" class="more">MORE</a> -->
             <div class="fimg wow fadeIn">
