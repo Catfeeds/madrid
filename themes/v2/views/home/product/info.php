@@ -19,7 +19,7 @@
 	                    <div class="header">
 	                        <p class="title"><?=$info->name?></p>
 	                        <p class="subtitle"><?=$info->eng?></p>
-	                        <p class="subtitle"><?=$info->price?></p>
+	                        <p class="subtitle">￥<?=$info->price?></p>
 	                        <div class="description">
 	                        <?php $tags = $info->getTagName();?>
 	                            <p>类型: <?=$tags['cid']?></p>
@@ -31,6 +31,9 @@
 	                                <br />
 	                            </p>
 	                            <p><a href="tencent://message/?uin=<?=SiteExt::getAttr('qjpz','qq')?>&Site=uelike&Menu=yes">在线预定</a></p>
+	                            <p>
+	                                <br />
+	                            </p>
 	                            <p><a href="<?=$this->createUrl('album',['id'=>$info->id])?>">查看相册</a></p>
 	                            <p>
 	                                <br />

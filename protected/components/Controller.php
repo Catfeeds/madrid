@@ -21,7 +21,10 @@ class Controller extends CController
 		Yii::app()->theme = 'v2';
 		if($this->redirectWap()&&$this->module->id=='home'&&$this->id!='error')
 		{
-			$this->redirect('/wap'.Yii::app()->request->getUrl());
+			if(Yii::app()->request->getUrl() == '/')
+				$this->redirect('/wap');
+			else
+				$this->redirect(str_replace('/home','/wap',Yii::app()->request->getUrl()));
 			Yii::app()->end();
 		}
 	}

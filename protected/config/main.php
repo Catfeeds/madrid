@@ -151,6 +151,7 @@ $config1 = array(
                 //中介
                 'vip/zf/zfEdit' =>'vip/zf/publish',
                 'vip/<c:\w+>/<a:\w+>' => 'vip/<c>/<a>',
+                'wap/<c:\w+>/<a:\w+>' => 'wap/<c>/<a>',
                 'vip' => 'vip/common/index',
                 //前台
                 'fz-<fenzhan:\w+>' => 'home/index/index',//分站主页
