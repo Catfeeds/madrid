@@ -7,18 +7,18 @@
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
-    <meta name="keywords" content="网站模板,自定义模板,餐饮网站,西餐网站,美食网站,美食模板">
-    <meta name="description" content="模板网站生成">
+    <meta name="keywords" content="网站模板,自定义西班牙红酒，里奥哈酒庄，进口顶级红酒模板,餐饮网站,西餐网站,美食网站,美食模板">
+    <meta name="description" content="模板网站西班牙进口红酒生成">
     <meta name="author" content="UEMO">
     <link type="text/css" href="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/css/font-awesome.min.css" rel="stylesheet">
     <link type="text/css" href="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/css/bxslider.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/css/animate.min.css">
     <link type="text/css" href="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" type="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/css/376m.css">
-    <title>关于 - mo004_376 - 食品餐饮类网站</title>
+    <link rel="stylesheet" type="text/css" href="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/css/376m.css">
+    <title>马德里公馆</title>
 </head>
 
-<body>
+<body class="<?=$this->banner?>">
     <div id="sitecontent" class="transform">
         <div id="header">
             <div id="openlc" class="fl btn">
@@ -31,12 +31,12 @@
                     </div>
                 </div>
             </div>
-            <a id="logo" href="http://mo004_376.mo4.line1.jsmo.xin/"><img src="http://resources.jsmo.xin/templates/upload/376/201607/1468932780156.png" /></a>
+            <a id="logo" href="<?=$this->createUrl('/')?>"><img src="<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcLogo'))?>" /></a>
         </div>
         <div class="scrollView">
             <?=$content?>
             <div id="footer">
-                <p class="plr10"><span>(©) 2017 mo004_376 - 食品餐饮类网站.</span>
+                <p class="plr10"><span>COPYRIGHT (©) 2017  常州马德里公馆.</span>
                     <a class="beian" href="http://www.miitbeian.gov.cn/" style="display:inline; width:auto; color:#8e8e8e" target="_blank"></a>
                 </p>
             </div>
@@ -57,18 +57,21 @@
                     </div>
                 </div>
             </li>
-            <li class="navitem"><a class="transform" href="http://mo004_376.mo4.line1.jsmo.xin/"><span class="circle transform"></span>首页</a></li>
-            <li class="navitem"><a class="transform" href="http://mo004_376.mo4.line1.jsmo.xin/project/"><span class="circle transform"></span>菜品</a></li>
-            <li class="navitem active"><a href="javascript:;" class="hassub"><span class="circle transform"></span>关于<span class="more"><span class="h"></span><span class="h v transform"></span></span></a>
-                <ul class="subnav transform" data-height="150" style="height:150px">
-                    <li class="active"><a href="http://mo004_376.mo4.line1.jsmo.xin/page/about/"><i class="fa fa-angle-right"></i>关于</a></li>
-                    <li><a href="http://mo004_376.mo4.line1.jsmo.xin/team/"><i class="fa fa-angle-right"></i>团队</a></li>
-                    <li><a href="http://mo004_376.mo4.line1.jsmo.xin/news/"><i class="fa fa-angle-right"></i>新闻</a></li>
-                </ul>
+            <?php $path = trim(Yii::app()->request->getPathInfo(),'/');?>
+
+            <li class="navitem"><a class="nav-a <?=$path=='home/index/index'?'active':''?>" href="<?=$this->createUrl('/home/index/index')?>" target="_self"><span  data-title="首页">首页</span></a></li>
+            <li class="navitem"><a class="nav-a <?=$path=='home/product/list'||$path=='home/product/info'?'active':''?>" href="<?=$this->createUrl('/home/product/list')?>" target="_self"><span data-title="酒款">酒款</span></a></li>
+            <li class="navitem"><a class="nav-a <?=$path=='home/house/list'||$path=='home/house/info'?'active':''?>" href="<?=$this->createUrl('/home/house/list')?>" target="_self"><span data-title="酒庄">酒庄</span></a></li>
+            <li class="navitem"><a class="nav-a <?=$path=='home/news/list'||$path=='home/news/info'?'active':''?>" href="<?=$this->createUrl('/home/news/list')?>" target="_self"><span data-title="资讯">资讯</span></a></li>
+            
+            <!-- <li class="navitem"><a class="nav-a <?=$path=='home/index/index'?'active':''?>" href="<?=$this->createUrl('index')?>" target="_self"><span data-title="图册">图册</span></a></li> -->
+            <li class="navitem"><a class="nav-a <?=$path=='home/serve/list'||$path=='home/serve/info'?'active':''?>" href="<?=$this->createUrl('/home/serve/list')?>" target="_self"><span data-title="服务">服务</span></a></li>
+            <li class="navitem"><a class="nav-a <?=$path=='home/team/list'||$path=='home/team/info'||$path=='home/contact/index'?'active':''?>" href="javascript:;" target=""><span data-title="关于">关于</span><i class="fa fa-angle-down"></i></a>        
+                <ul class="subnav">
+                    <li><a href="<?=$this->createUrl('/home/team/list')?>" target="_self"><span data-title="团队">团队</span><i class="fa fa-angle-right"></i></a></li>
+                    <li><a href="<?=$this->createUrl('/home/contact/index')?>" target="_self"><span data-title="联系">联系</span><i class="fa fa-angle-right"></i></a></li>
+              </ul>
             </li>
-            <li class="navitem"><a class="transform" href="http://mo004_376.mo4.line1.jsmo.xin/page/5739/"><span class="circle transform"></span>图册</a></li>
-            <li class="navitem"><a class="transform" href="http://mo004_376.mo4.line1.jsmo.xin/service/"><span class="circle transform"></span>服务</a></li>
-            <li class="navitem"><a class="transform" href="http://mo004_376.mo4.line1.jsmo.xin/page/5740/"><span class="circle transform"></span>联系</a></li>
         </ul>
     </div>
     <script type="text/javascript">
@@ -85,7 +88,7 @@
         }).init();
     })
     </script>
-    <script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/js/org.min.js" data-main="IndexMain"></script>
+    <script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/js/org.min.js" data-main="<?=$this->banner?'baseMain':'indexMain'?>"></script>
     <div class="hide"></div>
 
 <script type="text/javascript">

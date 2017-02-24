@@ -11,6 +11,7 @@ class WapController extends Controller
      * @var string
      */
     public $backUrl = '';
+    public $banner = 'nobanner';
     /**
      * @var string 布局文件路径
      */
