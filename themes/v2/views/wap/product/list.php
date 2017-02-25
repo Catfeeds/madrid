@@ -41,7 +41,7 @@
 </div>
 <script type="text/javascript">
 <?php Tools::startJs()?>
-	$('.fa-angle-down').click(function(){
+	$('.label plr20').click(function(){
 		if($('#category').attr('class') == 'dropmenu pro-dropmenu') {
 			$('.lll').css('height','auto');
 			$('#category').attr('class','dropmenu pro-dropmenu open');
