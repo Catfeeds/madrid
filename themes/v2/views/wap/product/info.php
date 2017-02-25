@@ -33,7 +33,7 @@
                 	<li><img src="<?=ImageTools::fixImage($value->url)?>" class="imgcw" />
                 	<hr></li>
                 <?php } endif;?></ul>
-                <p><a href="tencent://message/?uin=<?=SiteExt::getAttr('qjpz','qq')?>&Site=uelike&Menu=yes">在线预定</a></p>
+                <p><a href="mqqwpa://im/chat?chat_type=wpa&uin=<?=SiteExt::getAttr('qjpz','qq')?>&version=1&src_type=web&web_src=oicqzone.com">在线预定</a></p>
             </div>
         </div>
         <div id="pages"></div>
