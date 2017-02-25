@@ -22,7 +22,8 @@
                 <a class="newsinfo" href="<?=$this->createUrl('info',['id'=>$value->id])?>"><img src="<?=ImageTools::fixImage($value->image,150,100)?>" width="auto" height="auto" style="margin-right:10px;margin-bottom: 10px" />
                     <div class="newsdate">
                         <p class="md"><?=date('m',$value['created'])?>-<?=date('d',$value['created'])?></p>
-                        <p class="year"><?=date('Y',$value['created'])?></p>
+                        <!-- <p class="year"><?=date('Y',$value['created'])?></p> -->
+                        <p class="year"><?=$value->author?></p>
                     </div>
                     <div class="newsbody">
                         <p class="title ellipsis"><?=$value['title']?></p>
