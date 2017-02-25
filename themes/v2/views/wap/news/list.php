@@ -27,7 +27,7 @@
                     </div>
                     <div class="newsbody">
                         <p class="title ellipsis"><?=$value['title']?></p>
-                        <p class="description"><?=Tools::u8_title_substr($value['desc'],50)?></p>
+                        <p class="description"><?=Tools::u8_title_substr($value['desc'],46)?></p>
                     </div>
                 </a>
             </div>
