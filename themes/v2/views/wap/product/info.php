@@ -37,7 +37,7 @@
                 <div id="contactform" class="" data-wow-delay=".2s">
                             <form id="f1" method="post" onsubmit="alert('提交成功')">
                                 <p>
-                                    <input type="text" class="inputtxt name" name="name" placeholder="姓名" autocomplete="off" />
+                                    <input id="pname" type="text" class="inputtxt name" name="name" placeholder="姓名" autocomplete="off" />
                                 </p>
                                 <hr>
                                 <p>
@@ -45,7 +45,7 @@
                                 </p>
                                 <hr>
                                 <p>
-                                    <input type="text" class="inputtxt tel" name="tel" placeholder="电话" autocomplete="off" />
+                                    <input id="pphone" type="text" class="inputtxt tel" name="tel" placeholder="电话" autocomplete="off" />
                                 </p>
                                 <hr>
                                 <p>
@@ -53,7 +53,7 @@
                                 </p>
                                 <hr>
                                 <p>
-                                    <a onclick="alert('提交成功');document.getElementById('f1').submit();">在线预定</a>
+                                    <a onclick="orderIt()">在线预定</a>
                                 </p>
                                 <input type="hidden" name="pid" value="<?=$info->id?>">
                             </form>
@@ -65,3 +65,21 @@
         <div id="pages"></div>
     </div>
 </div>
+<script type="text/javascript">
+    <?php Tools::startJs()?>
+    function orderIt() {
+        if($('#pname').val() == '') {
+            alert('请填写姓名');
+            return false; 
+        }
+        var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
+        if(!myreg.test($("#pphone").val())) 
+        { 
+            alert('请输入有效的手机号码'); 
+            return false; 
+        } 
+        alert('提交成功');
+        document.getElementById('f1').submit();
+    }
+    <?php Tools::endJs('js')?>
+</script>
