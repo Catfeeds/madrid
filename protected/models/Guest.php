@@ -9,6 +9,7 @@
  * @property string $phone
  * @property string $mail
  * @property string $msg
+ * @property integer $pid
  * @property integer $created
  * @property integer $updated
  */
@@ -31,14 +32,14 @@ class Guest extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('created', 'required'),
-			array('created, updated', 'numerical', 'integerOnly'=>true),
+			array('pid, created, updated', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			array('phone', 'length', 'max'=>12),
 			array('mail', 'length', 'max'=>100),
 			array('msg', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, phone, mail, msg, created, updated', 'safe', 'on'=>'search'),
+			array('id, name, phone, mail, msg, pid, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +65,7 @@ class Guest extends CActiveRecord
 			'phone' => 'Phone',
 			'mail' => 'Mail',
 			'msg' => 'Msg',
+			'pid' => 'Pid',
 			'created' => 'Created',
 			'updated' => 'Updated',
 		);
@@ -92,6 +94,7 @@ class Guest extends CActiveRecord
 		$criteria->compare('phone',$this->phone,true);
 		$criteria->compare('mail',$this->mail,true);
 		$criteria->compare('msg',$this->msg,true);
+		$criteria->compare('pid',$this->pid);
 		$criteria->compare('created',$this->created);
 		$criteria->compare('updated',$this->updated);
 

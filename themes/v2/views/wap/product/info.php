@@ -33,7 +33,33 @@
                 	<li><img src="<?=ImageTools::fixImage($value->url)?>" class="imgcw" />
                 	<hr></li>
                 <?php } endif;?></ul>
-                <p><a href="mqqwpa://im/chat?chat_type=wpa&uin=<?=SiteExt::getAttr('qjpz','qq')?>&version=1&src_type=web&web_src=oicqzone.com">在线预定</a></p>
+                <p>
+                <div id="contactform" class="" data-wow-delay=".2s">
+                            <form id="f1" method="post" onsubmit="alert('提交成功')">
+                                <p>
+                                    <input type="text" class="inputtxt name" name="name" placeholder="姓名" autocomplete="off" />
+                                </p>
+                                <hr>
+                                <p>
+                                    <input type="text" class="inputtxt email" name="email" placeholder="邮箱" autocomplete="off" />
+                                </p>
+                                <hr>
+                                <p>
+                                    <input type="text" class="inputtxt tel" name="tel" placeholder="电话" autocomplete="off" />
+                                </p>
+                                <hr>
+                                <p>
+                                    <input class="cont" name="content" placeholder="备注" autocomplete="off"></input>
+                                </p>
+                                <hr>
+                                <p>
+                                    <a onclick="alert('提交成功');document.getElementById('f1').submit();">在线预定</a>
+                                </p>
+                                <input type="hidden" name="pid" value="<?=$info->id?>">
+                            </form>
+                        </div>
+                
+                </p>
             </div>
         </div>
         <div id="pages"></div>

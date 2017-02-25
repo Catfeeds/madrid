@@ -39,6 +39,19 @@ class ProductController extends WapController{
 	 */
 	public function actionInfo($id='')
 	{
+		if(Yii::app()->request->getIsPostRequest()) {
+    		$guest = new GuestExt;
+    		$data['name'] = Yii::app()->request->getPost('name','');
+    		$data['mail'] = Yii::app()->request->getPost('email','');
+    		$data['phone'] = Yii::app()->request->getPost('tel','');
+    		$data['msg'] = Yii::app()->request->getPost('content','');
+    		$data['pid'] = Yii::app()->request->getPost('pid',0);
+
+    		$guest->attributes = $data;
+    		if($guest->save()) {
+    			$this->redirect('info');
+    		}
+    	} 
 		$info = ProductExt::model()->findByPk($id);
 		if(!$info) {
 			$this->redirect('list');
