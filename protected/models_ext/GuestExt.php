@@ -59,4 +59,17 @@ class GuestExt extends Guest{
             )
         );
     }
+    /**
+     * 绑定行为类
+     */
+    public function behaviors() {
+        return array(
+            'CacheBehavior' => array(
+                'class' => 'application.behaviors.CacheBehavior',
+                'cacheExp' => 0, //This is optional and the default is 0 (0 means never expire)
+                'modelName' => __CLASS__, //This is optional as it will assume current model
+            ),
+            'BaseBehavior'=>'application.behaviors.BaseBehavior',
+        );
+    }
 }
