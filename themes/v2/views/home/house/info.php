@@ -19,7 +19,7 @@
 	                    <div class="header">
 	                        <p class="title"><?=$info->name?></p>
 	                        <p class="subtitle"><?=$info->eng?></p>
-	                        <p class="subtitle"><?=$info->place?></p>
+	                        <p class="subtitle"><?=TagExt::getNameByTag($info->place)?></p>
 	                        <div class="description">
 	                            <p>等级: <?=TagExt::getNameByTag($info->level)?></p>
 	                            <p>酒款数量: <?=count($info->products)?>款</p>

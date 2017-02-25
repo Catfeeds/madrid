@@ -27,7 +27,7 @@ class ProductController extends WapController{
 			$criteria->addCondition('house=:cid2');
 			$criteria->params[':cid2'] = $house;
 		}
-		$infos = ProductExt::model()->normal()->getList($criteria,6);
+		$infos = ProductExt::model()->normal()->getList($criteria,20);
 		$data = $infos->data;
 		$pager = $infos->pagination;
 		$this->render('list',['infos'=>$data,'pager'=>$pager,'cate'=>$cate,'ptpz'=>$ptpz,'house'=>$house]);

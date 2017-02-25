@@ -1,10 +1,10 @@
 <?php
 /**
- * 资讯控制器
+ * 酒庄前台控制器
  */
-class NewsController extends WapController{
+class HouseController extends WapController{
 	/**
-	 * [actionList 资讯列表]
+	 * [actionList 酒庄列表]
 	 * @param  string $cate  [description]
 	 * @param  string $ptpz  [description]
 	 * @param  string $house [description]
@@ -15,22 +15,22 @@ class NewsController extends WapController{
 		$criteria = new CDbCriteria;
 		$criteria->order = 'sort desc,updated desc';
 		if($cate){
-			$criteria->addCondition('cid=:cid');
+			$criteria->addCondition('level=:cid');
 			$criteria->params[':cid'] = $cate;
 		}
-		$infos = ArticleExt::model()->getNormal()->getList($criteria,8);
+		$infos = HouseExt::model()->getList($criteria,20);
 		$data = $infos->data;
 		$pager = $infos->pagination;
 		$this->render('list',['infos'=>$data,'pager'=>$pager,'cate'=>$cate]);
 	}
 	/**
-	 * [actionInfo 资讯详情]
+	 * [actionInfo 产品详情]
 	 * @param  string $id [description]
 	 * @return [type]     [description]
 	 */
 	public function actionInfo($id='')
 	{
-		$info = ArticleExt::model()->findByPk($id);
+		$info = HouseExt::model()->findByPk($id);
 		if(!$info) {
 			$this->redirect('list');
 		}

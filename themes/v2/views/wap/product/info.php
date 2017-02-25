@@ -7,8 +7,8 @@
     <div class="content">
         <div id="projectpost">
             <div class="header">
-                <p class="title">鲜柠香煎银鳕鱼</p>
-                <p class="subtitle">bacon-ranchero</p>
+                <p class="title"><?=$info->name?></p>
+                <p class="subtitle"><?=$info->eng?></p>
             </div>
             <ul id="projectimages" class="plr5">
                 <li><img src="<?=ImageTools::fixImage($info->image)?>" class="imgcw" /></li>

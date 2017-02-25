@@ -1,38 +1,52 @@
 <?php
-$artcate = '';
-foreach($cates as $v){
-    if($v->id == $cid){
-        $artcate = $v->name;
-    }
-}
-$this->pageTitle =($artcate ? $artcate : '房产资讯').'_'.SM::urmConfig()->cityName().'房产网_'.'第'.(int)Yii::app()->request->getParam('page',1).'页-'.SM::GlobalConfig()->siteName().'房产-'.SM::GlobalConfig()->siteName();
-Yii::app()->clientScript->registerMetaTag(($artcate ? $artcate : '房产资讯').'，'.SM::GlobalConfig()->siteName().'房产，'.SM::urmConfig()->cityName().'房产网','keywords');
-Yii::app()->clientScript->registerMetaTag(SM::GlobalConfig()->siteName().'房产网是最热的'.SM::urmConfig()->cityName().'房产网，是'.SM::urmConfig()->cityName().'地区的房地产专业网站。小区业主交流、买房、看盘、租房、二手房买卖、了解'.SM::urmConfig()->cityName().'房地产新闻资讯就上'.SM::GlobalConfig()->siteName().SM::urmConfig()->cityName().'房产网。','description');
+  $this->pageTitle = '资讯列表';
 ?>
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/static/wap/style/news.css" media="all" />
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/static/wap/style/swiper.min.css" media="all" />
-
-<?php $this->renderPartial('/layouts/header',['title'=>'楼盘资讯','bc'=>true]) ?>
-
-<?php if($hid):?>
-<div class="content-box">
-    <div class="line-d"></div>
-
-<?php else:?>
-<div class="content-box news-list-slider">
-    <ul class="news-tabs swiper-wrapper">
-        <li class="swiper-slide <?php echo $cid>0?'':'on'; ?>"><a href="<?php echo $this->createUrl("index");?>">全部资讯</a></li>
-        <?php foreach ($cates as $key => $cate) { ?>
-            <li class="swiper-slide <?php echo $cate['id']==$cid?'on':''; ?>"><a href="" data-url="<?php echo $this->createUrl("AjaxGetNewsList",array('cid'=>$cate->id,'hid'=>$hid));?>"><?=$cate['name']?></a></li>
-        <?php }?>
-    </ul>
-
-<?php endif;?>
-    <div class="news-list dropload" data-url="<?php echo $this->createUrl("AjaxGetNewsList",array('cid'=>$cid,'hid'=>$hid));?>" data-template='newsList'>
-        <ul class="list more-list">
-
-        </ul>
+<div class="npagePage">
+    <div class="content">
+    <?php $cates = CHtml::listData(TagExt::model()->getTagByCate('wzlm')->normal()->sorted()->findAll(),'id','name')?>
+        <div id="category" class="dropmenu pro-dropmenu">
+            <div class="label plr20 cate1"><i class="down fa fa-angle-down transform"></i>
+                <div class="text"><?=$cate?$cates[$cate]:'全部栏目'?></div>
+            </div>
+            <ul class="transform lll" data-height="246">
+            <?php $cateArr = $_GET;unset($cateArr['cate'])?>
+                <li><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$cate?'active':''?>">全部栏目</a></li>
+                <?php if($cates) foreach ($cates as $key => $value) { if($key!='19' && $key!=20): ?>
+                <li><a href="<?=$this->createUrl('list',$cateArr+['cate'=>$key])?>" class="<?=$key==$cate?'active':''?>"><?=$value?></a></li>
+            <?php endif;} ?>
+            </ul>
+        </div>
+        <div id="newslist">
+            <?php if($infos) foreach ($infos as $key => $value) {?>
+            <div class="newstitem plr10 wow fadeIn">
+                <a class="newsinfo" href="<?=$this->createUrl('info',['id'=>$value->id])?>"><img src="<?=ImageTools::fixImage($value->image,150,100)?>" width="auto" height="auto" style="margin-right:10px;margin-bottom: 10px" />
+                    <div class="newsdate">
+                        <p class="md"><?=date('m',$value['created'])?>-<?=date('d',$value['created'])?></p>
+                        <p class="year"><?=date('Y',$value['created'])?></p>
+                    </div>
+                    <div class="newsbody">
+                        <p class="title ellipsis"><?=$value['title']?></p>
+                        <p class="description"><?=Tools::u8_title_substr($value['desc'],50)?></p>
+                    </div>
+                </a>
+            </div>
+                    <?php } ?>
+        </div>
+        <div class="clear"></div>
+        <?php $this->widget('WapLinkPager',['pages'=>$pager])?>
     </div>
 </div>
-<div class="blank20"></div>
-<?php $this->renderPartial('/layouts/contact'); ?>
+<script type="text/javascript">
+<?php Tools::startJs()?>
+    $('.cate1').click(function(){
+        if($('#category').attr('class') == 'dropmenu pro-dropmenu') {
+            $('.lll').css('height','auto');
+            $('#category').attr('class','dropmenu pro-dropmenu open');
+        }
+        else{
+            $('.lll').css('height','0');
+            $('#category').attr('class','dropmenu pro-dropmenu');
+        }
+    });
+<?php Tools::endJs('js')?>
+</script>
