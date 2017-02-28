@@ -88,6 +88,7 @@ class ProductController extends VipController{
 
 			if($info->save()) {
 				if($images = Yii::app()->request->getPost('images',[])) {
+					AlbumExt::model()->deleteAllByAttributes(['pid'=>$info->id]);
 					$images = array_combine($images, Yii::app()->request->getPost('image_des',[]));
 					foreach ($images as $key => $value) {
 						$image = new AlbumExt;
