@@ -10,7 +10,7 @@ class ProductController extends HomeController{
 	 * @param  string $house [description]
 	 * @return [type]        [description]
 	 */
-	public function actionList($cate='',$ptpz='',$house='')
+	public function actionList($cate='',$area='',$house='')
 	{
 		$criteria = new CDbCriteria;
 		$criteria->order = 'sort desc,updated desc';
@@ -19,18 +19,25 @@ class ProductController extends HomeController{
 			$criteria->addCondition('cid=:cid');
 			$criteria->params[':cid'] = $cate;
 		}
-		if($ptpz){
-			$criteria->addCondition('ptpz=:cid1');
-			$criteria->params[':cid1'] = $ptpz;
+		if($area){
+			$criteria->addCondition('area=:cid1');
+			$criteria->params[':cid1'] = $area;
 		}
 		if($house){
 			$criteria->addCondition('house=:cid2');
 			$criteria->params[':cid2'] = $house;
 		}
-		$infos = ProductExt::model()->normal()->getList($criteria,8);
+		$infos = ProductExt::model()->normal()->getList($criteria,12);
 		$data = $infos->data;
 		$pager = $infos->pagination;
-		$this->render('list',['infos'=>$data,'pager'=>$pager,'cate'=>$cate,'ptpz'=>$ptpz,'house'=>$house]);
+		$areas = [];
+		if($data) {
+			foreach ($data as $key => $value) {
+				$value->area && $areas[] = $value->area;
+			}
+		}
+		array_filter($areas);
+		$this->render('list',['infos'=>$data,'pager'=>$pager,'cate'=>$cate,'house'=>$house,'areas'=>$areas,'area'=>$area]);
 	}
 	/**
 	 * [actionInfo 产品详情]

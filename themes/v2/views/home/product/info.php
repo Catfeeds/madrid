@@ -2,7 +2,7 @@
 	$this->pageTitle = '红酒详情';
 ?>
 <div id="sitecontent">
-	<div class="npagePage " id="npagePage">
+	<div class="npagePage " id="npagePage" style="width: 90%">
 	    <div class="content">
 	        <div id="projectwrap" class="fw">
 	            <div id="projectbody">
@@ -52,7 +52,7 @@
 	                <div id="projectib">
 	                <!-- 同一个系列 -->
 	                <?php if($info->xl) foreach (ProductExt::model()->normal()->sorted()->findAll(['condition'=>'xl=:xl','params'=>[':xl'=>$info->xl],'limit'=>8]) as $key => $value) {?>
-	                	<div class="projectitem">
+	                	<div class="projectitem" style="width: auto">
 	                        <a href="<?=$this->createUrl('info',['id'=>$value->id])?>" target="_blank">
 	                            <span class="propost_img"><img src="<?=ImageTools::fixImage($value->image,600,400)?>"/></span>
 	                            <div class="project_info">

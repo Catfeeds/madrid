@@ -96,9 +96,9 @@ bx-wrapper .bx-pager.bx-default-pager a.active, .bx-wrapper .bx-pager.bx-default
 
 #projectlist .projectitem a .project_info div { position: absolute; height:90px; width: 100%; bottom: -90px; margin-top: 0; top: auto; background-color:transparent; transition: all 0.3s ease-out 0s; }
 
-#projectlist .projectitem a .project_info div::after { width: 32px; height: 30px; position: absolute; content: ""; top: 0; transition: all 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0s; margin-top: 30px; right: 0px; background: url(http://resources.jsmo.xin/templates/upload/376/icon/jt01.png); opacity: 0; }
+#projectlist .projectitem a .project_info div::after { width: 32px; height: 30px; position: absolute; content: ""; top: 0; transition: all 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0s; margin-top: 30px; right: 0px; background: url(http://madridwine.cn/themes/v2/static/vip/pc/imgs/jt01.png); opacity: 0; }
 
-#projectlist .projectitem a:hover .project_info div::after { right: 25px; background: url(http://resources.jsmo.xin/templates/upload/376/icon/jt01.png); opacity: 1; }
+#projectlist .projectitem a:hover .project_info div::after { right: 25px; background: url(http://madridwine.cn/themes/v2/static/vip/pc/imgs/jt01.png); opacity: 1; }
 
 #projectlist .projectitem a .project_info p.title { margin: 0 80px 0 20px; color:#E4E4E4; padding: 20px 0px 5px; text-align: left; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; font-family: "Times New Roman", "微软雅黑"; }
 
@@ -138,7 +138,7 @@ bx-wrapper .bx-pager.bx-default-pager a.active, .bx-wrapper .bx-pager.bx-default
 
 #projectlist .projectitem a:hover .project_info::after { width: 100%; }
 
-#projectlist .projectitem a::after { content: '+'; width: 64px; height: 64px; line-height: 64px; margin: 0 auto; margin-left: -32px; margin-top: 0px; display: inline-block; position: absolute; top: 0%; left: 50%; z-index: 10; border-radius: 50px; border: 2px solid #fff;transition: all 0.6s cubic-bezier(.17,.84,.44,1) 0s; opacity: 0; color: #fff; font-size: 40px; text-align: center; font-family: "Times New Roman", "微软雅黑"; }
+/*#projectlist .projectitem a::after { content: ''; width: 64px; height: 64px; line-height: 64px; margin: 0 auto; margin-left: -32px; margin-top: 0px; display: inline-block; position: absolute; top: 0%; left: 50%; z-index: 10; border-radius: 50px; border: 2px solid #fff;transition: all 0.6s cubic-bezier(.17,.84,.44,1) 0s; opacity: 0; color: #fff; font-size: 40px; text-align: center; font-family: "Times New Roman", "微软雅黑"; }*/
 
 #projectlist .projectitem:hover a::after { margin-left: -32px; margin-top: -32px; top: 50%; opacity: 1; }
 

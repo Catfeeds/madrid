@@ -2,7 +2,7 @@
 	$this->pageTitle = '酒庄详情';
 ?>
 <div id="sitecontent">
-	<div class="npagePage " id="npagePage">
+	<div class="npagePage " id="npagePage" style="width: 96%">
 	    <div class="content">
 	        <div id="projectwrap" class="fw">
 	            <div id="projectbody">
@@ -44,7 +44,7 @@
 	                <div id="projectib">
 	                <!-- 酒庄酒款 -->
 	                <?php if($wines = $info->products) foreach (array_slice($wines, 0, 8) as $key => $value) {?>
-	                	<div class="projectitem">
+	                	<div class="projectitem" style="width: auto">
 	                        <a href="<?=$this->createUrl('/home/product/info',['id'=>$value->id])?>" target="_blank">
 	                            <span class="propost_img"><img src="<?=ImageTools::fixImage($value->image,600,400)?>"/></span>
 	                            <div class="project_info">
