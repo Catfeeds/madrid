@@ -256,7 +256,11 @@ class TagExt extends Tag
                 'select'=>'name',
                 'condition'=>'id=:id',
                 'params'=>[':id'=>$tagid]
-            ])->name;
+            ])?self::model()->normal()->find([
+                'select'=>'name',
+                'condition'=>'id=:id',
+                'params'=>[':id'=>$tagid]
+            ])->name:'';
         }else{
             $tagname = [];
             $criteria = new CDbCriteria;
