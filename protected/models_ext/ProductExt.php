@@ -37,6 +37,9 @@ class ProductExt extends Product{
 
     public function afterFind() {
         parent::afterFind();
+        if(!$this->image){
+            $this->image = SiteExt::getAttr('qjpz','productNoPic');
+        }
     }
 
     public function beforeValidate() {

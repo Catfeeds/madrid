@@ -34,7 +34,11 @@ class SiteExt extends Site{
         // pc服务列表头图
         'pcServeTop'=>'',
         // pc团队列表头图
-        'pcTeamTop'=>''
+        'pcTeamTop'=>'',
+        // 产品默认图
+        'productNoPic'=>'',
+        // 酒庄默认图
+        'houseNoPic'=>'',
 
     ];
     public static $cateName = [
@@ -57,6 +61,8 @@ class SiteExt extends Site{
             'pcContactTop'=>['type'=>'image','max'=>1,'name'=>'pc联系列表头图'],
             'pcServeTop'=>['type'=>'image','max'=>1,'name'=>'pc服务列表头图'],
             'pcTeamTop'=>['type'=>'image','max'=>1,'name'=>'pc团队列表头图'],
+            'productNoPic'=>['type'=>'image','max'=>1,'name'=>'产品默认图'],
+            'houseNoPic'=>['type'=>'image','max'=>1,'name'=>'酒庄默认图'],
             ],
     ];
 

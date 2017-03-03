@@ -58,6 +58,9 @@ class HouseExt extends House{
 
     public function afterFind() {
         parent::afterFind();
+        if(!$this->image){
+            $this->image = SiteExt::getAttr('qjpz','houseNoPic');
+        }
     }
 
     public function beforeValidate() {
