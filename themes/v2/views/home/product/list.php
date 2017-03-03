@@ -9,16 +9,16 @@
                 <p class="subtitle">PRODUCTS</p>
             </div> -->
             <ul id="category"  style="height: 20px;margin-bottom: 10px;margin-top: 10px;padding: 0">
-            <?php $cateArr = $_GET;unset($cateArr['cate'])?>
-            <li><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$cate?'active':''?>">全部类型</a></li>
-            <?php if($cates = CHtml::listData(TagExt::model()->getTagByCate('hjlx')->findAll(),'id','name')) foreach ($cates as $key => $value) {?>
-            	<li><a href="<?=$this->createUrl('list',$cateArr+['cate'=>$key])?>" class="<?=$key==$cate?'active':''?>"><?=$value?></a></li>
+            <?php $cateArr = $_GET;unset($cateArr['price'])?>
+            <li><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$price?'active':''?>">全部价格</a></li>
+            <?php if($prices = CHtml::listData(TagExt::model()->getTagByCate('hjjg')->findAll(),'id','name')) foreach ($prices as $key => $value) { ?>
+            	<li><a href="<?=$this->createUrl('list',$cateArr+['price'=>$key])?>" class="<?=$key==$price?'active':''?>"><?=$value?></a></li>
             <?php } ?>
             </ul>
             <ul id="category1"  style="height: 20px;margin-bottom: 10px;padding: 0">
             <?php $cateArr = $_GET;unset($cateArr['area'])?>
-            <li style="    display: inline-block;"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$area?'active':''?>">全部品种</a></li>
-            <?php if($areas) foreach ($areas as $key => $value) {?>
+            <li style="    display: inline-block;"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$area?'active':''?>">全部区域</a></li>
+            <?php if($areas = CHtml::listData(TagExt::model()->getTagByCate('hjdq')->findAll(),'id','name')) foreach ($areas as $key => $value) {?>
                 <li><a href="<?=$this->createUrl('list',$cateArr+['area'=>$value])?>" class="<?=$value==$area?'active':''?>"><?=$value?></a></li>
             <?php } ?>
             </ul>

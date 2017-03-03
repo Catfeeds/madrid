@@ -10,7 +10,7 @@ class ProductController extends HomeController{
 	 * @param  string $house [description]
 	 * @return [type]        [description]
 	 */
-	public function actionList($cate='',$area='',$house='')
+	public function actionList($cate='',$area='',$house='',$price='')
 	{
 		$criteria = new CDbCriteria;
 		$criteria->order = 'sort desc,updated desc';
@@ -27,17 +27,23 @@ class ProductController extends HomeController{
 			$criteria->addCondition('house=:cid2');
 			$criteria->params[':cid2'] = $house;
 		}
+		if($price && $tag = TagExt::model()->findByPk($price)){
+			$tname = $tag->name;
+			if(strstr($tname,'+')) {
+				$priceName = trim($tname,'+');
+				$criteria->addCondition('price>=:pc');
+				$criteria->params[':pc'] = $priceName;
+			} else {
+				list($min,$max) = explode('-', $tname);
+				$criteria->addCondition('price>=:min and price<=:max');
+				$criteria->params[':min'] = $min;
+				$criteria->params[':max'] = $max;
+			}
+		}
 		$infos = ProductExt::model()->normal()->getList($criteria,12);
 		$data = $infos->data;
 		$pager = $infos->pagination;
-		$areas = [];
-		if($data) {
-			foreach ($data as $key => $value) {
-				$value->area && $areas[] = $value->area;
-			}
-		}
-		array_filter($areas);
-		$this->render('list',['infos'=>$data,'pager'=>$pager,'cate'=>$cate,'house'=>$house,'areas'=>$areas,'area'=>$area]);
+		$this->render('list',['infos'=>$data,'pager'=>$pager,'cate'=>$cate,'house'=>$house,'area'=>$area,'price'=>$price]);
 	}
 	/**
 	 * [actionInfo 产品详情]

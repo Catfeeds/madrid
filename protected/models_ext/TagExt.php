@@ -21,6 +21,7 @@ class TagExt extends Tag
             'jzdq' => '酒庄地区',
             'jzdj' => '酒庄等级',
             'hjdq' => '红酒地区',
+            'hjjg' => '红酒价格',
             // 'zdpz' => '站点配置'
         ],
     ];
