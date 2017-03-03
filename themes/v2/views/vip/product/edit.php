@@ -63,12 +63,13 @@ $this->breadcrumbs = array('产品管理', $this->pageTitle);
 
         <span class="help-block"><?php echo $form->error($article, 'country'); ?></span>
     </div>
-    <label class="col-md-2 right-text control-label text-nowrap">区域</label>
-     <div class="col-md-3">
-         <?php echo $form->textField($article, 'area', array('class' => 'form-control')); ?>
-
-        <span class="help-block"><?php echo $form->error($article, 'area'); ?></span>
+</div>
+<div class="form-group">
+    <label class="col-md-2 control-label">区域</label>
+    <div class="col-md-4">
+        <?php echo $form->dropDownList($article, 'area', $areas, array('class' => 'form-control', 'encode' => false)); ?>
     </div>
+    <div class="col-md-2"><?php echo $form->error($article, 'area') ?></div>
 </div>
 <div class="form-group">
     <label class="col-md-2 control-label">售价<span class="required" aria-required="true">*</span></label>

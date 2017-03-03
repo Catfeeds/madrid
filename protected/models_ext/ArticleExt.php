@@ -80,6 +80,7 @@ class ArticleExt extends Article{
                 'order' => 'sort desc',
             ),
             'normal' => array(
+                'condition' => 'status=1',
                 'order' => 'sort desc',
             ),
         );

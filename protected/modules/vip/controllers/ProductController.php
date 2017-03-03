@@ -11,11 +11,13 @@ class ProductController extends VipController{
 	public $xls = [];
 	// 葡萄品种
 	public $ptpzs = [];
+	// 葡萄品种
+	public $areas = [];
 
 	public function init()
 	{
 		parent::init();
-		foreach (['cates'=>'hjlx','xls'=>'hjxl','ptpzs'=>'ptpz'] as $key => $value) {
+		foreach (['cates'=>'hjlx','xls'=>'hjxl','ptpzs'=>'ptpz','areas'=>'hjdq'] as $key => $value) {
 			$this->$key = CHtml::listData(TagExt::model()->getTagByCate($value)->normal()->findAll(),'id','name');
 		}
 	}
@@ -103,7 +105,7 @@ class ProductController extends VipController{
 				$this->setMessage(array_values($info->errors)[0][0],'error');
 			}
 		} 
-		$this->render('edit',['article'=>$info,'cates'=>$this->cates,'xls'=>$this->xls,'ptpzs'=>$this->ptpzs,'houses'=>CHtml::listData(HouseExt::model()->sorted()->findAll(),'id','name'),]);
+		$this->render('edit',['article'=>$info,'cates'=>$this->cates,'xls'=>$this->xls,'ptpzs'=>$this->ptpzs,'houses'=>CHtml::listData(HouseExt::model()->sorted()->findAll(),'id','name'),'areas'=>$this->areas]);
 	}
 
 	public function actionAjaxSort($id=0,$sort=0)
