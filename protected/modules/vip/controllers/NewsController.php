@@ -18,6 +18,7 @@ class NewsController extends VipController{
 	{
 		$criteria = new CDbCriteria;
 		$criteria->order = 'sort desc,updated desc';
+		$criteria->addCondition('deleted=0');
 		if($value = trim($value))
             if ($type=='title') {
                 $criteria->addSearchCondition('title', $value);

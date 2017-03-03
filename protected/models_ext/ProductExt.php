@@ -61,6 +61,9 @@ class ProductExt extends Product{
             'normal' => array(
                 'condition' => "{$alias}.status=1 and {$alias}.deleted=0",
             ),
+            'undeleted' => array(
+                'condition' => "{$alias}.deleted=0",
+            ),
         );
     }
 

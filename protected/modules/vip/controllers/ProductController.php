@@ -58,7 +58,7 @@ class ProductController extends VipController{
 			$criteria->addCondition('house=:house');
 			$criteria->params[':house'] = $house;
 		}
-		$news = ProductExt::model()->getList($criteria,20);
+		$news = ProductExt::model()->undeleted()->getList($criteria,20);
 		$houses = [];
 		if($prs = $news->data) 
 			foreach ($prs as $key => $v) {
