@@ -444,7 +444,7 @@ imf.create("imageFlow", 0.15, 1.5, 10);
 	</div>
 	<div class="bank">
 	<?php if($images) foreach ($images as $key => $value) {?>
-		<a rel="<?=ImageTools::fixImage($value->url,600,400)?>" title="<?=$value->name?>" href="#">
+		<a rel="<?=ImageTools::fixImage($value->url)?>" title="<?=$value->name?>" href="#">
 		</a>
 	<?php }?></div>
 	<div class="text">

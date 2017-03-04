@@ -12,7 +12,7 @@
             <?php $cateArr = $_GET;unset($cateArr['area'])?>
             <li style="    display: inline-block;"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$area?'active':''?>">全部区域</a></li>
             <?php if($areas = CHtml::listData(TagExt::model()->getTagByCate('hjdq')->normal()->findAll(),'id','name')) foreach ($areas as $key => $value) {?>
-                <li><a href="<?=$this->createUrl('list',$cateArr+['area'=>$value])?>" class="<?=$value==$area?'active':''?>"><?=$value?></a></li>
+                <li><a href="<?=$this->createUrl('list',$cateArr+['area'=>$key])?>" class="<?=$key==$area?'active':''?>"><?=$value?></a></li>
             <?php } ?>
             </ul>
             <ul id="category"  style="height: 20px;margin-bottom: 10px;margin-top: 10px;padding: 0">
