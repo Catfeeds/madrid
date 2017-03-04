@@ -24,7 +24,8 @@
                 <p>
                     <br />
                 </p>
-                
+                <p><center><h3>简介</h3></center></p>
+                <p><?=$info->content?></p>
                 <?php if($images = $info->images): ?>
                 	<p><center><h3>相册</h3></center></p>
                 <br>
