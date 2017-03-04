@@ -46,12 +46,10 @@
 	            <div id="projectshow">
 	                <div id="projecttags">
 	                <!-- 此处是红酒类型 -->
-	                <?php $xls = TagExt::getTagArrayByCate('hjlx'); if($xls) foreach ($xls as $key => $value) {?>
-	                	<a href="<?=$this->createUrl('list',['cate'=>$key])?>" target="_blank"><?=$value?></a>
-	                <?php } ?></div>
+	                </div>
 	                <div id="projectib">
 	                <!-- 同一个系列 -->
-	                <?php if($info->xl) foreach (ProductExt::model()->normal()->sorted()->findAll(['condition'=>'xl=:xl','params'=>[':xl'=>$info->xl],'limit'=>8]) as $key => $value) {?>
+	                <?php foreach (ProductExt::model()->normal()->sorted()->findAll(['limit'=>6]) as $key => $value) {?>
 	                	<div class="projectitem" style="width: auto">
 	                        <a href="<?=$this->createUrl('info',['id'=>$value->id])?>" target="_blank">
 	                            <span class="propost_img"><img src="<?=ImageTools::fixImage($value->image,600,400)?>"/></span>
