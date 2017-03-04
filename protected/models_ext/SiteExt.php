@@ -17,8 +17,12 @@ class SiteExt extends Site{
         'sitePhone'=>'',
         // 联系qq
         'qq'=>'',
+        // 邮箱
+        'mail'=>'',
         // 微信二维码
         'wxQr'=>'',
+        // 销售微信二维码
+        'staffQr'=>'',
         // pc首页新闻背景图
         'pcIndexNews'=>'',
         // pc首页关于背景图
@@ -52,8 +56,10 @@ class SiteExt extends Site{
             'pcLogo'=>['type'=>'image','max'=>1,'name'=>'pc版logo'],
             'sitePhone'=>['type'=>'text','name'=>'站点客服'],
             'qq'=>['type'=>'text','name'=>'联系qq'],
+            'mail'=>['type'=>'text','name'=>'邮箱'],
             'pcIndexAboutText'=>['type'=>'text','name'=>'pc首页关于'],
             'wxQr'=>['type'=>'image','max'=>1,'name'=>'微信二维码'],
+            'staffQr'=>['type'=>'image','max'=>1,'name'=>'销售微信二维码'],
             'pcIndexNews'=>['type'=>'image','max'=>1,'name'=>'pc首页新闻背景图'],
             'pcIndexAbout'=>['type'=>'image','max'=>1,'name'=>'pc首页关于背景图'],
             'pcIndexServe'=>['type'=>'image','max'=>1,'name'=>'pc首页服务背景图'],

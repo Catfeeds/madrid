@@ -28,51 +28,14 @@
                             <br />
                         </p>
                         <ul class="list list-paddingleft-2" style="list-style-type: square;">
-                            <li>
-                                <p>联系电话：<span style="font-size: 14px;"><strong>010-6688 7880</strong></span></p>
+                            <li>    
+                                <p>联系电话：<span style="font-size: 14px;"><strong><?=SiteExt::getAttr('qjpz','sitePhone')?></strong></span></p>
                             </li>
                             <li>
-                                <p>Email：<a href="https://www.baidu.com/" target="_blank" textvalue="webservice@uemo.net">webservice@uemo.net</a></p>
+                                <p>Email：<?=SiteExt::getAttr('qjpz','mail')?></p>
                                 <p>
                                     <br />
                                 </p>
-                            </li>
-                        </ul>
-                        <p>
-                            <br />
-                        </p>
-                        <p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 18px; ">网盟合作 / 广告投放&nbsp;</span></p>
-                        <p>
-                            <br />
-                        </p>
-                        <ul class="list list-paddingleft-2" style="list-style-type: square;">
-                            <li>
-                                <p>联系人：赵先生 / 张女士</p>
-                            </li>
-                            <li>
-                                <p>Email：zhaodong@web.net</p>
-                            </li>
-                        </ul>
-                        <p>
-                            <br />
-                        </p>
-                        <p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 18px;"><br /></span></p>
-                        <p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 18px; ">媒体联系</span></p>
-                        <p>
-                            <br />
-                        </p>
-                        <ul class="list list-paddingleft-2" style="list-style-type: square;">
-                            <li>
-                                <p>联系人：尹先生</p>
-                            </li>
-                            <li>
-                                <p>Email：yinlei@web.net</p>
-                            </li>
-                            <li>
-                                <p>联系人：李先生</p>
-                            </li>
-                            <li>
-                                <p>Email：lilei@web.net</p>
                             </li>
                         </ul>
                         <p>
@@ -85,18 +48,18 @@
                         </p>
                         <ul class="list list-paddingleft-2" style="list-style-type: square;">
                             <li>
-                                <p>联系人：李先生</p>
+                                <p>联系人：潘先生</p>
                             </li>
                             <li>
-                                <p>Email：lilei@web.net</p>
+                                <p>微信：madrid_cz</p>
                             </li>
                             <li>
-                                <p>联系人：曾女士
+                                <p>联系人：孙女士
                                     <br />
                                 </p>
                             </li>
                             <li>
-                                <p>Email：zeng@web.net</p>
+                                <p>微信：candycz2011</p>
                             </li>
                         </ul>
                         <p>

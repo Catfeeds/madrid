@@ -236,7 +236,7 @@
                             <!-- <div><a class="fl" target="_blank" href="http://weibo.com/web"><i class="fa fa-weibo"></i></a><a class="fl" target="_blank" href="tencent://message/?uin=40080000&Site=uemo&Menu=yes"><i class="fa fa-qq"></i></a> <a id="mpbtn" class="fl" href="http://resources.jsmo.xin/templates/upload/1/201508/1438424052624.jpg"><i class="fa fa-weixin"></i></a></div> -->
                         </div>
                         <div id="contactform" class="fr wow" data-wow-delay=".2s">
-                            <form action="index" method="post" onsubmit="alert('提交成功')">
+                            <form action="" method="post" onsubmit="onsit()">
                                 <p>
                                     <input type="text" class="inputtxt name" name="name" placeholder="姓名" autocomplete="off" />
                                 </p>
@@ -259,3 +259,9 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function onsit() {
+            alert('提交成功');
+            return true;
+        }
+    </script>

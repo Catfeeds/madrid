@@ -5,6 +5,7 @@ class IndexController extends HomeController
     {
         $this->banner = '';
     	if(Yii::app()->request->getIsPostRequest()) {
+            // var_dump(1);exit;
     		$guest = new GuestExt;
     		$data['name'] = Yii::app()->request->getPost('name','');
     		$data['mail'] = Yii::app()->request->getPost('email','');
@@ -12,7 +13,8 @@ class IndexController extends HomeController
     		$data['msg'] = Yii::app()->request->getPost('content','');
     		$guest->attributes = $data;
     		if($guest->save()) {
-    			$this->redirect('index');
+    			$this->redirect('/');
+                Yii::app()->end();
     		}
     	} 
     	// 首页轮播图片

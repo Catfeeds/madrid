@@ -39,19 +39,19 @@
                 <div id="contactform" class="" data-wow-delay=".2s">
                             <form id="f1" method="post" onsubmit="alert('提交成功')">
                                 <p>
-                                    <input id="pname" type="text" class="inputtxt name" name="name" placeholder="姓名" autocomplete="off" />
+                                    <input style="color:white" id="pname" type="text" class="inputtxt name" name="name" placeholder="姓名" autocomplete="off" />
                                 </p>
                                 <hr>
                                 <p>
-                                    <input type="text" class="inputtxt email" name="email" placeholder="邮箱" autocomplete="off" />
+                                    <input style="color:white" type="text" class="inputtxt email" name="email" placeholder="邮箱" autocomplete="off" />
                                 </p>
                                 <hr>
                                 <p>
-                                    <input id="pphone" type="text" class="inputtxt tel" name="tel" placeholder="电话" autocomplete="off" />
+                                    <input style="color:white" id="pphone" type="text" class="inputtxt tel" name="tel" placeholder="电话" autocomplete="off" />
                                 </p>
                                 <hr>
                                 <p>
-                                    <input class="cont" name="content" placeholder="备注" autocomplete="off"></input>
+                                    <input style="color:white" class="cont" name="content" placeholder="备注" autocomplete="off"></input>
                                 </p>
                                 <hr>
                                 <p>
