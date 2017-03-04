@@ -204,11 +204,7 @@
                     <p class="ellipsis mobile"><span>微信：</span>madrid_cz</p>
                     <p class="ellipsis fax"><span>QQ：</span><?=SiteExt::getAttr('qjpz','qq')?></p>
                     <p class="ellipsis email"><span>邮箱：</span><?=SiteExt::getAttr('qjpz','mail')?></p>
-                    <div>
-                        <span style="float:left;">销售微信:</span>
-                        &nbsp;&nbsp;
-                        <img style="margin-left: 10px" src="<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','staffQr'),60,60)?>" width="60" height="60" />
-                    </div>
+                    
                 </div>
             </div>
         </div>

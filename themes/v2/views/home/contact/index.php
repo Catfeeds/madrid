@@ -16,13 +16,6 @@
                     <p style="padding: 0px; margin-top: 0px; margin-bottom: 0px; font-family: Arial, 微软雅黑; white-space: normal; text-align: center; line-height: 2em;">从多年积累中，提炼用验、交互、设计等产品需求，从而建立WEB极速建站产品，推翻大多数用户认为模板建站价格低所以品质差的观念。</p>
                     <p style="padding: 0px; margin-top: 0px; margin-bottom: 0px; font-family: Arial, 微软雅黑; white-space: normal; ">
                         <br style="padding: 0px; margin: 0px;" />
-                    </p>
-                    <p style="text-align: center;"><img src="http://resources.jsmo.xin/templates/upload/376/201607/1468931069203.jpg" title="undefined" alt="undefined" width="820" vspace="0" border="0" height="109" />
-                        <br />
-                    </p>
-                    <p>
-                        <br />
-                    </p>
                     <hr />
                     <p>
                         <br />
@@ -37,10 +30,10 @@
                                     </p>
                                     <ul class="list list-paddingleft-2" style="list-style-type: square;">
                                         <li>
-                                            <p>联系电话：<span style="font-size: 14px;"><strong>010-6688 7880</strong></span></p>
+                                            <p>联系电话：<span><?=SiteExt::getAttr('qjpz','sitePhone')?></span></p>
                                         </li>
                                         <li>
-                                            <p>Email：<a href="https://www.baidu.com/" target="_blank" textvalue="webservice@uemo.net">webservice@uemo.net</a></p>
+                                            <p>Email：<?=SiteExt::getAttr('qjpz','mail')?></p>
                                             <p>
                                                 <br />
                                             </p>
@@ -51,16 +44,22 @@
                                     </p>
                                 </td>
                                 <td style="word-break: break-all;" width="460" valign="top">
-                                    <p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 18px; ">网盟合作 / 广告投放&nbsp;</span></p>
+                                    <p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 18px; ">售后服务&nbsp;</span></p>
                                     <p>
                                         <br />
                                     </p>
                                     <ul class="list list-paddingleft-2" style="list-style-type: square;">
                                         <li>
-                                            <p>联系人：赵先生 / 张女士</p>
+                                            <p>联系人：潘先生</p>
                                         </li>
                                         <li>
-                                            <p>Email：zhaodong@web.net</p>
+                                            <p>微信：madrid_cz</p>
+                                        </li>
+                                        <li>
+                                            <p>联系人：孙女士</p>
+                                        </li>
+                                        <li>
+                                            <p>微信：candycz2011</p>
                                         </li>
                                     </ul>
                                     <p>
@@ -71,22 +70,22 @@
                             <tr>
                                 <td style="word-break: break-all;padding-left:80px;" width="460" valign="top">
                                     <p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 18px;"><br /></span></p>
-                                    <p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 18px; ">媒体联系</span></p>
+                                    <p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 18px; ">商务合作</span></p>
                                     <p>
                                         <br />
                                     </p>
                                     <ul class="list list-paddingleft-2" style="list-style-type: square;">
                                         <li>
-                                            <p>联系人：尹先生</p>
+                                            <p>联系人：张先生</p>
                                         </li>
                                         <li>
-                                            <p>Email：yinlei@web.net</p>
+                                            <p>QQ：754710007</p>
                                         </li>
                                         <li>
-                                            <p>联系人：李先生</p>
+                                            <p>电话：13861242596</p>
                                         </li>
                                         <li>
-                                            <p>Email：lilei@web.net</p>
+                                            <p>邮箱：steven_allen@163.com</p>
                                         </li>
                                     </ul>
                                     <p>
@@ -94,27 +93,6 @@
                                     </p>
                                 </td>
                                 <td style="word-break: break-all;" width="460" valign="top">
-                                    <p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 18px; "><br /></span></p>
-                                    <p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 18px; ">售后服务</span></p>
-                                    <p>
-                                        <br />
-                                    </p>
-                                    <ul class="list list-paddingleft-2" style="list-style-type: square;">
-                                        <li>
-                                            <p>联系人：李先生</p>
-                                        </li>
-                                        <li>
-                                            <p>Email：lilei@web.net</p>
-                                        </li>
-                                        <li>
-                                            <p>联系人：曾女士
-                                                <br />
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>Email：zeng@web.net</p>
-                                        </li>
-                                    </ul>
                                 </td>
                             </tr>
                         </tbody>

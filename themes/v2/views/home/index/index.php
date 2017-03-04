@@ -229,10 +229,11 @@
                             <h3 class="ellipsis name">常州马德里公馆</h3>
                             <p class="ellipsis add"><span>地点：</span>中国地区XX分区5A写字楼8-88室</p>
                             <p class="ellipsis zip"><span>邮编：</span>213000</p>
-                            <p class="ellipsis tel"><span>电话：</span>400-888-8888</p>
-                            <p class="ellipsis mobile"><span>手机：</span>188-666-5188</p>
-                            <p class="ellipsis fax"><span>传真：</span>000-66668888</p>
-                            <p class="ellipsis email"><span>邮箱：</span>website@qq.com</p>
+                            <!-- <p class="ellipsis tel"><span>电话：</span>400-888-8888</p> -->
+                            <p class="ellipsis mobile"><span>手机：</span><?=SiteExt::getAttr('qjpz','sitePhone')?></p>
+                            <p class="ellipsis mobile"><span>微信：</span>madrid_cz</p>
+                            <p class="ellipsis fax"><span>QQ ：</span><?=SiteExt::getAttr('qjpz','qq')?></p>
+                            <p class="ellipsis email"><span>邮箱：</span><?=SiteExt::getAttr('qjpz','mail')?></p>
                             <!-- <div><a class="fl" target="_blank" href="http://weibo.com/web"><i class="fa fa-weibo"></i></a><a class="fl" target="_blank" href="tencent://message/?uin=40080000&Site=uemo&Menu=yes"><i class="fa fa-qq"></i></a> <a id="mpbtn" class="fl" href="http://resources.jsmo.xin/templates/upload/1/201508/1438424052624.jpg"><i class="fa fa-weixin"></i></a></div> -->
                         </div>
                         <div id="contactform" class="fr wow" data-wow-delay=".2s">
