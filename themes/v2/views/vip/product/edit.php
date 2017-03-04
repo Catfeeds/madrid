@@ -101,7 +101,7 @@ $this->breadcrumbs = array('产品管理', $this->pageTitle);
 </div>
 <div class="form-group images-place" style="margin-left: 220px">
   <?php if($article->images) foreach ($article->images as $key => $value) {?>
-      <div class='image-div' style='width: 150px;display:inline-table;height:180px'><a onclick='del_img(this)' class='btn red btn-xs' style='position: absolute;margin-left: 94px;'><i class='fa fa-trash'></i></a><img src='<?=ImageTools::fixImage($value->url)?>' style='width: 120px;height: 90px'><input name='image_des[]' value="<?=$value->name?>"  type='text' style='width: 120px'></input><input type='hidden' class='trans_img' name='images[]' value='"+data.msg.pic+"'></input></div>
+      <div class='image-div' style='width: 150px;display:inline-table;height:180px'><a onclick='del_img(this)' class='btn red btn-xs' style='position: absolute;margin-left: 94px;'><i class='fa fa-trash'></i></a><img src='<?=ImageTools::fixImage($value->url)?>' style='width: 120px;height: 90px'><input name='image_des[]' value="<?=$value->name?>"  type='text' style='width: 120px'></input><input type='hidden' class='trans_img' name='images[]' value='<?=$value->url?>'></input></div>
   <?php }?>
 </div>
 <div class="form-actions">
