@@ -40,7 +40,9 @@
                     <a class="beian" href="http://www.miitbeian.gov.cn/" style="display:inline; width:auto; color:#8e8e8e" target="_blank"></a>
                 </p>
             </div>
-            <div id="bgmask" class="iPage hide"></div>
+            <div id="bgmask" class="iPage hide">
+                <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261416854'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1261416854' type='text/javascript'%3E%3C/script%3E"));</script>
+            </div>
         </div>
     </div>
     <div id="leftcontrol">
