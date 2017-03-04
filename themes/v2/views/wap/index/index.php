@@ -37,7 +37,7 @@
                                  <li id="projectitem_<?=$key?>" class="projectitem wow">
                                         <a href="<?=$this->createUrl('/home/product/info',['id'=>$value->id])?>" class="projectitem_content" target="">
                                             <div class="projectitem_wrapper">
-                                                <div class="project_img"><img src="<?=ImageTools::fixImage($value->image,600,400)?>" width="650" height="385" /></div>
+                                                <div class="project_img"><img src="<?=ImageTools::fixImage($value->image,500,320)?>" width="500" height="320" /></div>
                                                 <div class="project_info">
                                                     <div>
                                                         <p class="title"><?=$value->name?></p>
