@@ -20,7 +20,7 @@ class IndexController extends HomeController
     	$images = $site->pcIndexImages;
     	$this->layout = '/layouts/base';
     	// 红酒类型
-    	$cates = CHtml::listData(TagExt::model()->getTagByCate('hjlx')->findAll(),'id','name');
+    	$cates = CHtml::listData(TagExt::model()->getTagByCate('hjdq')->normal()->findAll(),'id','name');
     	// 八款红酒
     	$wines = ProductExt::model()->normal()->findAll(['limit'=>8]);
     	// 四个新闻
