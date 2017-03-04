@@ -36,7 +36,7 @@
                     </div>
                     <div id="category" class="hide wow">
                       <?php if($cates) foreach ($cates as $key => $value) {?>
-                        <a href="<?=$this->createUrl('/home/product/list',['cate'=>$key])?>"><?=$value?></a>
+                        <a href="<?=$this->createUrl('/home/product/list',['area'=>$key])?>"><?=$value?></a>
                       <?php }?>
                     </div>
                     <!--yyLayout masonry-->
