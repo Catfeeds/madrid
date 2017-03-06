@@ -8,21 +8,11 @@
                         <p class="subtitle">Contact Us</p>
                     </div>
                     <div class="postbody">
-                        <p style="padding: 0px; font-family: Arial,微软雅黑; white-space: normal; line-height: 2.5em; text-align: center;">马德里公馆主营DOC级西班牙进口红酒，传播西班牙里奥哈葡萄酒历史、文化和知识。</p>
-                        <p style="padding: 0px; margin-top: 0px; margin-bottom: 0px; font-family: Arial, 微软雅黑; white-space: normal; text-align: center; line-height: 2em;">作为埃斯库德罗等西班牙顶级酒庄的中国总经销商，致力于为追求生活品质的你带来顶级名庄的红酒品酩体验，和欧盟认证顶级橄榄油的养生之道。为懂酒的你提供全国线下产品体验中心。</p>
+                        <p style="padding: 0px; font-family: Arial,微软雅黑; white-space: normal; line-height: 2.5em; text-align: center;">马德里公馆主营DOC级西班牙进口红酒，传播西班牙里奥哈葡萄酒历史、文化和知识。作为埃斯库德罗等西班牙顶级酒庄的中国总经销商，致力于为追求生活品质的你带来顶级名庄的红酒品酩体验，和欧盟认证顶级橄榄油的养生之道。为懂酒的你提供全国线下产品体验中心。</p>
                         <p style="padding: 0px; margin-top: 0px; margin-bottom: 0px; font-family: Arial, 微软雅黑; white-space: normal; ">
                             <br style="padding: 0px; margin: 0px;" />
                         </p>
-                        <p style="text-align: center;"><img src="http://resources.jsmo.xin/templates/upload/376/201607/1468931069203.jpg" title="undefined" alt="undefined" width="820" vspace="0" border="0" height="109" />
-                            <br />
-                        </p>
-                        <p>
-                            <br />
-                        </p>
-                        <hr />
-                        <p>
-                            <br />
-                        </p>
+                        <br>
                         <p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 18px; ">客服服务</span></p>
                         <p>
                             <br />

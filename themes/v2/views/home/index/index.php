@@ -1,5 +1,5 @@
 <?php
-  $this->pageTitle = '首页';
+  $this->pageTitle = '马德里公馆-首页';
 ?>
     <div id="sitecontent">
         <div id="indexPage">
