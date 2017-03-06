@@ -227,7 +227,7 @@
                     <div id="contactlist" class="fw">
                         <div id="contactinfo" class="fl wow" data-wow-delay=".2s">
                             <h3 class="ellipsis name">常州马德里公馆</h3>
-                            <p class="ellipsis add"><span>地点：</span>中国地区XX分区5A写字楼8-88室</p>
+                            <p class="ellipsis add"><span>地点：</span>常州市钟楼区龙江中路169号</p>
                             <p class="ellipsis zip"><span>邮编：</span>213000</p>
                             <!-- <p class="ellipsis tel"><span>电话：</span>400-888-8888</p> -->
                             <p class="ellipsis mobile"><span>手机：</span><?=SiteExt::getAttr('qjpz','sitePhone')?></p>
