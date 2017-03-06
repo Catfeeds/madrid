@@ -4,12 +4,12 @@
     $this->description = '马德里公馆-'.$info->name.'更多红酒资讯请持续关注马德里公馆。';
 ?>
 <div id="sitecontent">
-	<div class="npagePage " id="npagePage" style="width: 90%">
+	<div class="npagePage " id="npagePage" style="width: 100%">
 	    <div class="content">
 	        <div id="projectwrap" class="fw">
-	            <div id="projectbody">
+	            <div id="projectbody" style="width: 70%">
 	                <ul id="projectimages">
-	                    <li><img src="<?=ImageTools::fixImage($info->image,1200,800)?>" /></li>
+	                    <li><img src="<?=ImageTools::fixImage($info->image)?>" /></li>
 	                </ul>
 	                <div class="clear"></div>
 	                <div class="postbody">
@@ -51,12 +51,12 @@
 	                <div id="projecttags">
 	                <!-- 此处是红酒类型 -->
 	                </div>
-	                <div id="projectib">
+	                <div id="projectib" style="width: 25%">
 	                <!-- 同一个系列 -->
 	                <?php foreach (ProductExt::model()->normal()->sorted()->findAll(['limit'=>6]) as $key => $value) {?>
-	                	<div class="projectitem" style="width: auto">
+	                	<div class="projectitem" style="width: 150px;">
 	                        <a href="<?=$this->createUrl('info',['id'=>$value->id])?>" target="_blank">
-	                            <span class="propost_img"><img src="<?=ImageTools::fixImage($value->image,600,400)?>"/></span>
+	                            <span class="propost_img"><img src="<?=ImageTools::fixImage($value->image,150,200)?>"/></span>
 	                            <div class="project_info">
 	                                <div>
 	                                    <p class="title"><?=$value->name?></p>

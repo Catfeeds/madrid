@@ -50,7 +50,7 @@
                                 <ul style="height: 400px;margin-top: 0" class="content_list" data-options-sliders="5" data-options-margin="20" data-options-ease="cubic-bezier(.73,-0.03,.24,1.01)" data-options-speed="0.5">
                                 <?php if($wines) foreach ($wines as $key => $value) {?>
                                  <li class="projectitem" style="display:inline;height:300px;word-break:break-all;word-wrap : break-word ;margin-right:20px;width: 180px !important;margin-top: 20px">
-                            <a href="<?=$this->createUrl('info',['id'=>$value->id])?>" target="_blank">
+                            <a href="<?=$this->createUrl('/home/product/info',['id'=>$value->id])?>" target="_blank">
                                 <div class="project_img"><img style="height: 240px;width: 180px" src="<?=ImageTools::fixImage($value->image,180,240)?>" width="200" height="180" /></div>
                                 <div class="project_info" style="height:60px;width: 180px">
                                     <div style="">

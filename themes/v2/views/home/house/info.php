@@ -4,10 +4,10 @@
     $this->description = '马德里公馆-'.$info->name.'更多红酒资讯请持续关注马德里公馆。';
 ?>
 <div id="sitecontent">
-	<div class="npagePage " id="npagePage" style="width: 96%">
+	<div class="npagePage " id="npagePage" style="width: 100%">
 	    <div class="content">
 	        <div id="projectwrap" class="fw">
-	            <div id="projectbody">
+	            <div id="projectbody" style="width: 70%">
 	                <ul id="projectimages">
 	                    <li><img src="<?=ImageTools::fixImage($info->image)?>" /></li>
 	                </ul>
@@ -43,12 +43,12 @@
 	                <?php $xls = TagExt::getTagArrayByCate('jzdj'); if($xls) foreach ($xls as $key => $value) {?>
 	                	<a href="<?=$this->createUrl('list',['level'=>$key])?>" target="_blank"><?=$value?></a>
 	                <?php } ?></div>
-	                <div id="projectib">
+	                <div id="projectib" style="width: 25%">
 	                <!-- 酒庄酒款 -->
 	                <?php if($wines = $info->products) foreach (array_slice($wines, 0, 8) as $key => $value) {?>
-	                	<div class="projectitem" style="width: auto">
+	                	<div class="projectitem" style="width: 150px">
 	                        <a href="<?=$this->createUrl('/home/product/info',['id'=>$value->id])?>" target="_blank">
-	                            <span class="propost_img"><img src="<?=ImageTools::fixImage($value->image,600,400)?>"/></span>
+	                            <span class="propost_img"><img src="<?=ImageTools::fixImage($value->image,150,200)?>"/></span>
 	                            <div class="project_info">
 	                                <div>
 	                                    <p class="title"><?=$value->name?></p>
