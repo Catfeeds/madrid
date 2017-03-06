@@ -6,7 +6,7 @@
 <div id="sitecontent">
         <div id="newsPage" class="npagePage Pagenews">
             <div id="banner">
-                <div style="background-image:url(<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcNewsTop'),1200,400)?>);"></div>
+                <div style="background-image:url(<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcNewsTop'))?>);"></div>
             </div>
             <div class="content">
                 <div class="header">

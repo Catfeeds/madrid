@@ -4,7 +4,7 @@
 <div id="sitecontent">
         <div class="npagePage Pageservice">
             <div id="banner">
-                <div style="background-image:url(<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcServeTop'),1200,400)?>);"></div>
+                <div style="background-image:url(<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcServeTop'))?>);"></div>
             </div>
             <div class="content">
                 <div class="header">
