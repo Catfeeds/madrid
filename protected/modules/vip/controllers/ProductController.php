@@ -99,6 +99,8 @@ class ProductController extends VipController{
 						$image->name = $value;
 						$image->save();
 					}
+				} else {
+					AlbumExt::model()->deleteAllByAttributes(['pid'=>$info->id]);
 				}
 				$this->setMessage('操作成功','success',['list']);
 			} else {
