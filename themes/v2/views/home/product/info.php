@@ -33,10 +33,12 @@
 	                                <br />
 	                            </p>
 	                            <p><a href="tencent://message/?uin=<?=SiteExt::getAttr('qjpz','qq')?>&Site=uelike&Menu=yes">在线预定</a></p>
+	                            <?php if($info->images):?>
 	                            <p>
 	                                <br />
 	                            </p>
 	                            <p><a href="<?=$this->createUrl('album',['id'=>$info->id])?>">查看相册</a></p>
+	                        <?php endif;?>
 	                            <p>
 	                                <br />
 	                            </p>
