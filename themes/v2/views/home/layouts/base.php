@@ -9,6 +9,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta content="black" name="apple-mobile-web-app-status-bar-style" />
 <meta content="telephone=no" name="format-detection" />
+<meta name="baidu-site-verification" content="2nn5PXRAlF" />
 <link rel="stylesheet" type="text/css" href="<?=Yii::app()->theme->baseUrl?>/static/vip/pc/css/lib.css">
 <link rel="stylesheet" type="text/css"  href="<?=Yii::app()->theme->baseUrl?>/static/vip/pc/css/style.css">
 <link rel="stylesheet" type="text/css"  href="<?=Yii::app()->theme->baseUrl?>/static/vip/pc/css/376.css">
