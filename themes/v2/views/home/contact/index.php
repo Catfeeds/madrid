@@ -1,5 +1,5 @@
 <?php 
-	$this->pageTitle = '联系';
+	$this->pageTitle = '马德里公馆-联系我们';
 ?>
 <div id="sitecontent">
         <div class="npagePage Pageyemian" id="page_none">

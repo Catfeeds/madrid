@@ -1,5 +1,5 @@
 <?php 
-	$this->pageTitle = '服务详情';
+	$this->pageTitle = '马德里公馆-服务详情';
 ?>
 <div id="sitecontent">
         <div class="npagePage default">

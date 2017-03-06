@@ -7,15 +7,15 @@
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
-    <meta name="keywords" content="网站模板,自定义西班牙红酒，里奥哈酒庄，进口顶级红酒模板,餐饮网站,西餐网站,美食网站,美食模板">
-    <meta name="description" content="模板网站西班牙进口红酒生成">
+    <meta name="keywords" content="里奥哈葡萄酒,进口红酒,西班牙红酒,里奥哈酒庄,进口顶级红酒"/>
+    <meta name="description" content="马德里公馆主营西班牙进口红酒,介绍西班牙里奥哈葡萄酒历史、文化和知识。为追求品质吃喝的你带来高价值的红酒及橄榄油科普,提供全国线下产品体验中心。"/>
     <meta name="author" content="UEMO">
     <link type="text/css" href="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/css/font-awesome.min.css" rel="stylesheet">
     <link type="text/css" href="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/css/bxslider.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/css/animate.min.css">
     <link type="text/css" href="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/css/style.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?=Yii::app()->theme->baseUrl?>/static/vip/wap/css/376m.css">
-    <title>马德里公馆</title>
+  <title><?php echo '马德里公馆-'.$this->pageTitle;?></title>
 </head>
 
 <body class="<?=$this->banner?>">

@@ -1,5 +1,5 @@
 <?php 
-	$this->pageTitle = '团队详情';
+	$this->pageTitle = '马德里公馆-团队详情';
 ?>
  <div id="sitecontent">
         <div class="npagePage">

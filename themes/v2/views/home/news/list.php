@@ -1,5 +1,7 @@
 <?php 
-	$this->pageTitle = '资讯列表';
+	$this->pageTitle = '马德里公馆-资讯列表';
+    $this->keyword = '西班牙进口红酒，红酒资讯，红酒文化，红酒知识';
+    $this->description = '马德里公馆介绍西班牙里奥哈葡萄酒历史、文化和知识';
 ?>
 <div id="sitecontent">
         <div id="newsPage" class="npagePage Pagenews">

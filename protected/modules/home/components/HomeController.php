@@ -6,6 +6,11 @@
  */
 class HomeController extends Controller
 {
+    //关键字
+    private $keyword;
+
+    //描述
+    private $description;
     public $banner = 'nobanner';
     /**
      * @var string 页面底部
@@ -68,6 +73,28 @@ class HomeController extends Controller
             );
         }
         return $this->beginCache($id,$properties);
+    }
+
+    public function getKeyword(){
+        if($this->keyword === null){
+            $this->keyword = '里奥哈葡萄酒,进口红酒,西班牙红酒,里奥哈酒庄,进口顶级红酒';
+        }
+        return $this->keyword;
+    }
+
+    public function setKeyword($value){
+        $this->keyword = $value;
+    }
+
+    public function setDescription($value){
+        $this->description = $value;
+    }
+
+    public function getDescription(){
+        if($this->description === null){
+            $this->description = '马德里公馆主营西班牙进口红酒,介绍西班牙里奥哈葡萄酒历史、文化和知识。为追求品质吃喝的你带来高价值的红酒及橄榄油科普,提供全国线下产品体验中心。';
+        }
+        return $this->description;
     }
 
     /**

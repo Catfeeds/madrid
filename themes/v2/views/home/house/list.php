@@ -1,5 +1,7 @@
 <?php 
-	$this->pageTitle = '酒庄列表';
+	$this->pageTitle = '马德里公馆-酒庄列表';
+    $this->keyword = '西班牙进口红酒，酒庄列表，里奥哈酒庄';
+    $this->description = '马德里公馆提供优质西班牙进口红酒，主营里奥哈地区品质酒庄酒款。';
 ?>
 <div id="sitecontent">
     <div class="npagePage Pageanli" id="mproject">
