@@ -24,7 +24,7 @@ class IndexController extends HomeController
     	// 红酒类型
     	$cates = CHtml::listData(TagExt::model()->getTagByCate('hjdq')->normal()->findAll(),'id','name');
     	// 八款红酒
-    	$wines = ProductExt::model()->normal()->findAll(['limit'=>8]);
+    	$wines = ProductExt::model()->normal()->findAll(['limit'=>10]);
     	// 四个新闻
     	$news = ArticleExt::model()->getNormal()->sorted()->normal()->findAll(['limit'=>4]);
     	// 三个团队

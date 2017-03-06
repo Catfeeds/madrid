@@ -4,7 +4,7 @@
     $this->description = '马德里公馆提供优质西班牙进口红酒，主营里奥哈地区品质酒庄酒款。';
 ?>
 <div id="sitecontent">
-    <div class="npagePage Pageanli" id="mproject" style="">
+    <div class="npagePage Pageanli" id="mproject" style="margin-left: 20px">
         <div class="content">
             <!-- <div class="header" id="plheader">
                 <p class="title">菜品</p>
@@ -43,11 +43,11 @@
                 <div class="wrapper">
                     <ul class="content_list">
                     <?php if($infos) foreach ($infos as $key => $value) {?>
-                    	<li class="projectitem" style="height: 300px;width: 200px;margin-right: 30px;margin-top: 20px">
+                    	<li class="projectitem" style="display:inline;height:300px;word-break:break-all;word-wrap : break-word ;margin-right:20px;width: 200px;margin-top: 20px">
                             <a href="<?=$this->createUrl('info',['id'=>$value->id])?>" target="_blank">
                                 <div class="project_img"><img src="<?=ImageTools::fixImage($value->image,200,250)?>" width="200" height="250" /></div>
-                                <div class="project_info" style="height:50px">
-                                    <div style="height:60px">
+                                <div class="project_info" style="height:60px">
+                                    <div style="">
                                         <p class="title" style="padding-top:5px;margin-left: 0;margin-right: 0"><?=$value->name?></p>
                                         <p class="subtitle" style="padding-left:0px;margin-left: 0;margin-right: 0;font-size: 8px;padding-right: 0"><?=Tools::u8_title_substr($value->eng,20)?><span style="float: right;">￥<?=$value->price?></span></p>
                                     </div>

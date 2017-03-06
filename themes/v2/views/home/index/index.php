@@ -30,7 +30,7 @@
             <div id="mproject" class="module">
                 <div class="bgmask"></div>
                 <div class="content layoutslider">
-                    <div class="header wow">
+                    <div class="header wow" style="padding-bottom: 0">
                         <p class="title">酒款</p>
                         <p class="subtitle">WINES</p>
                     </div>
@@ -47,22 +47,19 @@
                                 <p class="subtitle"></p>
                             </div>
                             <div class="wrapper">
-                                <ul class="content_list" data-options-sliders="4" data-options-margin="20" data-options-ease="cubic-bezier(.73,-0.03,.24,1.01)" data-options-speed="0.5">
+                                <ul style="height: 400px;margin-top: 0" class="content_list" data-options-sliders="5" data-options-margin="20" data-options-ease="cubic-bezier(.73,-0.03,.24,1.01)" data-options-speed="0.5">
                                 <?php if($wines) foreach ($wines as $key => $value) {?>
-                                 <li id="projectitem_<?=$key?>" class="projectitem wow">
-                                        <a href="<?=$this->createUrl('/home/product/info',['id'=>$value->id])?>" class="projectitem_content" target="_blank">
-                                            <div class="projectitem_wrapper">
-                                                <div class="project_img"><img src="<?=ImageTools::fixImage($value->image,600,400)?>" width="650" height="385" /></div>
-                                                <div class="project_info">
-                                                    <div>
-                                                        <p class="title"><?=$value->name?></p>
-                                                        <p class="subtitle"><?=$value->eng?></p>
-                                                        <p class="description hide">Semestral project - publicLocation: Nałęczów, PolandStatus: ideadate: 2013在线预约</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
+                                 <li class="projectitem" style="display:inline;height:300px;word-break:break-all;word-wrap : break-word ;margin-right:20px;width: 180px !important;margin-top: 20px">
+                            <a href="<?=$this->createUrl('info',['id'=>$value->id])?>" target="_blank">
+                                <div class="project_img"><img style="height: 240px;width: 180px" src="<?=ImageTools::fixImage($value->image,180,240)?>" width="200" height="180" /></div>
+                                <div class="project_info" style="height:60px;width: 180px">
+                                    <div style="">
+                                        <p class="title" style="padding-top:5px;margin-left: 0;margin-right: 0"><?=$value->name?></p>
+                                        <p class="subtitle" style="padding-left:0px;margin-left: 0;margin-right: 0;font-size: 8px;padding-right: 0"><?=Tools::u8_title_substr($value->eng,20)?><span style="float: right;">￥<?=$value->price?></span></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
                                 <?php }?>
                                 </ul>
                             </div>
