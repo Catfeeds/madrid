@@ -40,7 +40,7 @@ class ProductController extends HomeController{
 				$criteria->params[':max'] = $max;
 			}
 		}
-		$infos = ProductExt::model()->normal()->getList($criteria,12);
+		$infos = ProductExt::model()->normal()->getList($criteria,10);
 		$data = $infos->data;
 		$pager = $infos->pagination;
 		$this->render('list',['infos'=>$data,'pager'=>$pager,'cate'=>$cate,'house'=>$house,'area'=>$area,'price'=>$price]);

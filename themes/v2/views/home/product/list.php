@@ -4,38 +4,38 @@
     $this->description = '马德里公馆提供优质西班牙进口红酒，主营里奥哈地区品质酒庄酒款。';
 ?>
 <div id="sitecontent">
-    <div class="npagePage Pageanli" id="mproject">
+    <div class="npagePage Pageanli" id="mproject" style="">
         <div class="content">
             <!-- <div class="header" id="plheader">
                 <p class="title">菜品</p>
                 <p class="subtitle">PRODUCTS</p>
             </div> -->
-            <ul id="category1"  style="height: 20px;margin-bottom: 10px;padding: 0">
+            <ul id="category1"  style="height: 20px;margin-bottom: 10px;padding: 0;margin-top: 10px">
             <?php $cateArr = $_GET;unset($cateArr['area'])?>
-            <li style="    display: inline-block;"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$area?'active':''?>">全部区域</a></li>
+            <li style="margin-left: 10px;    display: inline-block;float: left"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$area?'active':''?>">全部区域</a></li>
             <?php if($areas = CHtml::listData(TagExt::model()->getTagByCate('hjdq')->normal()->findAll(),'id','name')) foreach ($areas as $key => $value) {?>
-                <li><a href="<?=$this->createUrl('list',$cateArr+['area'=>$key])?>" class="<?=$key==$area?'active':''?>"><?=$value?></a></li>
+                <li style="float:left"><a href="<?=$this->createUrl('list',$cateArr+['area'=>$key])?>" class="<?=$key==$area?'active':''?>"><?=$value?></a></li>
             <?php } ?>
             </ul>
-            <ul id="category"  style="height: 20px;margin-bottom: 10px;margin-top: 10px;padding: 0">
+            <ul id="category"  style="height: 20px;margin-bottom: 10px;margin-top: 10px;padding: 0;">
             <?php $cateArr = $_GET;unset($cateArr['price'])?>
-            <li><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$price?'active':''?>">全部价格</a></li>
+            <li style="margin-left: 10px;float: left;"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$price?'active':''?>">全部价格</a></li>
             <?php if($prices = CHtml::listData(TagExt::model()->getTagByCate('hjjg')->normal()->findAll(),'id','name')) foreach ($prices as $key => $value) { ?>
-            	<li><a href="<?=$this->createUrl('list',$cateArr+['price'=>$key])?>" class="<?=$key==$price?'active':''?>"><?=$value?></a></li>
+            	<li style="float:left"><a href="<?=$this->createUrl('list',$cateArr+['price'=>$key])?>" class="<?=$key==$price?'active':''?>"><?=$value?></a></li>
             <?php } ?>
             </ul>
             <ul id="category1"  style="height: 20px;margin-bottom: 10px;padding: 0">
             <?php $cateArr = $_GET;unset($cateArr['cate'])?>
-            <li style="    display: inline-block;"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$cate?'active':''?>">全部类型</a></li>
+            <li style="margin-left: 10px;    display: inline-block;float: left"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$cate?'active':''?>">全部类型</a></li>
             <?php if($areas = CHtml::listData(TagExt::model()->getTagByCate('hjlx')->normal()->findAll(),'id','name')) foreach ($areas as $key => $value) {?>
-                <li><a href="<?=$this->createUrl('list',$cateArr+['cate'=>$key])?>" class="<?=$value==$cate?'active':''?>"><?=$value?></a></li>
+                <li style="float:left"><a href="<?=$this->createUrl('list',$cateArr+['cate'=>$key])?>" class="<?=$value==$cate?'active':''?>"><?=$value?></a></li>
             <?php } ?>
             </ul>
-            <ul id="category2">
+            <ul id="category2" >
             <?php $cateArr = $_GET;unset($cateArr['house'])?>
-            <li style="    display: inline-block;"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$house?'active':''?>">全部酒庄</a></li>
+            <li style="margin-left: 10px;    display: inline-block;float: left"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$house?'active':''?>">全部酒庄</a></li>
             <?php if($cates = CHtml::listData(HouseExt::model()->findAll(),'id','name')) foreach ($cates as $key => $value) {?>
-            	<li><a href="<?=$this->createUrl('list',$cateArr+['house'=>$key])?>" class="<?=$key==$house?'active':''?>"><?=$value?></a></li>
+            	<li style="float:left"><a href="<?=$this->createUrl('list',$cateArr+['house'=>$key])?>" class="<?=$key==$house?'active':''?>"><?=$value?></a></li>
             <?php } ?>
             </ul>
             
@@ -43,18 +43,16 @@
                 <div class="wrapper">
                     <ul class="content_list">
                     <?php if($infos) foreach ($infos as $key => $value) {?>
-                    	<li class="projectitem">
+                    	<li class="projectitem" style="height: 300px;width: 200px;margin-right: 30px;margin-top: 20px">
                             <a href="<?=$this->createUrl('info',['id'=>$value->id])?>" target="_blank">
-                                <div class="project_img"><img src="<?=ImageTools::fixImage($value->image,500,320)?>" width="500" height="320" /></div>
-                                <div class="project_info">
-                                    <div>
-                                        <p class="title"><?=$value->name?></p>
-                                        <p class="subtitle"><?=$value->eng?></p>
-                                        <p class="subtitle ">￥<?=$value->price?></p>
+                                <div class="project_img"><img src="<?=ImageTools::fixImage($value->image,200,250)?>" width="200" height="250" /></div>
+                                <div class="project_info" style="height:50px">
+                                    <div style="height:60px">
+                                        <p class="title" style="padding-top:5px;margin-left: 0;margin-right: 0"><?=$value->name?></p>
+                                        <p class="subtitle" style="padding-left:0px;margin-left: 0;margin-right: 0;font-size: 8px;padding-right: 0"><?=Tools::u8_title_substr($value->eng,20)?><span style="float: right;">￥<?=$value->price?></span></p>
                                     </div>
                                 </div>
                             </a>
-                            <a href="<?=$this->createUrl('info',['id'=>$value->id])?>" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
                         </li>
                     <?php } ?>
                     </ul>
