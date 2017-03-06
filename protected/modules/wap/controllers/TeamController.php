@@ -14,7 +14,7 @@ class TeamController extends WapController{
 	{
 		$criteria = new CDbCriteria;
 		$criteria->order = 'sort desc,updated desc';
-		$infos = ArticleExt::model()->getTeam()->getList($criteria);
+		$infos = ArticleExt::model()->getTeam()->normal()->getList($criteria);
 		$data = $infos->data;
 		$pager = $infos->pagination;
 		$this->render('list',['infos'=>$data,'pager'=>$pager]);

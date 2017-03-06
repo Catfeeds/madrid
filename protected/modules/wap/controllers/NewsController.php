@@ -18,7 +18,7 @@ class NewsController extends WapController{
 			$criteria->addCondition('cid=:cid');
 			$criteria->params[':cid'] = $cate;
 		}
-		$infos = ArticleExt::model()->getNormal()->getList($criteria,8);
+		$infos = ArticleExt::model()->getNormal()->normal()->getList($criteria,8);
 		$data = $infos->data;
 		$pager = $infos->pagination;
 		$this->render('list',['infos'=>$data,'pager'=>$pager,'cate'=>$cate]);

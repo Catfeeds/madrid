@@ -14,7 +14,7 @@ class ServeController extends WapController{
 	{
 		$criteria = new CDbCriteria;
 		$criteria->order = 'sort desc,updated desc';
-		$infos = ArticleExt::model()->getServe()->getList($criteria);
+		$infos = ArticleExt::model()->getServe()->normal()->getList($criteria);
 		$data = $infos->data;
 		$pager = $infos->pagination;
 		$this->render('list',['infos'=>$data,'pager'=>$pager]);
