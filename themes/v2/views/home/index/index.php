@@ -106,7 +106,7 @@
                 </div>
             </div>
             <!--project-->
-            <div id="mservice" class="module bgShow" style="background-image:url(<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcIndexServe'),1200,1000)?>);">
+            <div id="mservice" class="module bgShow" style="background-image:url(<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','pcIndexServe'))?>);">
                 <div class="bgmask"></div>
                 <div class="content layoutslider">
                     <div class="header wow fw" data-wow-delay=".1s">

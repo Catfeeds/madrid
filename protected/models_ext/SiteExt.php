@@ -52,7 +52,7 @@ class SiteExt extends Site{
     // 属性分类
     public static $cateTag = [
         'qjpz'=> [
-            'pcIndexImages'=>['type'=>'multiImage','max'=>3,'name'=>'pc首页轮播图'],
+            'pcIndexImages'=>['type'=>'multiImage','max'=>4,'name'=>'pc首页轮播图'],
             'pcLogo'=>['type'=>'image','max'=>1,'name'=>'pc版logo'],
             'sitePhone'=>['type'=>'text','name'=>'站点客服'],
             'qq'=>['type'=>'text','name'=>'联系qq'],

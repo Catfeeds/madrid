@@ -21,7 +21,7 @@
             <?php if($infos) foreach ($infos as $key => $value) {?>
             <div class="projectitem wow fadeIn">
                     <a href="<?=$this->createUrl('info',['id'=>$value->id])?>">
-                        <div class="project_img"><img src="<?=ImageTools::fixImage($value->image,500,320)?>" width="500" height="320" /></div>
+                        <div class="project_img"><img src="<?=ImageTools::fixImage($value->image,400,600)?>" width="400" height="600" /></div>
                         <div class="project_info">
                             <div>
                                 <p class="title"><?=$value->name?></p>

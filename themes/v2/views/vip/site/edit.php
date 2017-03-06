@@ -47,8 +47,8 @@ $this->breadcrumbs = array('站点配置', $this->pageTitle);
 <script type="text/javascript">
     <?php Tools::startJs()?>
     function callback(data){
-        if($('.image-div').length >= 3) {
-            alert('最多选择3张图片');
+        if($('.image-div').length >= 4) {
+            alert('最多选择4张图片');
         } else {
             // 指定区域出现图片
             var html = "";
