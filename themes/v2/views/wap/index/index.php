@@ -41,8 +41,7 @@
                                                 <div class="project_info">
                                                     <div>
                                                         <p class="title"><?=$value->name?></p>
-                                                        <p class="subtitle"><?=$value->eng?></p>
-                                                        <p class="description hide">Semestral project - publicLocation: Nałęczów, PolandStatus: ideadate: 2013在线预约</p>
+                                                        <p class="subtitle"><?=Tools::u8_title_substr($value->eng,16)?><span style="float: right;margin-right: 2px">￥<?=$value->price?></span></p>
                                                     </div>
                                                 </div>
                                             </div>
