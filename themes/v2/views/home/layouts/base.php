@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="keywords" content="西班牙红酒，里奥哈酒庄，进口顶级红酒">
-<meta name="description" content="西班牙进口红酒">
+<meta name="keywords" content="进口红酒,西班牙红酒,里奥哈酒庄,进口顶级红酒">
+<meta name="description" content="马德里公馆主营西班牙进口红酒，介绍西班牙里奥哈葡萄酒历史、文化和知识。为追求品质吃喝的你带来最有价值的红酒及橄榄油科普，提供全国线下产品体验中心。">
 <meta name="author" content="YY-MO">
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta content="black" name="apple-mobile-web-app-status-bar-style" />
