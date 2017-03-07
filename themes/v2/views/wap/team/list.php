@@ -11,7 +11,7 @@
                     <ul id="teamlist" class="plr10">
                     <?php if($infos) foreach ($infos as $key => $value) {?>
                     <li class="teamitem wow fadeIn">
-                            <a href="<?=$this->createUrl('info',['id'=>$value->id])?>">
+                            <a href="#">
                                 <div id="team_img"><img src="<?=ImageTools::fixImage($value->image,90,90)?>" width="90" height="90" /></div>
                                 <div class="teaminfo">
                                     <div class="header">

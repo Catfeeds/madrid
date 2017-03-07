@@ -15,18 +15,18 @@
                     <div class="wrap">
                     <?php if($infos) foreach ($infos as $key => $value) {?>
                     	<div class="teamitem">
-                            <a href="<?=$this->createUrl('info',['id'=>$value->id])?>" target="_blank">
+                            <a href="#">
                                 <div class="teamimg"><img src="<?=ImageTools::fixImage($value->image,320,320)?>" width="320" height="320" /></div>
                                 <div class="wrap">
                                     <div><span class="h"></span><span class="v"></span></div>
                                 </div>
                             </a>
                             <div class="teaminfo">
-                                <p class="title"><a href="<?=$this->createUrl('info',['id'=>$value->id])?>" target="_blank"><?=$value->title?></a></p>
+                                <p class="title"><a href="#"><?=$value->title?></a></p>
                                 <p class="subtitle"><?=$value->sub_title?></p>
                                 <p class="description"><?=Tools::u8_title_substr($value['desc'],50)?></p>
                             </div>
-                            <a href="#" target="_blank" class="details">more<i class="fa fa-angle-right"></i></a>
+                            <a href="#" class="details">more<i class="fa fa-angle-right"></i></a>
                         </div>
                     <?php }?>
                     </div>
