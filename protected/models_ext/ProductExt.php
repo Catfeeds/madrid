@@ -90,7 +90,7 @@ class ProductExt extends Product{
             return TagExt::getNameByTag($attr);
         } else {
             $arr = [];
-            foreach (['cid','xl','ptpz'] as $key => $value) {
+            foreach (['cid','xl','ptpz','area'] as $key => $value) {
                 $arr[$value] = TagExt::getNameByTag($this->$value);
             }
             return $arr;

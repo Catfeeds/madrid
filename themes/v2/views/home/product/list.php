@@ -4,8 +4,8 @@
     $this->description = '马德里公馆提供优质西班牙进口红酒，主营里奥哈地区品质酒庄酒款。';
 ?>
 <div id="sitecontent">
-    <div class="npagePage Pageanli" id="mproject" style="margin-left: 20px">
-        <div class="content">
+    <div class="npagePage Pageanli" id="mproject" style="margin-left: 20px;width: 1500px">
+        <div class="content" style="margin:0 auto">
             <!-- <div class="header" id="plheader">
                 <p class="title">菜品</p>
                 <p class="subtitle">PRODUCTS</p>

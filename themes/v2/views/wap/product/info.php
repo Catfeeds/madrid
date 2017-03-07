@@ -15,9 +15,9 @@
             </ul>
             <div class="clear"></div>
             <div class="postbody plr10">
-                <p>类型: <?=$tags['cid']?></p>
-                <p>葡萄品种: <?=$tags['ptpz']?></p>
-                <p>系列: <?=$tags['xl']?></p>
+                <p>类型: <?=$tags['cid']?$tags['cid']:'暂无'?></p>
+                <p>产地: <?=$tags['area']?$tags['area']:'暂无'?></p>
+                <p>系列: <?=$tags['xl']?$tags['xl']:'暂无'?></p>
                 <p>酒庄: <?=$info->houseInfo?$info->houseInfo->name:'-'?></p>
                 <p>等级: <?=$info->houseInfo?TagExt::getNameByTag($info->houseInfo->level):'-'?></p>
                 <p>价格：￥<?=$info->price?></p>
