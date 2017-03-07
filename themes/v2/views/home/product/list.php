@@ -10,21 +10,21 @@
                 <p class="title">菜品</p>
                 <p class="subtitle">PRODUCTS</p>
             </div> -->
-            <ul id="category1"  style="height: 20px;margin-bottom: 10px;padding: 0;margin-top: 10px">
+            <ul id="category1"  style="height: 22px;margin-bottom: 10px;padding: 0;margin-top: 10px">
             <?php $cateArr = $_GET;unset($cateArr['area'])?>
             <li style="margin-left: 10px;    display: inline-block;float: left"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$area?'active':''?>">全部区域</a></li>
             <?php if($areas = CHtml::listData(TagExt::model()->getTagByCate('hjdq')->normal()->findAll(),'id','name')) foreach ($areas as $key => $value) {?>
                 <li style="float:left"><a href="<?=$this->createUrl('list',$cateArr+['area'=>$key])?>" class="<?=$key==$area?'active':''?>"><?=$value?></a></li>
             <?php } ?>
             </ul>
-            <ul id="category"  style="height: 20px;margin-bottom: 10px;margin-top: 10px;padding: 0;">
+            <ul id="category"  style="height: 22px;margin-bottom: 10px;margin-top: 10px;padding: 0;">
             <?php $cateArr = $_GET;unset($cateArr['price'])?>
             <li style="margin-left: 10px;float: left;"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$price?'active':''?>">全部价格</a></li>
             <?php if($prices = CHtml::listData(TagExt::model()->getTagByCate('hjjg')->normal()->findAll(),'id','name')) foreach ($prices as $key => $value) { ?>
             	<li style="float:left"><a href="<?=$this->createUrl('list',$cateArr+['price'=>$key])?>" class="<?=$key==$price?'active':''?>"><?=$value?></a></li>
             <?php } ?>
             </ul>
-            <ul id="category1"  style="height: 20px;margin-bottom: 10px;padding: 0">
+            <ul id="category3"  style="height: 22px;margin-bottom: 10px;padding: 0">
             <?php $cateArr = $_GET;unset($cateArr['cate'])?>
             <li style="margin-left: 10px;    display: inline-block;float: left"><a href="<?=$this->createUrl('list',$cateArr)?>" class="<?=!$cate?'active':''?>">全部类型</a></li>
             <?php if($areas = CHtml::listData(TagExt::model()->getTagByCate('hjlx')->normal()->findAll(),'id','name')) foreach ($areas as $key => $value) {?>
