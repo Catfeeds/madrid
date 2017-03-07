@@ -18,7 +18,7 @@
                                         <p class="title"><?=$value->title?></p>
                                         <p class="subtitle"><?=$value->sub_title?></p>
                                     </div>
-                                    <p class="description"><?=Tools::u8_title_substr($value->desc,50)?></p>
+                                    <p class="description"><?=$value->desc?></p>
                                 </div>
                             </a>
                         </li>

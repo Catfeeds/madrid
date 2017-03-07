@@ -24,7 +24,7 @@
                             <div class="teaminfo">
                                 <p class="title"><a href="#"><?=$value->title?></a></p>
                                 <p class="subtitle"><?=$value->sub_title?></p>
-                                <p class="description"><?=Tools::u8_title_substr($value['desc'],50)?></p>
+                                <p class="description"><?=Tools::u8_title_substr($value['desc'],100)?></p>
                             </div>
                             <a href="#" class="details">more<i class="fa fa-angle-right"></i></a>
                         </div>
