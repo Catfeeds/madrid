@@ -3,8 +3,8 @@
     $this->keyword = '西班牙进口红酒，红酒列表，里奥哈酒庄，进口红酒列表';
     $this->description = '马德里公馆提供优质西班牙进口红酒，主营里奥哈地区品质酒庄酒款。';
 ?>
-<div id="sitecontent">
-    <div class="npagePage Pageanli" id="mproject" style="margin-left: 20px;width: 1500px">
+<div id="sitecontent" style="">
+    <div class="npagePage Pageanli" id="mproject" style="width: 1400px;margin:0 auto">
         <div class="content" style="margin:0 auto">
             <!-- <div class="header" id="plheader">
                 <p class="title">菜品</p>
