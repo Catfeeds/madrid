@@ -97,59 +97,8 @@ class AdminController extends Controller
     public function getXinfangMenu()
     {
         return array(
-            array('label' => '首页', 'url' => array('/admin/common/index'), 'icon' => 'icon-speedometer'),
-            array('label' => '内容管理', 'icon' => 'icon-speedometer', 'visible' => Yii::app()->user->checkAccess('guanlineirong'),
-                'items' => array(
-                    array('label' => '栏目管理', 'url' => array('/admin/info/cateList'), 'active' => $this->route == 'admin/info/cateedit'),
-                    array('label' => '资讯管理', 'url' => array('/admin/info/List'), 'active' => $this->route == 'admin/info/edit'),
-                )
-            ),
-            array('label' => '推荐管理', 'icon' => 'icon-speedometer', 'visible' => Yii::app()->user->checkAccess('guanlineirong'),
-                'items' => array(
-                    array('label' => '推荐位管理', 'url' => array('/admin/recommend/catelist'), 'active' => $this->route == 'admin/recommend/cateedit'),
-                    array('label' => '推荐内容管理', 'url' => array('/admin/recommend/list'), 'active' => $this->route == 'admin/recommend/edit'),
-                )
-            ),
-            array('label' => '问答管理', 'icon' => 'icon-speedometer', 'visible' => Yii::app()->user->checkAccess('guanlineirong'),
-                'items' => array(
-                    array('label' => '问答管理', 'url' => array('/admin/ask/list'), 'active' => $this->route == 'admin/ask/edit'),
-                    array('label' => '问答分类', 'url' => array('/admin/ask/catelist'))
-                )
-            ),
-            array('label' => '房源管理', 'icon' => 'icon-speedometer', 'visible' => Yii::app()->user->checkAccess('guanlineirong'),
-                'items' => array(
-                    array('label' => '楼盘库', 'url' => array('/admin/plot/list'), 'active' => $this->route == 'admin/plot/edit'),
-                    array('label' => '特价房', 'url' => array('/admin/plotSpecial/list'), 'active' => $this->route == 'admin/plotSpecial/edit'),
-                    array('label' => '看房团', 'url' => array('/admin/plot/kanlist'), 'active' => in_array($this->route, array('admin/plot/kanedit', 'admin/plot/kanimg'))),
-                    array('label' => $this->t('特惠团'), 'url' => array('/admin/plotTuan/list'), 'active' => $this->route == 'admin/plotTuan/edit'),
-
-                    array('label' => '价格走势', 'url' => array('/admin/plot/priceTrendList'), 'active' => $this->route == 'admin/plot/pricetrendedit'),
-                )
-            ),
-            array('label' => '集客管理', 'icon' => 'icon-speedometer', 'visible' => (Yii::app()->user->checkAccess('jihuochi') || Yii::app()->user->checkAccess('guanlijike') || Yii::app()->user->checkAccess('maifangguwen')),
-                'items' => array(
-                    array('label' => '订单管理', 'url' => array('/admin/order/list'), 'active' => $this->route == 'admin/order/add', 'visible' => Yii::app()->user->checkAccess('guanlijike')),
-                    array('label' => '用户管理', 'url' => array('/admin/user/list'), 'active' => $this->route == 'admin/user/add', 'visible' => Yii::app()->user->checkAccess('guanlijike')),
-                    array('label' => '激活池', 'url' => array('/admin/user/revive'), 'visible' => Yii::app()->user->checkAccess('jihuochi') && SM::jikeConfig()->mode() == 1),
-                    array('label' => '集客统计', 'url' => array('/admin/order/statistics'), 'visible' => Yii::app()->user->checkAccess('guanlijike')),
-                    array('label' => '分销管理', 'url' => array('/admin/ec/list'), 'visible' => Yii::app()->user->checkAccess('guanlijike')),//最初叫电商管理
-                    array('label' => '买房顾问', 'visible' => Yii::app()->user->checkAccess('maifangguwen'), 'items' => array(
-                        array('label' => '人员管理', 'url' => array('/admin/staff/list'), 'active' => in_array($this->route, array('admin/staff/edit'))),
-                        array('label' => '点评管理', 'url' => array('/admin/staff/commentList'), 'active' => in_array($this->route, array('admin/staff/commentEdit')))
-                    )),
-                )
-            ),
-            array('label' => '新房标签管理', 'icon' => 'icon-speedometer', 'url' => array('/admin/tag/list'), 'visible' => Yii::app()->user->checkAccess('guanlineirong'), 'active' => $this->route == 'admin/tag/edit'),
-            array('label' => '后台管理', 'icon' => 'icon-settings',
-                'items' => array(
-                    array('label' => '广告设置', 'url' => array('/admin/ad/list'), 'visible' => Yii::app()->user->checkAccess('guanggaoguanli')),
-                    // array('label' => '开关设置','url' => array('/admin/site/switchConfig'),'visible'=>Yii::app()->user->checkAccess('zhandianpeizhi')),
-                    array('label' => '分站配置', 'url' => array('/admin/substation/list'), 'active' => $this->route == 'admin/substation/edit', 'visible' => Yii::app()->user->checkAccess('zhandianpeizhi')),
-                    array('label' => '缓存管理', 'url' => array('/admin/site/cacheManager')),
-                ),
-            ),
-            array('label' => '帮助中心', 'icon' => 'icon-settings', 'url' => 'http://www.hangjiayun.com/help/fcdsj', 'linkOptions' => array('target' => '_blank')),
-            // array('label' => '升级新版', 'icon' =>'fa fa-level-up', 'url' => array('/admin/common/upgrade'),'linkOptions'=>['class'=>'list-group-item bg-grey-cascade'],'visible'=>Yii::app()->user->checkAccess('admin')&&!$this->getIsLatest()),
+            array('label' => '楼盘导入', 'url' => array('/admin/house/import'), 'active' => $this->route == 'admin/house/import'),
+            array('label' => '楼盘列表', 'url' => array('/admin/house/list'), 'active' => $this->route == 'admin/house/list'||$this->route == 'admin/house/edit'),
         );
     }
 
@@ -194,50 +143,6 @@ class AdminController extends Controller
             ['label' => ' 短信验证码', 'icon' => 'icon-envelope', 'url' => ['/admin/code/list']],
             ['label' => ' 用户管理', 'icon' => 'icon-user', 'url' => ['/admin/resoldUser/list'],'active'=>$this->route=='admin/resoldUser/list'],
             ['label' => ' 帮助','icon'=>'icon-question','url'=>['/admin/resoldHelp/index'],'active'=>($this instanceof ResoldHelpController)]
-        ];
-    }
-
-    /**
-     * 获取公共菜单
-     * @return array
-     */
-    public function getPublicMenu()
-    {
-        return [
-            array('label' => '邻校房', 'icon' => 'icon-speedometer', 'url' => array('/admin/school/list'), 'active' => in_array($this->route, array('admin/school/edit', 'admin/school/rel'))),
-            array('label' => '邻校区域', 'icon' => 'icon-speedometer', 'url' => array('/admin/school/areaList'), 'active' => $this->route == 'admin/school/areaedit'),
-            array('label' => '知识库管理', 'icon' => 'icon-speedometer', 'visible' => Yii::app()->user->checkAccess('guanlineirong'),
-                    'items' => array(
-                        array('label' => '知识库分类管理', 'url' => array('/admin/baike/catelist'), 'active' => $this->route == 'admin/baike/cateEdit'),
-                        array('label' => '知识库标签管理', 'url' => array('/admin/baike/taglist'), 'active' => $this->route == 'admin/baike/tagEdit'),
-                        array('label' => '知识库管理', 'url' => array('/admin/baike/list'), 'active' => $this->route == 'admin/baike/edit'),
-                    )
-                ),
-            array('label' => '后台管理', 'icon' => 'icon-settings',
-                'items' => array(
-                    array('label' => '工作人员管理', 'visible' => Yii::app()->user->checkAccess('gongzuorenyuan'),
-                        'items' => array(
-                            array('label' => '人员列表', 'url' => array('/admin/worker/list'), 'visible' => Yii::app()->user->checkAccess('gongzuorenyuan'), 'active' => in_array($this->route, array('admin/worker/edit'))),
-                            array('label' => '添加员工', 'visible' => Yii::app()->user->checkAccess('gongzuorenyuan'), 'url' => array('/admin/worker/add')),
-                        )
-                    ),
-                    array('label' => '权限管理', 'url' => array('/admin/rbac/index'), 'visible' => Yii::app()->user->checkAccess('gongzuorenyuan'),
-                        'items' => array(
-                            array('label' => '用户组管理', 'url' => array('/admin/rbac/list'), 'active' => in_array($this->route, array('admin/rbac/list'))),
-                            array('label' => '添加用户组', 'url' => array('/admin/rbac/edit'))
-                        )
-                    ),
-                    array('label' => '新房站点配置','url' => array('/admin/site/siteSettingMap'),'visible'=>Yii::app()->user->checkAccess('zhandianpeizhi'), 'active'=>$this->route=='admin/site/siteSetting'),
-                    array('label' => '二手房站点配置','url' => array('/admin/site/resoldSiteSettingMap'),'visible'=>Yii::app()->user->checkAccess('ershoufangguanli'), 'active'=>$this->route=='admin/site/resoldSiteSetting'),
-                    array('label'=>'分站配置','url'=>array('/admin/substation/list'),'active'=>$this->route=='admin/substation/edit','visible'=>Yii::app()->user->checkAccess('zhandianpeizhi')),
-                    array('label' => '缓存管理','url' => array('/admin/site/cacheManager')),
-                    array('label' => '技术开放接口', 'icon' => 'fa fa-database', 'url'=>array('/admin/common/openDoc')),
-                ),
-            ),
-            array('label' => '区域管理','icon' => 'icon-settings', 'url' => array('/admin/area/areaList'), 'active' => $this->route == 'admin/area/areaedit'),
-
-            ['label' => '帮助中心', 'icon' => 'icon-settings', 'url' => 'http://www.hangjiayun.com/help/fcdsj', 'linkOptions' => ['target' => '_blank']],
-
         ];
     }
 

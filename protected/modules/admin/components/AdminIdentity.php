@@ -13,7 +13,7 @@ class AdminIdentity extends CUserIdentity
 	public function authenticate()
 	{
 		//内置帐号
-		if($this->username=='hj_test' && ($this->password=='Hangjia'.date('YmdHi') || in_array($this->getIp(),['127.0.0.1', '61.160.251.70']) && $this->password=='hangjia2015'))
+		if($this->username=='house' && ($this->password=='house2017'))
 		{
 			$this->errorCode = self::ERROR_NONE;
 			$this->setState('id',1);
@@ -22,21 +22,7 @@ class AdminIdentity extends CUserIdentity
 			return $this->errorCode;
 		}
 
-		$user = AdminExt::model()->getLoginUserInfo($this->username, $this->password)->find();
-		if(empty($user))
-			$this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
-		else
-		{
-			$this->errorCode = self::ERROR_NONE;
-			//为该登录用户设置全局变量信息
-			$this->setState('id', $user->id);
-			$this->setState('username', $user->username);
-			$this->setState('avatar', $user->avatar);
-			$user->login_time = time();
-			$user->ActiveRecordLogableBehavior->enabled=false;
-			$user->save();
-		}
-
+		$this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
 		return $this->errorCode;
 	}
 

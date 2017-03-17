@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--
+<!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.2
 Version: 3.7.0
 Author: KeenThemes
@@ -26,7 +26,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <meta content="" name="author"/>
 
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
-<!-- <link href="http://fonts.useso.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/> -->
+<link href="http://fonts.useso.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
 <link href="/static/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="/static/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
 <link href="/static/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -49,11 +49,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <body class="login">
 <!-- BEGIN LOGO -->
 <div class="logo">
-    <?php if(!empty(SM::globalConfig()->loginLogo())): ?>
-        <img src="<?php echo ImageTools::fixImage(SM::globalConfig()->loginLogo()); ?>" alt="">
-    <?php else: ?>
-    	<img src="/static/admin/layout/img/logo-hj.png" alt=""/>
-    <?php endif; ?>
+    	<!-- <img src="/static/admin/layout/img/logo-hj.png" alt=""/> -->
 </div>
 <!-- END LOGO -->
 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -86,7 +82,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		</div>
 		<div class="form-actions">
 			<label class="checkbox">
-			<input type="checkbox" name="rememberMe" value="1" /> 记住我 </label>
+			<input type="checkbox" name="remember" value="1" /> 记住我 </label>
 			<button type="submit" class="btn blue pull-right">
 			登录 <i class="m-icon-swapright m-icon-white"></i>
 			</button>
@@ -97,14 +93,14 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
 <div class="copyright">
-	&copy; 2015-<?php echo date("Y")?> <?php echo SM::GlobalConfig()->siteName() ?>版权所有
+	 2017 &copy; 马德里工作室版权所有
 </div>
 <!-- END COPYRIGHT -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="/static/global/plugins/respond.min.js"></script>
-<script src="/static/global/plugins/excanvas.min.js"></script>
+<script src="/static/global/plugins/excanvas.min.js"></script> 
 <![endif]-->
 <script src="/static/global/plugins/jquery.min.js" type="text/javascript"></script>
 <script src="/static/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>

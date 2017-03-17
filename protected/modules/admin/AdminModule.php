@@ -39,7 +39,7 @@ class AdminModule extends CWebModule
 			'admin.models.*',
 			'admin.models_ext.*',
 			'admin.components.*',
-			'admin.widgets.*'
+			'admin.widgets.*',
 		));
 
 		$this->preloadComponents();

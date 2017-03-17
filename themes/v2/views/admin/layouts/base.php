@@ -61,7 +61,7 @@
 		<!-- BEGIN LOGO -->
 		<div class="page-logo" style="width:500px">
 			<a href="<?php echo $this->createUrl('/admin/common/index') ?>"  class="logo-name">
-			<?php echo SM::GlobalConfig()->siteName() ?> &bull; 房产数据营销后台
+			&bull; 房产数据营销后台
 			<!-- <img src="/static/admin/layout/img/logo.png" alt="logo" class="logo-default"/> -->
 			</a>
 			<div class="menu-toggler sidebar-toggler hide">
@@ -153,13 +153,11 @@
 					<!-- END SIDEBAR TOGGLER BUTTON -->
 				</li>
 				<br>
-				<?php  $user = AdminExt::model()->find(['condition'=>'username=:username','params'=>[':username'=>Yii::app()->user->getName()]]);
-        				if($user->group->chinese != '管理二手房'):?>
 				<li class="start open xf">
 					<a href="javascript:;">
 					<i class="fa fa-cogs"></i>
 					<span class="title">
-					新房 </span>
+					楼盘库 </span>
 					<span class="arrow ">
 					</span>
 					<span class="selected"></span>
@@ -168,23 +166,7 @@
 					<?php $this->widget('HouseMenu') ?>
 					</ul>
 				</li>
-			<?php endif;?>
-				<?php if(Yii::app()->user->checkAccess('ershoufangguanli')):?>
-				<li class="start open esf">
-					<a href="javascript:;">
-					<i class="fa fa-cogs"></i>
-					<span class="title">
-					二手房 </span>
-					<span class="arrow ">
-					</span>
-					<span class="selected"></span>
-					</a>
-					<ul class="sub-menu">
-					<?php $this->widget('HouseMenu', ['items' => $this->getResoldMenu()]) ?>
-					</ul>
-				</li>
-			<?php endif;?>
-				<li class="start open public">
+				<!-- <li class="start open public">
 					<a href="javascript:;">
 					<i class="fa fa-cogs"></i>
 					<span class="title">
@@ -193,15 +175,12 @@
 					</span>
 					<span class="selected"></span>
 					</a>
-					<ul class="sub-menu">
-					<?php $this->widget('HouseMenu', ['items' => $this->getPublicMenu()]) ?>
-					</ul>
 				</li>
 				<div class="help-box">
                 	<ul>
                     	<li>有事您找我</li>
                         <li>客服：<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2729269887&amp;site=qq&amp;menu=yes" target="_blank" class="qq">QQ交谈</a></li>                                            </ul>
-                  </div>
+                  </div> -->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
@@ -238,7 +217,7 @@
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
 	<div class="page-footer-inner">
-		 2015 &copy; <?php echo SM::GlobalConfig()->siteName().'版权所有'; ?>
+		 2017 &copy; <?php echo '马德里工作室版权所有'; ?>
 	</div>
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>
