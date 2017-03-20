@@ -59,8 +59,8 @@ class HouseController extends AdminController{
 		// 基本信息+销售信息
 		preg_match_all('/<div class="main_1200">[.|\s|\s]+<!--[.|\s|\S]+list-right c00">/', $result, $xsTags);
 		$xxs = $xsTags[0][0];
-		// var_dump($xxs);
 		$xxs = $this->characet($xxs);
+		// var_dump($xxs);exit;
 		// 价格
 		preg_match_all('/em>[.|\s|\S]+<\/em/', $xxs,$pricetag);
 		$pricetag && $pricetag = $pricetag[0][0];
@@ -79,6 +79,57 @@ class HouseController extends AdminController{
 		$sldz = str_replace('">', '', $sldz);
 		$plot->wylx = $wylx;
 		$plot->sale_addr = $sldz;
+
+		// 项目特色
+		preg_match_all('/tag.+/', $xxs, $xstss);
+
+		$xmts = '';
+		if($xstss) {
+			foreach ($xstss[0] as $key => $value) {
+				$tmp = str_replace('tag">', '', $value);
+				$tmp = str_replace('</span>', '', $tmp);
+				$xmts .= $tmp.' ';
+			}
+			$xmts = trim($xmts);
+		}
+		$plot->xmts = $xmts;
+		// 建筑类别
+		// $xxs = str_replace(' ','',$xxs);
+		$jzlb = $jzlbs = '';
+		// [];
+		preg_match('/bulid\-type[.|\s|\S]+<\/s/', $xxs, $jzlbTags);
+		if($jzlbTags = $jzlbTags[0]) {
+			$jzlb = str_replace('bulid-type">', '', $jzlbTags);
+			$jzlb = str_replace('</s', '', $jzlb);
+		}
+		if($jzlb) {
+			$jzlb = explode(' ', $jzlb);
+			foreach ($jzlb as $key => $value) {
+				if(trim($value)) {
+					$jzlbs .= trim($value) . ' ';
+				}
+			}
+			$jzlbs = trim($jzlbs);
+		}
+		$plot->jzlb = $jzlbs;
+		// 开发商
+		$kfs = '';
+		preg_match_all('/_blank">.+<\/a/', $xxs, $kfss);
+		if(isset($kfss[0][0]) && $kfss = $kfss[0][0]) {
+			$kfs = str_replace('_blank">', '', $kfss);
+			$kfs = str_replace('</a', '', $kfs);
+		}
+		$plot->developer = $kfs;
+		// 楼盘地址
+		$addr = '';
+		preg_match_all('/list-right-text">[\x{4e00}-\x{9fa5}|0-9]+/u', $xxs, $adds);
+			// var_dump($adds);exit;
+		if(isset($adds[0][0]) && $adds = $adds[0][0]) {
+			$addr = str_replace('list-right-text">', '', $adds);
+		}
+		$plot->address = $addr;
+
+		
 
 		var_dump($plot->attributes);
 		exit;
