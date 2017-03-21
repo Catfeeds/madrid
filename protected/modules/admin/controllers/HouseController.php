@@ -34,7 +34,9 @@ class HouseController extends AdminController{
 		// ditu.fang.com/?c=channel&a=xiaoquNew&newcode=1821031186&city=cz
 		$plot = New PlotExt;
 		$urlarr = explode('.', $url);
+		// preg_match_all('', $urlarr[0], matches)
 		$plot->pinyin = str_replace('http://', '', $urlarr[0]);
+		// var_dump($plot->pinyin);exit;
 		$res = HttpHelper::get($url);
 		$totalHtml = $res['content'];
 		// 截取body
@@ -50,14 +52,15 @@ class HouseController extends AdminController{
 		$title = str_replace('</a><!--', '', $title);
 		// 编码装换
 		$title = $this->characet($title);
+		$result = $this->characet($result);
 		$plot->title = $title;
 		// 拼音
-		$plot->pinyin = $this->Pinyin($title,1);
+		// $plot->pinyin = $this->Pinyin($title,1);
 		// var_dump(strpos($result, '常州'),$result);exit;
-		str_replace('销售信息', 'xsxx', $result);
+		// str_replace('销售信息', 'xsxx', $result);
 		// var_dump($result);exit;
 		// 基本信息+销售信息
-		preg_match_all('/<div class="main_1200">[.|\s|\s]+<!--[.|\s|\S]+list-right c00">/', $result, $xsTags);
+		preg_match_all('/<div class="main_1200">[.|\s|\s]+<!--[.|\s|\S]+list-right c00">.+/', $result, $xsTags);
 		$xxs = $xsTags[0][0];
 		$xxs = $this->characet($xxs);
 		// var_dump($xxs);exit;
@@ -128,10 +131,182 @@ class HouseController extends AdminController{
 			$addr = str_replace('list-right-text">', '', $adds);
 		}
 		$plot->address = $addr;
+		// 销售状态
+		$xszt = '';
+		preg_match_all('/销售状态：<\/div>[\s]+<div class="list-right">[\s].+<\/div>/', $xxs, $xszts);
+		if(isset($xszts[0][0]) && $xszts = $xszts[0][0]) {
+			// var_dump($xszts);exit;
+			preg_match_all('/[\x{4e00}-\x{9fa5}]+/u', $xszts, $xsztarr);
+			$xszt = $xsztarr[0][1];
+		}
+		$plot->sale_status = $xszt;
+		// 开盘时间
+		// 销售状态
+		$kpsj = '';
+		preg_match_all('/开盘时间：<\/div>[\s]+<div class="list-right">.+<a/', $xxs, $kpsjs);
+		if(isset($kpsjs[0][0]) && $kpsjs = $kpsjs[0][0]) {
+			// var_dump($kpsjs);exit;
+			preg_match_all('/[\x{4e00}-\x{9fa5}|0-9|#]+/u', $kpsjs, $xsztarr);
+			// var_dump($xsztarr);exit;
+			$xszt = $xsztarr[0][1];
+			// 格式处理
+			preg_match_all('/[0-9]+年[0-9]+月[0-9]+日/', $xszt, $xszts);
+			if($xszts[0] && isset($xszts[0][0]) && $xszts = $xszts[0][0]) {
+				$xszts = str_replace('年', '-', $xszts);
+				$xszts = str_replace('月', '-', $xszts);
+				$xszts = str_replace('日', '', $xszts);
+				// var_dump($xszts);exit;
+				$kpsj = strtotime($xszts);
+			} else {
+				preg_match_all('/[0-9]+年[0-9]+月/', $xszt, $xszts);
+				if($xszts[0] && isset($xszts[0][0]) && $xszts = $xszts[0][0]) {
+					$xszts = str_replace('年', '-', $xszts);
+					$xszts = str_replace('月', '', $xszts);
+					// var_dump($xszts);exit;
+					$kpsj = strtotime($xszts);
+				}
+			}
 
+		}
+		$plot->open_time = $kpsj;
+		// 交房时间
+		$jfsj = '';
+		preg_match_all('/交房时间：<\/div>[\s]+<div class="list-right">.+<\//', $xxs, $jfsjs);
+		if(isset($jfsjs[0][0]) && $kpsjs = $jfsjs[0][0]) {
+			// var_dump($kpsjs);exit;
+			preg_match_all('/[\x{4e00}-\x{9fa5}|0-9|#]+/u', $kpsjs, $xsztarr);
+			// var_dump($xsztarr);exit;
+			$xszt = $xsztarr[0][1];
+			// 格式处理
+			preg_match_all('/[0-9]+年[0-9]+月[0-9]+日/', $xszt, $xszts);
+			if($xszts[0] && isset($xszts[0][0]) && $xszts = $xszts[0][0]) {
+				$xszts = str_replace('年', '-', $xszts);
+				$xszts = str_replace('月', '-', $xszts);
+				$xszts = str_replace('日', '', $xszts);
+				// var_dump($xszts);exit;
+				$kpsj = strtotime($xszts);
+			} else {
+				preg_match_all('/[0-9]+年[0-9]+月/', $xszt, $xszts);
+				if($xszts[0] && isset($xszts[0][0]) && $xszts = $xszts[0][0]) {
+					$xszts = str_replace('年', '-', $xszts);
+					$xszts = str_replace('月', '', $xszts);
+					// var_dump($xszts);exit;
+					$kpsj = strtotime($xszts);
+				}
+			}
+		}
+		$plot->delivery_time = $kpsj;
+		// 装修情况
+		$zxqk = '';
+		preg_match_all('/装修状况：<\/div>[\s]+<div class="list-right">.+<a/', $xxs, $jfsjs);
+		if(isset($jfsjs[0][0]) && $kpsjs = $jfsjs[0][0]) { 
+			preg_match_all('/[\x{4e00}-\x{9fa5}|0-9|#]+/u', $kpsjs, $xsztarr);
+			// var_dump($xsztarr);exit;
+			$xszt = $xsztarr[0][1];
+		}
+		$plot->zxzt = $xszt;
+		// 售楼电话
+		preg_match_all('/c00">.+</', $xxs, $jfsjs);
+		if(isset($jfsjs[0][0]) && $kpsjs = $jfsjs[0][0]) { 
+			$phone = str_replace('c00">', '', $kpsjs);
+			// var_dump($phone);
+			$phone = trim($phone,'<');
+		}
+		$plot->sale_tel = $phone;
+		// 小区规划部分
+		preg_match_all('/小区规划开始[.|\s|\S]+小区规划结束/', $result, $xqghs);
+		if(isset($xqghs[0][0]) && $xqghs = $xqghs[0][0]) {
+			preg_match_all('/占地面积：[.|\s|\S|0-9]+平方米<\/div>/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				preg_match_all('/[0-9]+/',$areas,$ars);
+				if(isset($ars[0][0]))
+					$plot->size = $ars[0][0];
+				if(isset($ars[0][1]))
+					$plot->buildsize = $ars[0][1];
+			}
+			// 容积率绿化率
+			preg_match_all('/率：[.|\s|\S]+%/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				preg_match_all('/[0-9|.]+&nbsp;/',$areas,$ars);
+				if(isset($ars[0][0])){
+					$plot->capacity = trim($ars[0][0],'&nbsp;');
+				}
+				preg_match_all('/[0-9|.]+%/',$areas,$ars);
+				if(isset($ars[0][0])){
+					// var_dump(expression)
+					$plot->green = trim($ars[0][0],'%');
+				}
+			}
+			// 物业费
+			preg_match_all('/[0-9|.]+元\/㎡·月/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				// var_dump($areas);exit;
+					$plot->manage_fee = trim($areas,'元\/㎡·月');
+			}
+
+		}
+		// 交通、配套部分
+		preg_match_all('/交通配套开始[.|\s|\S]+交通配套结束/', $result, $xqghs);
+		if(isset($xqghs[0][0]) && $xqghs = $xqghs[0][0]) {
+			// var_dump($xqghs);exit;
+			preg_match_all('/<p>[.|\s|\S]+class="set"/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				preg_match_all('/<p>[.|\s|\S]+<\/p>/',$areas,$ars);
+				if(isset($ars[0][0])) {
+					$ars = trim($ars[0][0],'<p>');
+					$ars = trim($ars,'</p>');
+					// var_dump($ars);exit;
+					$plot->transit = trim($ars);
+				}
+			}
+			preg_match_all('/项目配套<\/h3>[.|\s|\S]+<\/p>/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				preg_match_all('/<p>[.|\s|\S]+<\/p>/',$areas,$ars);
+				if(isset($ars[0][0])) {
+					$ars = trim($ars[0][0],'<p>');
+					$ars = trim($ars,'</p>');
+					// var_dump($ars);exit;
+					$plot->peripheral = trim($ars);
+				}
+			}
+		}
+		// 项目简介
+		// intro">[.|\s|\S]+项目
+		preg_match_all('/intro">[.|\s|\S]+项目/', $result, $xqghs);
+		if(isset($xqghs[0][0]) && $xqghs = $xqghs[0][0]) {
+			preg_match_all('/>[.|\s|\S]+<\/p>/',$xqghs,$ars);
+			if(isset($ars[0][0])) {
+				$ars = trim($ars[0][0],'>');
+				$ars = trim($ars,'</p>');
+				// var_dump(trim($ars));exit;
+				$plot->content = trim($ars);
+			}
+		}
 		
+		// 区域
+		preg_match_all('/header_mnav[.|\s|\S]+面包屑/', $result, $xqghs);
+		if(isset($xqghs[0][0]) && $xqghs = $xqghs[0][0]) {
+			// var_dump($xqghs);exit;
+			preg_match_all('/title=.+<\/a>/',$xqghs,$ars);
+			if(isset($ars[0][0])) {
+				preg_match_all('/[\x{4e00}-\x{9fa5}]+/u', $ars[0][0], $arss);
+				// var_dump($arss);exit;
+				if(isset($arss[0][1])) {
+					// var_dump();exit;
+					$plot->area = str_replace('楼盘', '', $arss[0][1]);
+				}
+			}
+		}
+		// 封面
+		preg_match_all('/face.+.jpg\'/', $result, $jps);
+		if(isset($jps[0][0]) && $jps = $jps[0][0]) {
+			$jps = str_replace('face = ', '', $jps);
+			$jps = trim($jps,"'");
+			$plot->image = $jps;
+			// $jps = Yii::app()->file->fetch($jps);
+		}
 
-		var_dump($plot->attributes);
+		var_dump($plot->content);exit;
 		exit;
 		
 	}
