@@ -9,6 +9,7 @@
  * @property string $title
  * @property string $image
  * @property integer $bedroom
+ * @property string $size
  * @property string $content
  * @property integer $deleted
  * @property integer $created
@@ -35,10 +36,11 @@ class PlotHx extends CActiveRecord
 			array('hid, created', 'required'),
 			array('hid, bedroom, deleted, created, updated', 'numerical', 'integerOnly'=>true),
 			array('title, image', 'length', 'max'=>255),
+			array('size', 'length', 'max'=>10),
 			array('content', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, hid, title, image, bedroom, content, deleted, created, updated', 'safe', 'on'=>'search'),
+			array('id, hid, title, image, bedroom, size, content, deleted, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +66,7 @@ class PlotHx extends CActiveRecord
 			'title' => 'Title',
 			'image' => 'Image',
 			'bedroom' => 'Bedroom',
+			'size' => 'Size',
 			'content' => 'Content',
 			'deleted' => 'Deleted',
 			'created' => 'Created',
@@ -94,6 +97,7 @@ class PlotHx extends CActiveRecord
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('image',$this->image,true);
 		$criteria->compare('bedroom',$this->bedroom);
+		$criteria->compare('size',$this->size,true);
 		$criteria->compare('content',$this->content,true);
 		$criteria->compare('deleted',$this->deleted);
 		$criteria->compare('created',$this->created);

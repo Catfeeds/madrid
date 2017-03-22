@@ -1,4 +1,5 @@
 <?php
+use Qiniu\Auth;
 /**
  * 楼盘控制器
  * @author tivon <[<email address>]>
@@ -119,10 +120,14 @@ class HouseController extends AdminController{
 		$kfs = '';
 		preg_match_all('/_blank">.+<\/a/', $xxs, $kfss);
 		if(isset($kfss[0][0]) && $kfss = $kfss[0][0]) {
-			$kfs = str_replace('_blank">', '', $kfss);
-			$kfs = str_replace('</a', '', $kfs);
+			preg_match_all('/[\x{4e00}-\x{9fa5}]+/u', $kfss, $xsztarr);
+			if(isset($xsztarr[0][0])) {
+				foreach ($xsztarr[0] as $key => $value) {
+					$kfs .= $value.' ';
+				}
+			}
 		}
-		$plot->developer = $kfs;
+		$plot->developer = trim($kfs);
 		// 楼盘地址
 		$addr = '';
 		preg_match_all('/list-right-text">[\x{4e00}-\x{9fa5}|0-9]+/u', $xxs, $adds);
@@ -198,7 +203,7 @@ class HouseController extends AdminController{
 		$plot->delivery_time = $kpsj;
 		// 装修情况
 		$zxqk = '';
-		preg_match_all('/装修状况：<\/div>[\s]+<div class="list-right">.+<a/', $xxs, $jfsjs);
+		preg_match_all('/装修状况：<\/div>[\s]+<div class="list-right">.+</', $xxs, $jfsjs);
 		if(isset($jfsjs[0][0]) && $kpsjs = $jfsjs[0][0]) { 
 			preg_match_all('/[\x{4e00}-\x{9fa5}|0-9|#]+/u', $kpsjs, $xsztarr);
 			// var_dump($xsztarr);exit;
@@ -238,10 +243,20 @@ class HouseController extends AdminController{
 				}
 			}
 			// 物业费
-			preg_match_all('/[0-9|.]+元\/㎡·月/', $xqghs, $areas);
+			preg_match_all('/[0-9|.]+元\//', $xqghs, $areas);
 			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
 				// var_dump($areas);exit;
-					$plot->manage_fee = trim($areas,'元\/㎡·月');
+					$plot->manage_fee = trim($areas,'元\/');
+			}
+			// 物业公司
+			preg_match_all('/物业公司：[.|\s|\S]+<\/a/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				preg_match_all('/[\x{4e00}-\x{9fa5}]+/u', $areas, $arss);
+				// var_dump($areas);exit;
+				if(isset($arss[0][1])) {
+					// var_dump($arss[0][1]);exit;
+					$plot->manage_company = $arss[0][1];
+				}
 			}
 
 		}
@@ -293,7 +308,7 @@ class HouseController extends AdminController{
 				// var_dump($arss);exit;
 				if(isset($arss[0][1])) {
 					// var_dump();exit;
-					$plot->area = str_replace('楼盘', '', $arss[0][1]);
+					$plot->street = str_replace('楼盘', '', $arss[0][1]);
 				}
 			}
 		}
@@ -305,9 +320,77 @@ class HouseController extends AdminController{
 			$plot->image = $jps;
 			// $jps = Yii::app()->file->fetch($jps);
 		}
-
-		var_dump($plot->content);exit;
-		exit;
+		// 城市
+		preg_match_all('/vcity.+/', $result, $jps);
+		if(isset($jps[0][0]) && $jps = $jps[0][0]) {
+			$jps = str_replace("vcity= '", '', $jps);
+			$jps = str_replace("';", '', $jps);
+			$jps = trim($jps,"'");
+			$plot->area = $jps;
+			// $jps = Yii::app()->file->fetch($jps);
+		}
+		// 地图数据
+		preg_match_all('/SouFunSearch\.newhouseDomain.+/', $result, $jps);
+		if(isset($jps[0][0]) && $jps = $jps[0][0]) {
+			// 城市简写
+			preg_match_all('/newhouse\..+fang/', $jps, $jxs);
+			if(isset($jxs[0][0]) && $jxs = $jxs[0][0]) { 
+				$jx = str_replace("newhouse.", '', $jxs);
+				$jx = str_replace(".fang", '', $jx);
+			}
+			// 楼盘id
+			preg_match_all('/newcode=.+/', $result, $jxs);
+			if(isset($jxs[0][0]) && $jxs = $jxs[0][0]) { 
+				$code = str_replace("newcode='", '', $jxs);
+				$code = str_replace("';", '', $code);
+			}
+			if($jx && $code) {
+				// 路由拼凑
+				$mapurl = "http://ditu.fang.com/?c=channel&a=xiaoquNew&newcode=$code&city=$jx";
+				$res1 = HttpHelper::get($mapurl);
+				$totalHtml1 = $res1['content'];
+				if($totalHtml1) {
+					preg_match_all('/_vars.cityx.+newhouse_style/', $totalHtml1, $jxs);
+					if(isset($jxs[0][0]) && $jxs = $jxs[0][0]) { 
+						$ds = explode(';', $jxs);
+						if($ds) {
+							foreach ($ds as $key => $value) {
+								if(strrpos($value, '=')) {
+									list($a,$b) = explode('=', $value);
+									$a = trim($a,'_vars.');
+									$a = trim($a);
+									$b = trim($b);
+									$b = trim($b,'"');
+									$$a = $b;
+								}
+							}
+							if(isset($cityx))
+								$plot->map_lng = $cityx;
+							if(isset($cityy))
+								$plot->map_lat= $cityy;
+							if(isset($zoom))
+								$plot->map_zoom = $zoom;
+						}
+					}
+				}
+			}
+		}
+		// 抓取户型图
+		preg_match_all('/<a.+户型/', $result, $jxs);
+		if(isset($jxs[0][0]) && $jxs = $jxs[0][0]) {
+			
+			preg_match_all('/photo\/list.+htm/', $jxs, $urls);
+			if(isset($urls[0][0]) && $urls = $urls[0][0]) {
+				$urlar = explode('com', $url);
+				$hxurl = $urlar[0] . 'com/' . $urls;
+			}
+		}
+		
+		if($plot->save()) {
+			if(isset($hxurl) && $hxurl)
+				$this->fetchHx($hxurl,$plot->id);
+			$this->setMessage('保存成功','success');
+		}
 		
 	}
 
@@ -316,9 +399,73 @@ class HouseController extends AdminController{
 	 * @param  string $value [description]
 	 * @return [type]        [description]
 	 */
-	public function fetchHx($value='')
+	public function fetchHx($url='',$hid=0)
 	{
-		# code...
+		if(!$url)
+			return true;
+		$res = HttpHelper::get($url);
+		$totalHtml = $res['content'];
+		// 截取body
+		preg_match_all('/<body[.|\s|\S]+body>/', $totalHtml, $results);
+		// 去除script标签
+		$result = str_replace('script', '', $results[0][0]);
+
+		$result = $this->characet($result);
+		// var_dump($result);exit;
+		preg_match_all('/ListModel[.|\S|\s]+户型图右部户型图信息[.|\s]+start/', $result, $jxs);
+
+		if(isset($jxs[0][0]) && $jxs = $jxs[0][0]) {
+			$lists = explode('xc_img_list', $jxs);
+			if($lists) {
+				foreach ($lists as $key => $value) {
+					preg_match_all('/src.+.jpg/', $value, $urls);
+					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
+						$hximg = str_replace('src="', '', $urls);
+						$hximg = str_replace('220x150', '748x578', $hximg);
+						// var_dump(21);exit;
+						// header("content-type:image/jpg");
+						$opt=array("http"=>array("header"=>"Referer: " . $url)); 
+						$context=stream_context_create($opt); 
+						$file_contents = file_get_contents($hximg,false, $context);
+						$resss = $this->request_by_curl('http://upload.qiniu.com/putb64/-1',$file_contents,$this->createQnKey());
+						var_dump($resss);exit;
+						// $name = Yii::app()->theme->baseUrl.'/static/admin/images/'.str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
+						// var_dump(file_put_contents(Yii::app()->theme->baseUrl.'/static/admin/images/a.txt', '111'));exit;
+						// var_dump(file_put_contents($name, $file_contents));exit;
+						
+						file_put_contents($name, $file_contents);
+
+					} else continue;
+					preg_match_all('/title.+"/', $value, $urls);
+					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
+						$hxtitle = str_replace('title=', '', $urls);
+						$hxtitle = str_replace('"', '', $hxtitle);
+						// var_dump($hxtitle);exit;
+					} else continue;
+					preg_match_all('/[0-9]+室/', $value, $urls);
+					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
+						$hxbed = str_replace('室', '', $urls);
+					} else continue;
+					preg_match_all('/fr.+/', $value, $urls);
+					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
+						preg_match_all('/[0-9]+/', $urls, $sizss);
+						if(isset($sizss[0][0]) && $sizss = $sizss[0][0]) {
+							$hxsize = $sizss;
+						}
+					} else continue;
+					if(isset($hximg) && isset($hxtitle) && isset($hxbed)){
+						$hx = new PlotHxExt;
+						$hx->image = $hximg;
+						$hx->title = $hxtitle;
+						$hx->bedroom = $hxbed;
+						$hx->hid = $hid;
+						isset($hxsize) && $hx->size = $hxsize;
+						$hx->save();
+					}
+
+				}
+			}
+		}
 	}
 
 	/**
@@ -342,8 +489,41 @@ class HouseController extends AdminController{
 		$criteria->order = 'updated desc,id desc';
 		if($title)
 			$criteria->addSearchCondition('title',$title);
-		$houses = PlotExt::model()->undeleted->getList($criteria,20);
+		$houses = PlotExt::model()->undeleted()->getList($criteria,20);
 		$this->render('list',['infos'=>$houses->data,'pager'=>$houses->pagination]);
+	}
+
+	/**
+	 * [actionList 户型列表]
+	 * @param  string $title [description]
+	 * @return [type]        [description]
+	 */
+	public function actionHxlist($hid='')
+	{
+		$_SERVER['HTTP_REFERER']='http://www.baidu.com';
+		$house = PlotExt::model()->findByPk($hid);
+		if(!$house){
+			$this->redirect('/admin');
+		}
+		$criteria = new CDbCriteria;
+		$criteria->order = 'updated desc,id desc';
+		$criteria->addCondition('hid=:hid');
+		$criteria->params[':hid'] = $hid;
+		$houses = PlotHxExt::model()->undeleted()->getList($criteria,20);
+		$this->render('hxlist',['infos'=>$houses->data,'pager'=>$houses->pagination,'house'=>$house]);
+	}
+
+	public function actionAjaxDel($id='')
+	{
+		if($id) {
+			$plot = PlotExt::model()->findByPk($id);
+			$plot->deleted=1;
+			if($plot->save()) {
+				$this->setMessage('操作成功','success');
+			} else {
+				$this->setMessage('操作失败','error');
+			}
+		}
 	}
 
 	/**
@@ -360,6 +540,12 @@ class HouseController extends AdminController{
 		if(Yii::app()->request->getIsPostRequest()) {
 			$values = Yii::app()->request->getPost('PlotExt',[]);
 			$house->attributes = $values;
+			if(strpos($house->open_time,'-')) {
+				$house->open_time = strtotime($house->open_time);
+			}
+			if(strpos($house->delivery_time,'-')) {
+				$house->delivery_time = strtotime($house->delivery_time);
+			}
 			if($house->save()) {
 				$this->setMessage('保存成功','success');
 				$this->redirect('/admin/house/list');
@@ -486,4 +672,40 @@ class HouseController extends AdminController{
   }
   return $data;
 }
+
+	function request_by_curl($remote_server,$post_string,$upToken) {  
+
+		  $headers = array();
+		  $headers[] = 'Content-Type:image/png';
+		  $headers[] = 'Authorization:UpToken '.$upToken;
+		  $ch = curl_init();  
+		  curl_setopt($ch, CURLOPT_URL,$remote_server);  
+		  //curl_setopt($ch, CURLOPT_HEADER, 0);
+		  curl_setopt($ch, CURLOPT_HTTPHEADER ,$headers);
+		  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);  
+		  //curl_setopt($ch, CURLOPT_POST, 1);
+		  curl_setopt($ch, CURLOPT_POSTFIELDS, $post_string);
+		  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+		  curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+		  $data = curl_exec($ch);  
+		  curl_close($ch);  
+		  
+		  return $data;  
+	} 
+
+	/**
+     * [actionQnUpload 七牛图片上传]
+     * @return [type] [description]
+     */
+    public function createQnKey()
+    {
+        $auth = new Auth(Yii::app()->file->accessKey,Yii::app()->file->secretKey);
+        $policy = array(
+            'mimeLimit'=>'image/*',
+            'fsizeLimit'=>10000000,
+            'saveKey'=>Yii::app()->file->createQiniuKey(),
+        );
+        $token = $auth->uploadToken(Yii::app()->file->bucket,null,3600,$policy);
+        return $token;
+    }
 }
