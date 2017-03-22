@@ -25,7 +25,7 @@ class FileComponent extends CApplicationComponent
     /**
      * @var string 云存储属主空间(bucket)名
      */
-    public $bucket = 'weibaqiu';
+    public $bucket = 'ztspace';
     /**
      * @var int 授权凭证有效时间（单位：秒），默认300秒
      */
@@ -84,6 +84,7 @@ class FileComponent extends CApplicationComponent
         $auth = new Auth($this->accessKey, $this->secretKey);
         $bucketMgr = new BucketManager($auth);
         $r = $bucketMgr->fetch($url, $this->bucket, $key);
+        // var_dump($r);exit;
         if(!empty($r[0]['hash'])&&!empty($r[0]['key']))
             return $key;
         else

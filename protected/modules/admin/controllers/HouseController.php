@@ -1,4 +1,5 @@
 <?php
+use Qiniu\Storage\UploadManager;
 use Qiniu\Auth;
 /**
  * 楼盘控制器
@@ -317,7 +318,7 @@ class HouseController extends AdminController{
 		if(isset($jps[0][0]) && $jps = $jps[0][0]) {
 			$jps = str_replace('face = ', '', $jps);
 			$jps = trim($jps,"'");
-			$plot->image = $jps;
+			$plot->image = $this->sfImage($jps,$url);
 			// $jps = Yii::app()->file->fetch($jps);
 		}
 		// 城市
@@ -376,7 +377,7 @@ class HouseController extends AdminController{
 			}
 		}
 		// 抓取户型图
-		preg_match_all('/<a.+户型/', $result, $jxs);
+		preg_match_all('/<a.+padding:0 11px;">户型/', $result, $jxs);
 		if(isset($jxs[0][0]) && $jxs = $jxs[0][0]) {
 			
 			preg_match_all('/photo\/list.+htm/', $jxs, $urls);
@@ -385,7 +386,7 @@ class HouseController extends AdminController{
 				$hxurl = $urlar[0] . 'com/' . $urls;
 			}
 		}
-		
+		// var_dump($hxurl);exit;
 		if($plot->save()) {
 			if(isset($hxurl) && $hxurl)
 				$this->fetchHx($hxurl,$plot->id);
@@ -422,19 +423,7 @@ class HouseController extends AdminController{
 					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
 						$hximg = str_replace('src="', '', $urls);
 						$hximg = str_replace('220x150', '748x578', $hximg);
-						// var_dump(21);exit;
-						// header("content-type:image/jpg");
-						$opt=array("http"=>array("header"=>"Referer: " . $url)); 
-						$context=stream_context_create($opt); 
-						$file_contents = file_get_contents($hximg,false, $context);
-						$resss = $this->request_by_curl('http://upload.qiniu.com/putb64/-1',$file_contents,$this->createQnKey());
-						var_dump($resss);exit;
-						// $name = Yii::app()->theme->baseUrl.'/static/admin/images/'.str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
-						// var_dump(file_put_contents(Yii::app()->theme->baseUrl.'/static/admin/images/a.txt', '111'));exit;
-						// var_dump(file_put_contents($name, $file_contents));exit;
-						
-						file_put_contents($name, $file_contents);
-
+					    $hximg = $this->sfImage($hximg,$url);
 					} else continue;
 					preg_match_all('/title.+"/', $value, $urls);
 					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
@@ -707,5 +696,23 @@ class HouseController extends AdminController{
         );
         $token = $auth->uploadToken(Yii::app()->file->bucket,null,3600,$policy);
         return $token;
+    }
+
+    public function sfImage($img='',$refer = '')
+    {
+    	$opt=array("http"=>array("header"=>"Referer: " . $refer)); 
+		$context=stream_context_create($opt); 
+		$file_contents = file_get_contents($img,false, $context);
+		$name = str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
+
+		file_put_contents('/'.$name, $file_contents);
+		$fileName = Yii::app()->file->getFilePath().str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
+
+		$upManager = new UploadManager();
+	    list($ret, $error) = $upManager->putFile($this->createQnKey(),$fileName, '/'.$name);
+	    if(!$error)
+	    	return $ret['key'];
+	    else
+	    	return '';
     }
 }

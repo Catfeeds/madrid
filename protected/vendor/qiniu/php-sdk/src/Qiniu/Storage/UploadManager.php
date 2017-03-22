@@ -109,6 +109,7 @@ final class UploadManager
                 $checkCrc
             );
         }
+
         $up = new ResumeUploader(
             $upToken,
             $key,
@@ -118,12 +119,14 @@ final class UploadManager
             $mime,
             $this->config
         );
-        return $up->upload();
+        $ret = $up->upload();
+        fclose($file);
+        return $ret;
     }
 
     public static function trimParams($params)
     {
-        if ($params == null) {
+        if ($params === null) {
             return null;
         }
         $ret = array();
