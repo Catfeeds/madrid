@@ -5,7 +5,7 @@
 <div class="col-md-10">
 	<form action="" method="get">
 		<div class="row">
-			<label class="col-md-2">请输入楼盘主页网址：</label>
+			<label class="col-md-2">请输入楼盘详情页网址：</label>
 			<div class="col-md-8">
 				<textarea name="urls" id="" cols="80" rows="10"></textarea>
 				<span class="help-block">多个网址请用空格隔开</span>
