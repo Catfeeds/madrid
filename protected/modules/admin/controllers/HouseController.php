@@ -317,7 +317,7 @@ class HouseController extends AdminController{
 		if(isset($jps[0][0]) && $jps = $jps[0][0]) {
 			$jps = str_replace('face = ', '', $jps);
 			$jps = trim($jps,"'");
-			$plot->image = $this->sfImage($jps,$url);
+			$jps && $plot->image = $this->sfImage($jps,$url);
 			// $jps = Yii::app()->file->fetch($jps);
 		}
 		// 城市
