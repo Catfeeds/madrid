@@ -429,7 +429,7 @@ class HouseController extends AdminController{
 					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
 						$hximg = str_replace('src="', '', $urls);
 						$hximg = str_replace('220x150', '748x578', $hximg);
-					    $hximg = $this->sfImage($hximg,$url);
+					    $hximg && $hximg = $this->sfImage($hximg,$url);
 					} else continue;
 					preg_match_all('/title.+"/', $value, $urls);
 					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
