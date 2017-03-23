@@ -45,7 +45,7 @@ class HouseController extends AdminController{
 		preg_match_all('/<body>[.|\s|\S]+body>/', $totalHtml, $results);
 		// 去除script标签
 		$result = str_replace('script', '', $results[0][0]);
-
+		$result = $this->characet($result);
 		// 标题
 		preg_match_all('/<h1>[.|\s|\S]+h1>/', $result, $titleTag);
 		preg_match_all('/">.+<\/a><!--/', $titleTag[0][0], $titleTag2);
@@ -54,7 +54,6 @@ class HouseController extends AdminController{
 		$title = str_replace('</a><!--', '', $title);
 		// 编码装换
 		$title = $this->characet($title);
-		$result = $this->characet($result);
 		$plot->title = $title;
 		// 拼音
 		// $plot->pinyin = $this->Pinyin($title,1);
@@ -655,8 +654,10 @@ class HouseController extends AdminController{
 
 		$upManager = new UploadManager();
 	    list($ret, $error) = $upManager->putFile($this->createQnKey(),$fileName, $path.$name);
-	    if(!$error)
+	    if(!$error){
+	    	unlink($path.$name);
 	    	return $ret['key'];
+	    }
 	    else
 	    	return '';
     }
