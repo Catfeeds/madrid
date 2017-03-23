@@ -644,7 +644,12 @@ class HouseController extends AdminController{
     {
     	$opt=array("http"=>array("header"=>"Referer: " . $refer)); 
 		$context=stream_context_create($opt); 
-		$file_contents = file_get_contents($img,false, $context);
+		try{
+			$file_contents = file_get_contents($img,false, $context);
+		} catch(Exception $e){
+			echo $img;exit;
+		}
+		
 		$name = str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
 		$path = '/mnt/sfimages\/';
 		if (! file_exists ( $path )) 
