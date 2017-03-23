@@ -98,7 +98,7 @@ class AdminController extends Controller
     {
         return array(
             array('label' => '楼盘导入', 'url' => array('/admin/house/import'), 'active' => $this->route == 'admin/house/import'),
-            array('label' => '楼盘列表', 'url' => array('/admin/house/list'), 'active' => $this->route == 'admin/house/list'||$this->route == 'admin/house/edit'),
+            array('label' => '楼盘列表', 'url' => array('/admin/house/list'), 'active' => $this->route == 'admin/house/list'||$this->route == 'admin/house/edit'||$this->route == 'admin/house/hxlist'||$this->route == 'admin/house/imagelist'),
         );
     }
 

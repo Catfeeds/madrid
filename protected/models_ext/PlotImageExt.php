@@ -55,7 +55,7 @@ class PlotImageExt extends PlotImage{
         $alias = $this->getTableAlias();
         return array(
             'undeleted' => array(
-                'status' => $alias.'deleted=0',
+                'condition' => $alias.'.'.'deleted=0',
             )
         );
     }

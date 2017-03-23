@@ -7,6 +7,7 @@
  * @property integer $id
  * @property string $title
  * @property string $url
+ * @property integer $hid
  * @property string $type
  * @property string $content
  * @property integer $deleted
@@ -32,13 +33,13 @@ class PlotImage extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('created', 'required'),
-			array('deleted, created, updated', 'numerical', 'integerOnly'=>true),
+			array('hid, deleted, created, updated', 'numerical', 'integerOnly'=>true),
 			array('title, url', 'length', 'max'=>255),
 			array('type', 'length', 'max'=>100),
 			array('content', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, url, type, content, deleted, created, updated', 'safe', 'on'=>'search'),
+			array('id, title, url, hid, type, content, deleted, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,6 +63,7 @@ class PlotImage extends CActiveRecord
 			'id' => 'ID',
 			'title' => 'Title',
 			'url' => 'Url',
+			'hid' => 'Hid',
 			'type' => '图片分类',
 			'content' => 'Content',
 			'deleted' => 'Deleted',
@@ -91,6 +93,7 @@ class PlotImage extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('url',$this->url,true);
+		$criteria->compare('hid',$this->hid);
 		$criteria->compare('type',$this->type,true);
 		$criteria->compare('content',$this->content,true);
 		$criteria->compare('deleted',$this->deleted);
