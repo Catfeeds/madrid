@@ -647,12 +647,14 @@ class HouseController extends AdminController{
 		$context=stream_context_create($opt); 
 		$file_contents = file_get_contents($img,false, $context);
 		$name = str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
-
-		file_put_contents('/'.$name, $file_contents);
+		$path = '/sfimages\/';
+		if (! file_exists ( $path )) 
+        	mkdir ( "$path", 0777, true );
+		file_put_contents($path.$name, $file_contents);
 		$fileName = Yii::app()->file->getFilePath().str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
 
 		$upManager = new UploadManager();
-	    list($ret, $error) = $upManager->putFile($this->createQnKey(),$fileName, '/'.$name);
+	    list($ret, $error) = $upManager->putFile($this->createQnKey(),$fileName, $path.$name);
 	    if(!$error)
 	    	return $ret['key'];
 	    else
