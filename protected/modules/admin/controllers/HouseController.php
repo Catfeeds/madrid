@@ -646,7 +646,7 @@ class HouseController extends AdminController{
 		$context=stream_context_create($opt); 
 		$file_contents = file_get_contents($img,false, $context);
 		$name = str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
-		$path = '/sfimages\/';
+		$path = '/mnt/sfimages\/';
 		if (! file_exists ( $path )) 
         	mkdir ( "$path", 0777, true );
 		file_put_contents($path.$name, $file_contents);
