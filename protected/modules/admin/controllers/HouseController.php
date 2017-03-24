@@ -640,16 +640,18 @@ class HouseController extends AdminController{
 	public function actionDealimage($hid='')
 	{
 		$value = PlotExt::model()->findByPk($hid);
+		$hxs = $value->hxs;
+		$imgs = $value->images;
 		if($value->image && !strstr($value->image,'http')) {
 			$this->setMessage('已处理','success');
 			$this->redirect('/admin/house/list');
-		}elseif($hxs = $value->hxs){
+		}elseif($hxs){
 			if(!strstr($hxs[0]['image'],'http')) {
 				$this->setMessage('已处理','success');
 				$this->redirect('/admin/house/list');
 			}
 				
-		}elseif($imgs = $value->images){
+		}elseif($imgs){
 			if(!strstr($imgs[0]['url'],'http')) {
 				$this->setMessage('已处理','success');
 				$this->redirect('/admin/house/list');
