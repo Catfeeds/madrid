@@ -660,7 +660,13 @@ class HouseController extends AdminController{
 		$fileName = Yii::app()->file->getFilePath().str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
 
 		$upManager = new UploadManager();
-	    list($ret, $error) = $upManager->putFile($this->createQnKey(),$fileName, $path.$name);
+		try{
+			list($ret, $error) = $upManager->putFile($this->createQnKey(),$fileName, $path.$name);
+		} catch(Exception $e) {
+			echo $e->getMessage();
+			return '';
+		}
+	    
 	    if(!$error){
 	    	unlink($path.$name);
 	    	return $ret['key'];
