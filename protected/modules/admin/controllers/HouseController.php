@@ -442,6 +442,14 @@ class HouseController extends AdminController{
 					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
 						$hxbed = str_replace('室', '', $urls);
 					} else continue;
+					preg_match_all('/[0-9]+厅/', $value, $urls);
+					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
+						$hxlive = str_replace('厅', '', $urls);
+					}
+					preg_match_all('/[0-9]+卫/', $value, $urls);
+					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
+						$hxbath = str_replace('卫', '', $urls);
+					}
 					preg_match_all('/fr.+/', $value, $urls);
 					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
 						preg_match_all('/[0-9]+/', $urls, $sizss);
@@ -454,6 +462,8 @@ class HouseController extends AdminController{
 						$hx->image = $hximg;
 						$hx->title = $hxtitle;
 						$hx->bedroom = $hxbed;
+						isset($hxlive) && $hx->livingroom = $hxlive;
+						isset($hxbath) && $hx->bathroom = $hxbath;
 						$hx->hid = $hid;
 						isset($hxsize) && $hx->size = $hxsize;
 						$hx->save();

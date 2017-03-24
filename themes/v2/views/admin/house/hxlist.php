@@ -9,7 +9,7 @@
             <th class="text-center">id</th>
             <th class="text-center">标题</th>
             <th class="text-center">图片</th>
-            <th class="text-center">几室</th>
+            <th class="text-center">室/厅/卫</th>
             <!-- <th class="text-center">状态</th> -->
             <th class="text-center">面积</th>
         </tr>
@@ -20,7 +20,7 @@
             <td  class="text-center"><?php echo $v->id ?></td>
             <td  class="text-center"><?php echo $v->title ?></td>
             <td  class="text-center"><?=$v->image?></td>
-            <td class="text-center"><?php echo $v->bedroom ?></td>
+            <td class="text-center"><?php echo $v->bedroom.'/'.$v->livingroom.'/'.$v->bathroom ?></td>
             <td class="text-center"><?php echo $v->size; ?></td>
         </tr>
     <?php endforeach; ?>
