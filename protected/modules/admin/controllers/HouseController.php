@@ -318,7 +318,6 @@ class HouseController extends AdminController{
 			$jps = str_replace('face = ', '', $jps);
 			$jps = trim($jps,"'");
 			$jps && $plot->image = $this->sfImage($jps,$url);
-			// $jps = Yii::app()->file->fetch($jps);
 		}
 		// 城市
 		preg_match_all('/vcity.+/', $result, $jps);
@@ -496,7 +495,8 @@ class HouseController extends AdminController{
 						$image->type = $typeArr[$typeid];
 						isset($value['url'])&&$image->url = $this->sfImage($value['url'],$getUrl);
 						$image->hid = $hid;
-						$image->save();
+						if($image->url)
+							$image->save();
 					}
 				}
 			}
@@ -647,7 +647,8 @@ class HouseController extends AdminController{
 		try{
 			$file_contents = file_get_contents($img,false, $context);
 		} catch(Exception $e){
-			echo $img;exit;
+			echo $e->getMessage();
+			return '';
 		}
 		
 		$name = str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
