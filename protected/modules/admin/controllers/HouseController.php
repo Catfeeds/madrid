@@ -484,11 +484,11 @@ class HouseController extends AdminController{
 		if(!$url || !$code)
 			return true;
 		$typeArr = [
-			'903'=>'实景图',
+			// '903'=>'实景图',
 			'904'=>'效果图',
-			'901'=>'交通图',
-			'907'=>'配套图',
-			'905'=>'样板间',
+			// '901'=>'交通图',
+			// '907'=>'配套图',
+			// '905'=>'样板间',
 		];
 		foreach (array_keys($typeArr) as $typeid) {
 			foreach ([1] as $page) {
