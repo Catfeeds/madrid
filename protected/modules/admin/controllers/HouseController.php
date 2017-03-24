@@ -491,7 +491,7 @@ class HouseController extends AdminController{
 			// '905'=>'样板间',
 		];
 		foreach (array_keys($typeArr) as $typeid) {
-			foreach ([1] as $page) {
+			foreach ([1,2] as $page) {
 				// var_dump($url."?newcode=$code&type=$typeid&nextpage=$page");exit;
 				$getUrl = $url."?newcode=$code&type=$typeid&nextpage=$page";
 				$res = HttpHelper::get($getUrl);
