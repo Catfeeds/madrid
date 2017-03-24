@@ -17,7 +17,7 @@ class PlotExt extends Plot{
         'map_lng'=>'',
         'map_lat'=>'',
         'map_zoom'=>'',
-        'image'=>'',
+        // 'image'=>'',
         'price'=>'',
         'buildsize'=>'',
         'size'=>'',
@@ -85,7 +85,8 @@ class PlotExt extends Plot{
     public function relations()
     {
         return array(
-            // 'baike'=>array(self::BELONGS_TO, 'BaikeExt', 'bid'),
+            'hxs'=>array(self::HAS_MANY, 'PlotHxExt', 'hid'),
+            'images'=>array(self::HAS_MANY, 'PlotImageExt', 'hid'),
         );
     }
 

@@ -8,6 +8,7 @@
  * @property string $title
  * @property string $area
  * @property string $street
+ * @property string $image
  * @property string $data_conf
  * @property integer $deleted
  * @property integer $created
@@ -33,11 +34,11 @@ class Plot extends CActiveRecord
 		return array(
 			array('created', 'required'),
 			array('deleted, created, updated', 'numerical', 'integerOnly'=>true),
-			array('title, area, street', 'length', 'max'=>255),
+			array('title, area, street, image', 'length', 'max'=>255),
 			array('data_conf', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, area, street, data_conf, deleted, created, updated', 'safe', 'on'=>'search'),
+			array('id, title, area, street, image, data_conf, deleted, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,6 +63,7 @@ class Plot extends CActiveRecord
 			'title' => 'Title',
 			'area' => 'Area',
 			'street' => 'Street',
+			'image' => 'Image',
 			'data_conf' => 'Data Conf',
 			'deleted' => 'Deleted',
 			'created' => 'Created',
@@ -91,6 +93,7 @@ class Plot extends CActiveRecord
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('area',$this->area,true);
 		$criteria->compare('street',$this->street,true);
+		$criteria->compare('image',$this->image,true);
 		$criteria->compare('data_conf',$this->data_conf,true);
 		$criteria->compare('deleted',$this->deleted);
 		$criteria->compare('created',$this->created);

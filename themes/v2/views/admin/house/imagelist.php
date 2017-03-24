@@ -19,7 +19,7 @@
         <tr>
             <td  class="text-center"><?php echo $v->id ?></td>
             <td  class="text-center"><?php echo $v->title ?></td>
-            <td  class="text-center"><?=$v->image?></td>
+            <td  class="text-center"><?=strstr($v->url,'http')?$v->url:('<img width="200px" height="180px" src="'.ImageTools::fixImage($v->url).'">')?></td>
             <td class="text-center"><?php echo $v->type ?></td>
         </tr>
     <?php endforeach; ?>

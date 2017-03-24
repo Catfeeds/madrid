@@ -32,6 +32,7 @@
             <td class="text-center"><?php echo $v->area.'-'.$v->street; ?></td>
             <td class="text-center"><?php echo date('Y-m-d',$v->created); ?></td>
             <td  class="text-center">
+                <a href="<?=$this->createUrl('dealimage',['hid'=>$v->id])?>" class="btn btn-xs default">处理图片</a>
                 <a href="<?=$this->createUrl('imagelist',['hid'=>$v->id])?>" class="btn btn-xs red">相册</a>
             	<a href="<?=$this->createUrl('hxlist',['hid'=>$v->id])?>" class="btn btn-xs yellow">户型</a>
                 <a href="<?php echo $this->createUrl('edit',array('id'=>$v->id,'referrer'=>Yii::app()->request->url)) ?>" class="btn default btn-xs green"><i class="fa fa-edit"></i> 编辑 </a>

@@ -19,7 +19,7 @@
         <tr>
             <td  class="text-center"><?php echo $v->id ?></td>
             <td  class="text-center"><?php echo $v->title ?></td>
-            <td  class="text-center"><?=$v->image?></td>
+            <td  class="text-center"><?=strstr($v->image,'http')?$v->image:('<img width="200px" height="180px" src="'.ImageTools::fixImage($v->image).'">')?></td>
             <td class="text-center"><?php echo $v->bedroom.'/'.$v->livingroom.'/'.$v->bathroom ?></td>
             <td class="text-center"><?php echo $v->size; ?></td>
         </tr>

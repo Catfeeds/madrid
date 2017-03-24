@@ -491,7 +491,7 @@ class HouseController extends AdminController{
 			'905'=>'样板间',
 		];
 		foreach (array_keys($typeArr) as $typeid) {
-			foreach ([1,2] as $page) {
+			foreach ([1] as $page) {
 				// var_dump($url."?newcode=$code&type=$typeid&nextpage=$page");exit;
 				$getUrl = $url."?newcode=$code&type=$typeid&nextpage=$page";
 				$res = HttpHelper::get($getUrl);
@@ -635,6 +635,43 @@ class HouseController extends AdminController{
 		    }
 		}
 		return $data;
+	}
+
+	public function actionDealimage($hid='')
+	{
+		$value = PlotExt::model()->findByPk($hid);
+		if($value->image && !strstr($value->image,'http')) {
+			$this->setMessage('已处理','success');
+			$this->redirect('/admin/house/list');
+		}elseif($hxs = $value->hxs){
+			if(!strstr($hxs[0]['image'],'http')) {
+				$this->setMessage('已处理','success');
+				$this->redirect('/admin/house/list');
+			}
+				
+		}elseif($imgs = $value->images){
+			if(!strstr($imgs[0]['url'],'http')) {
+				$this->setMessage('已处理','success');
+				$this->redirect('/admin/house/list');
+			}
+				
+		}
+		$value->image = $this->sfimage($value->image,$value->image);
+        $value->save();
+        if($hxs){
+            foreach ($hxs as $hx) {
+                $hx->image = $this->sfimage($hx->image,$hx->image);
+                $hx->save();
+            }
+        }
+        if($imgs){
+            foreach ($imgs as $img) {
+                $img->url = $this->sfimage($img->url,$img->url);
+                $img->save();
+            }
+        }
+        $this->setMessage('处理完毕','success');
+        $this->redirect('/admin/house/list');
 	}
 
 	/**
