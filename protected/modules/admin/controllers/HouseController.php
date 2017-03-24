@@ -317,7 +317,7 @@ class HouseController extends AdminController{
 		if(isset($jps[0][0]) && $jps = $jps[0][0]) {
 			$jps = str_replace('face = ', '', $jps);
 			$jps = trim($jps,"'");
-			$jps = $this->sfImage($jps,$url);
+			// $jps = $this->sfImage($jps,$url);
 			$jps && $plot->image = $jps;
 		}
 		// 城市
@@ -429,7 +429,8 @@ class HouseController extends AdminController{
 					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
 						$hximg = str_replace('src="', '', $urls);
 						$hximg = str_replace('220x150', '748x578', $hximg);
-					    $hximg && $hximg = $this->sfImage($hximg,$url);
+
+					    // $hximg && $hximg = $this->sfImage($hximg,$url);
 					} else continue;
 					preg_match_all('/title.+"/', $value, $urls);
 					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
@@ -494,7 +495,8 @@ class HouseController extends AdminController{
 						$image = new PlotImageExt();
 						isset($value['title'])&&$image->title = $value['title'];
 						$image->type = $typeArr[$typeid];
-						isset($value['url'])&&$image->url = $this->sfImage($value['url'],$getUrl);
+						isset($value['url'])&&$image->url = $value['url'];
+						// isset($value['url'])&&$image->url = $this->sfImage($value['url'],$getUrl);
 						$image->hid = $hid;
 						if($image->url)
 							$image->save();
