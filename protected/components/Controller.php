@@ -1,4 +1,6 @@
 <?php
+use Qiniu\Storage\UploadManager;
+use Qiniu\Auth;
 /**
  * @author wibaqiu
  * @date 2015-09-07
@@ -224,6 +226,91 @@ class Controller extends CController
 	{
 		$arr = ['msg'=>'','status'=>'success','data'=>[]];
 		return $arr;
+	}
+
+		/**
+     * [actionQnUpload 七牛图片上传]
+     * @return [type] [description]
+     */
+    public function createQnKey()
+    {
+        $auth = new Auth(Yii::app()->file->accessKey,Yii::app()->file->secretKey);
+        $policy = array(
+            'mimeLimit'=>'image/*',
+            'fsizeLimit'=>10000000,
+            'saveKey'=>Yii::app()->file->createQiniuKey(),
+        );
+        $token = $auth->uploadToken(Yii::app()->file->bucket,null,3600,$policy);
+        return $token;
+    }
+
+    public function sfImage($img='',$refer = '')
+    {
+    	$opt=array("http"=>array("header"=>"Referer: " . $refer,"timeout"=>3)); 
+		$context=stream_context_create($opt);
+	    set_error_handler(  
+	        create_function(  
+	            '$severity, $message, $file, $line',  
+	            'throw new ErrorException($message, $severity, $severity, $file, $line);'  
+	        )  
+	    );  
+	      
+	    try {  
+	        $file_contents = file_get_contents($img,false, $context);
+	    }  
+	    catch (Exception $e) {  
+	        echo $e->getMessage();  
+	    }  
+  
+    	restore_error_handler(); 
+		// try{
+		// 	$file_contents = file_get_contents($img,false, $context);
+		// } catch(Exception $e){
+		// 	echo $e->getMessage();
+		// 	return '';
+		// }
+		if(!isset($file_contents)||!$file_contents) {
+			return;
+		}
+		$name = str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
+		$path = '/mnt/sfimages\/';
+		if (! file_exists ( $path )) 
+        	mkdir ( "$path", 0777, true );
+		file_put_contents($path.$name, $file_contents);
+		$fileName = Yii::app()->file->getFilePath().str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
+
+		$upManager = new UploadManager();
+		try{
+			list($ret, $error) = $upManager->putFile($this->createQnKey(),$fileName, $path.$name);
+		} catch(Exception $e) {
+			echo $e->getMessage();
+			return '';
+		}
+	    
+	    if(!$error){
+	    	unlink($path.$name);
+	    	return $ret['key'];
+	    }
+	    else
+	    	return '';
+    }
+
+    function unicode_decode($name){
+	    $json = '{"str":"'.$name.'"}';
+	    $arr = json_decode($json,true);
+	    if(empty($arr)) return '';
+	    return $arr['str'];
+	}
+
+	  	function characet($data)
+  	{
+	  	if( !empty($data) ){
+		    $fileType = mb_detect_encoding($data , array('UTF-8','GBK','LATIN1','BIG5')) ;
+		    if( $fileType != 'UTF-8'){
+		      $data = mb_convert_encoding($data ,'utf-8' , $fileType);
+		    }
+		}
+		return $data;
 	}
 
 }

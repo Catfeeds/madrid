@@ -9,6 +9,9 @@
  * @property string $area
  * @property string $street
  * @property string $image
+ * @property string $transit
+ * @property string $peripheral
+ * @property string $content
  * @property string $data_conf
  * @property integer $deleted
  * @property integer $created
@@ -32,13 +35,13 @@ class Plot extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('created', 'required'),
+			array('peripheral, content, created', 'required'),
 			array('deleted, created, updated', 'numerical', 'integerOnly'=>true),
 			array('title, area, street, image', 'length', 'max'=>255),
-			array('data_conf', 'safe'),
+			array('transit, data_conf', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, area, street, image, data_conf, deleted, created, updated', 'safe', 'on'=>'search'),
+			array('id, title, area, street, image, transit, peripheral, content, data_conf, deleted, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +67,9 @@ class Plot extends CActiveRecord
 			'area' => 'Area',
 			'street' => 'Street',
 			'image' => 'Image',
+			'transit' => 'Transit',
+			'peripheral' => 'Peripheral',
+			'content' => 'Content',
 			'data_conf' => 'Data Conf',
 			'deleted' => 'Deleted',
 			'created' => 'Created',
@@ -94,6 +100,9 @@ class Plot extends CActiveRecord
 		$criteria->compare('area',$this->area,true);
 		$criteria->compare('street',$this->street,true);
 		$criteria->compare('image',$this->image,true);
+		$criteria->compare('transit',$this->transit,true);
+		$criteria->compare('peripheral',$this->peripheral,true);
+		$criteria->compare('content',$this->content,true);
 		$criteria->compare('data_conf',$this->data_conf,true);
 		$criteria->compare('deleted',$this->deleted);
 		$criteria->compare('created',$this->created);

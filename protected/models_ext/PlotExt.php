@@ -26,9 +26,9 @@ class PlotExt extends Plot{
         'manage_fee'=>'',
         'manage_company'=>'',
         'developer'=>'',
-        'transit'=>'',
-        'content'=>'',
-        'peripheral'=>'',
+        // 'transit'=>'',
+        // 'content'=>'',
+        // 'peripheral'=>'',
         'wylx'=>'',
         'jzlb'=>'',
         'xmts'=>'',
@@ -109,6 +109,26 @@ class PlotExt extends Plot{
         else
             $this->updated = time();
         return parent::beforeValidate();
+    }
+
+    public function afterSave()
+    {
+        parent::afterSave();
+        if($this->deleted==1) {
+            if($hxs = $this->hxs) {
+                foreach ($hxs as $key => $value) {
+                    $value->deleted = 1;
+                    $value->save();
+                }
+            }
+            if($images = $this->images) {
+                foreach ($images as $key => $value) {
+                    $value->deleted = 1;
+                    $value->save();
+                }
+            }
+        }
+            
     }
 
     /**

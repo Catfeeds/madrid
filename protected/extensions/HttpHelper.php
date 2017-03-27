@@ -56,6 +56,7 @@ class HttpHelper {
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 			curl_setopt($ch, CURLOPT_SSLVERSION, 3);
+			 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
 			curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.122 Safari/537.36');
 			if (!empty($extra) && is_array($extra))
 			{
@@ -255,17 +256,17 @@ class HttpHelper {
 
 	public static function post($url, $data, $headers = array()) {
 		$multipart = false;
-		if($data)
-		{
-			foreach($data as $item)
-			{
-				if(substr($item,0,1)=='@')
-				{
-					$multipart=true;
-					break;
-				}
-			}
-		}
+		// if($data)
+		// {
+		// 	foreach($data as $item)
+		// 	{
+		// 		if(substr($item,0,1)=='@')
+		// 		{
+		// 			$multipart=true;
+		// 			break;
+		// 		}
+		// 	}
+		// }
 		return self::request($url, $data, $headers);
 	}
 

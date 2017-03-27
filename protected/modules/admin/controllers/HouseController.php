@@ -1,6 +1,4 @@
 <?php
-use Qiniu\Storage\UploadManager;
-use Qiniu\Auth;
 /**
  * 楼盘控制器
  * @author tivon <[<email address>]>
@@ -270,6 +268,10 @@ class HouseController extends AdminController{
 				if(isset($ars[0][0])) {
 					$ars = trim($ars[0][0],'<p>');
 					$ars = trim($ars,'</p>');
+					$ars = str_replace('\n', '', $ars);
+					$ars = str_replace('\r', '', $ars);
+					$ars = str_replace('\t', '', $ars);
+					$ars = strip_tags($ars);
 					// var_dump($ars);exit;
 					$plot->transit = trim($ars);
 				}
@@ -317,7 +319,7 @@ class HouseController extends AdminController{
 		if(isset($jps[0][0]) && $jps = $jps[0][0]) {
 			$jps = str_replace('face = ', '', $jps);
 			$jps = trim($jps,"'");
-			// $jps = $this->sfImage($jps,$url);
+			$jps = $this->sfImage($jps,$url);
 			$jps && $plot->image = $jps;
 		}
 		// 城市
@@ -457,6 +459,13 @@ class HouseController extends AdminController{
 							$hxsize = $sizss;
 						}
 					} else continue;
+					preg_match_all('/biaoqian.+/', $value, $urls);
+					if(isset($urls[0][0]) && $urls = $urls[0][0]) {
+						preg_match_all('/[\x{4e00}-\x{9fa5}]+/u', $urls, $sizss);
+						if(isset($sizss[0][0]) && $sizss = $sizss[0][0]) {
+							$hxstatus = $sizss;
+						}
+					} 
 					if(isset($hximg) && isset($hxtitle) && isset($hxbed)){
 						$hx = new PlotHxExt;
 						$hx->image = $hximg;
@@ -466,6 +475,7 @@ class HouseController extends AdminController{
 						isset($hxbath) && $hx->bathroom = $hxbath;
 						$hx->hid = $hid;
 						isset($hxsize) && $hx->size = $hxsize;
+						isset($hxstatus) && $hx->sale_status = $hxstatus;
 						$hx->save();
 					}
 
@@ -615,37 +625,12 @@ class HouseController extends AdminController{
 		$this->render('edit',['house'=>$house]);
 	}
 
-	/**
-	 * [actionExport 导出固定格式接口]
-	 * @param  string $value [description]
-	 * @return [type]        [description]
-	 */
-	public function actionExport($page='')
-	{
-		// is_new=>1 status=>1 is_coop=>1
-		# code...
-	}
-
-  	function characet($data)
-  	{
-	  	if( !empty($data) ){
-		    $fileType = mb_detect_encoding($data , array('UTF-8','GBK','LATIN1','BIG5')) ;
-		    if( $fileType != 'UTF-8'){
-		      $data = mb_convert_encoding($data ,'utf-8' , $fileType);
-		    }
-		}
-		return $data;
-	}
-
 	public function actionDealimage($hid='')
 	{
 		$value = PlotExt::model()->findByPk($hid);
 		$hxs = $value->hxs;
 		$imgs = $value->images;
-		if($value->image && !strstr($value->image,'http')) {
-			$this->setMessage('已处理','success');
-			$this->redirect('/admin/house/list');
-		}elseif($hxs){
+		if($hxs){
 			if(!strstr($hxs[0]['image'],'http')) {
 				$this->setMessage('已处理','success');
 				$this->redirect('/admin/house/list');
@@ -658,8 +643,8 @@ class HouseController extends AdminController{
 			}
 				
 		}
-		$value->image = $this->sfimage($value->image,$value->image);
-        $value->save();
+		// $value->image = $this->sfimage($value->image,$value->image);
+  //       $value->save();
         if($hxs){
             foreach ($hxs as $hx) {
                 $hx->image = $this->sfimage($hx->image,$hx->image);
@@ -676,53 +661,119 @@ class HouseController extends AdminController{
         $this->redirect('/admin/house/list');
 	}
 
-	/**
-     * [actionQnUpload 七牛图片上传]
-     * @return [type] [description]
-     */
-    public function createQnKey()
-    {
-        $auth = new Auth(Yii::app()->file->accessKey,Yii::app()->file->secretKey);
-        $policy = array(
-            'mimeLimit'=>'image/*',
-            'fsizeLimit'=>10000000,
-            'saveKey'=>Yii::app()->file->createQiniuKey(),
-        );
-        $token = $auth->uploadToken(Yii::app()->file->bucket,null,3600,$policy);
-        return $token;
-    }
+	public function actionTohj($hid='')
+	{
+		$token = '000d811b3d06f933d9316b04359d0f1e';
+		$value = PlotExt::model()->findByPk($hid);
+		$value = $value->attributes;
+        $data_conf = json_decode($value['data_conf'],true);
+        // va
+        unset($value['data_conf']);
+        unset($value['deleted']);
+        unset($value['created']);
+        unset($value['updated']);
+        // $tmp = array_merge($value,$data_conf);
+        // var_dump($tmp);exit;
+        foreach (array_merge($value,$data_conf) as $k => $v) {
+            if($k!='transit'&&$k!='peripheral'&&$k!='content')
+                $tmp[$k] = $this->unicode_decode($v); 
+            else
+                $tmp[$k] = str_replace(['\n','\t','\r'], '', $v);
+        }
+        $tmp['is_new'] = $tmp['status'] = $tmp['is_coop'] = 1;
 
-    public function sfImage($img='',$refer = '')
-    {
-    	$opt=array("http"=>array("header"=>"Referer: " . $refer)); 
-		$context=stream_context_create($opt); 
-		try{
-			$file_contents = file_get_contents($img,false, $context);
-		} catch(Exception $e){
-			echo $e->getMessage();
-			return '';
-		}
-		
-		$name = str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
-		$path = '/mnt/sfimages\/';
-		if (! file_exists ( $path )) 
-        	mkdir ( "$path", 0777, true );
-		file_put_contents($path.$name, $file_contents);
-		$fileName = Yii::app()->file->getFilePath().str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
+        // $areas = Yii::app()->params['area'];
+        $jzlbs = Yii::app()->params['jzlb'];
+        $zxzts = Yii::app()->params['zxzt'];
+        $xmtss = Yii::app()->params['xmts'];
+        $wylxs = Yii::app()->params['wylx'];
+        $xszts = Yii::app()->params['xszt'];
+        // foreach ($areas as $k => $v) {
+        //     if(strstr($value['area'],$k))
+        //         $tmp['area'] = $v;
+        //     if(strstr($value['street'],$k))
+        //         $tmp['street'] = $v;
+        // }
+        foreach ($jzlbs as $k => $v) {
+            if(isset($tmp['jzlb'])&&strstr($tmp['jzlb'],$k))
+                $tmp_jzlb[] = $v;
+        }
+        foreach ($zxzts as $k => $v) {
+            if(isset($tmp['zxzt'])&&strstr($tmp['zxzt'],$k))
+                $tmp_zxzt[] = $v;
+        }
+        foreach ($xmtss as $k => $v) {
+            if(isset($tmp['xmts'])&&strstr($tmp['xmts'],$k))
+                $tmp_xmts[] = $v;
+        }
+        foreach ($wylxs as $k => $v) {
+            if(isset($tmp['wylx'])&&strstr($tmp['wylx'],$k))
+                $tmp_wylx[] = $v;
+        }
+        foreach ($xszts as $k => $v) {
+            if(isset($tmp['xszt'])&&strstr($tmp['xszt'],$k))
+                $tmp['xszt'] = $v;
+        }
+        if(strstr($tmp['image'],'http')){
+            $tmp['image'] = $this->sfImage($tmp['image'],$tmp['image']);
+        }
+        $tmp['image'] && $tmp['image'] = ImageTools::fixImage($tmp['image']).'?imageMogr2/auto-orient/gravity/NorthWest/crop/!800x500-10-10/blur/1x0/quality/75';
+        // if(!is_numeric($tmp['area']))
+        //     continue;
+        if(!isset($tmp_jzlb))
+            $tmp['jzlb'] = [];
+        else
+            $tmp['jzlb'] = $tmp_jzlb;
+        if(!isset($tmp_zxzt))
+            $tmp['zxzt'] = [];
+        else
+            $tmp['zxzt'] = $tmp_zxzt;
+        if(!isset($tmp_xmts))
+            $tmp['xmts'] = [];
+        else
+            $tmp['xmts'] = $tmp_xmts;
+        if(!isset($tmp_wylx))
+            $tmp['wylx'] = [];
+        else
+            $tmp['wylx'] = $tmp_wylx;
+        if(!isset($tmp_xszt))
+            $tmp['sale_status'] = 2;
+        else
+            $tmp['sale_status'] = $tmp_xszt;
+        unset($tmp_jzlb);
+        unset($tmp_zxzt);
+        unset($tmp_xmts);
+        unset($tmp_wylx);
+        unset($tmp_xszt);
 
-		$upManager = new UploadManager();
-		try{
-			list($ret, $error) = $upManager->putFile($this->createQnKey(),$fileName, $path.$name);
-		} catch(Exception $e) {
-			echo $e->getMessage();
-			return '';
-		}
-	    
-	    if(!$error){
-	    	unlink($path.$name);
-	    	return $ret['key'];
-	    }
-	    else
-	    	return '';
-    }
+        if($tmp['price']) {
+            if(strstr($tmp['price'],'套')){
+                $tmp['unit'] = 2;
+            } else {
+                $tmp['unit'] = 1;
+            }
+            preg_match_all('/[0-9|.]+/', $tmp['price'], $pricefs);
+            if(isset($pricefs[0][0]) && $tmp['price'] = intval($pricefs[0][0])) ;
+        }
+        $tmp['token'] = $token;
+        foreach ($tmp as $k => $v) {
+        	if(is_array($v)) {
+        		foreach ($v as $t => $m) {
+        			$tmp[$k."[$t]"] = $m;
+        		}
+        		unset($tmp[$k]);
+        	}
+        }
+        $tmp['area'] = trim($value['area']);
+        $tmp['street'] = trim($value['street']);
+        $res = HttpHelper::post('http://house.shangxiaban.cn/rest/importOnePlot',$tmp);
+        // var_dump($res['content']);exit;
+        $res = json_decode($res['content'],true);
+        if(array_keys($res['data'])[0]=='error')
+        	$this->setMessage($res['data']['error'],'error');
+        else
+        	$this->setMessage('导入成功','success');
+	}
+
+
 }

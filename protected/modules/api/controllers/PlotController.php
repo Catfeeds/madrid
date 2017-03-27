@@ -4,230 +4,174 @@
  */
 class PlotController extends ApiController
 {
-
     /**
-     * 地图找房ajax请求
-     * 缩放到一定层级时统计几个行政区的相关楼盘数量
+     * [actionExport 导出固定格式接口]
+     * @param  string $value [description]
+     * @return [type]        [description]
      */
-    public function actionAjaxMapAreaInfo($wuye='',$price='',$tese='')
+    public function actionExport($page='',$type='')
     {
-        $data = array();
-        $xs = Yii::app()->search->house_plot;
-        $xs->setQuery('');
-        if($price)
-        {
-            $priceTag = PlotPricetagExt::getPriceTag();
-            foreach($priceTag as $k=>$v)
-            {
-                if($v->id == $price)
-                {
-                    $xs->addRange('price',intval($v->min>0?$v->min:0),intval($v->max>0?$v->max:0));
+        $pageOff = ($page-1)*100;
+        
+        
+        $data = [];
+
+        // is_new=>1 status=>1 is_coop=>1
+        if($type=='plot') {
+            $sql = "select m.* from plot m where m.deleted=0 order by m.id asc limit $pageOff,100";
+            $criteria = new CDbCriteria();
+            $criteria->order = 'id asc';
+            $count = PlotExt::model()->undeleted()->count($criteria);
+            if($page>($count/100)+1)
+                return false;
+            $houseInfo = Yii::app()->db->createCommand($sql)->queryAll();
+            foreach ($houseInfo as $key => $value) {
+                $data_conf = json_decode($value['data_conf'],true);
+                // va
+                unset($value['data_conf']);
+                unset($value['deleted']);
+                unset($value['created']);
+                unset($value['updated']);
+                // $tmp = array_merge($value,$data_conf);
+                // var_dump($tmp);exit;
+                foreach (array_merge($value,$data_conf) as $k => $v) {
+                    if($k!='transit'&&$k!='peripheral'&&$k!='content')
+                        $tmp[$k] = $this->unicode_decode($v); 
+                    else
+                        $tmp[$k] = str_replace(['\n','\t','\r'], '', $v);
                 }
-            }
-        }
-        if($wuye)
-            $xs->addQueryString('wylx:'.intval($wuye), XS_CMD_QUERY_OP_AND);
-        if($tese)
-            $xs->addQueryString('xmts:'.intval($tese), XS_CMD_QUERY_OP_AND);
-        $xs->addRange('status',1,1);
-        $xs->addRange('is_new',1,1);
-        $xs->setFacets('area', true)->search();
-        $nums = $xs->getFacets('area');
-        $areas = AreaExt::model()->normal()->findAll(array('index'=>'id'));
-        foreach($nums as $k=>$v)
-        {
-            if(!isset($areas[$k])) continue;
-            $data[] = array('name'=>$areas[$k]->name, 'lng'=>$areas[$k]->map_lng, 'lat'=>$areas[$k]->map_lat, 'num'=>$v,'id'=>$areas[$k]->id);
-        }
-        echo CJSON::encode($data);
-    }
 
-    /**
-     * 地图找房ajax请求
-     * 根据筛选条件获得指定经纬度内的楼盘信息
-     * @param  float $lng   地图中心点经度
-     * @param  float $lat   地图中心点纬度
-     * @param  integer $distance 西南-东北对角线的长度距离
-     * @param  string $wuye  物业类型标签id
-     * @param  string $jiage 价格标签id
-     * @param  string $tese 项目特色标签id
-     * @param  string $area 区域id
-     */
-    public function actionAjaxMapPlotInfo($lng, $lat, $distance, $wuye='',$price='',$tese='',$area='')
-    {
-        $mapArea = $this->getNearDistance( $lat, $lng, $distance / 2 );
+                $tmp['is_new'] = $tmp['status'] = $tmp['is_coop'] = 1;
 
-        $criteria = new CDbCriteria(array(
-            'limit' => 80
-        ));
-        $xs = Yii::app()->search->house_plot;
-        $xs->setQuery('');
-        if($price)
-        {
-            $priceTag = TagExt::model()->getTagByCate('xinfangjiage')->normal()->findAll();
-            foreach($priceTag as $k=>$v)
-            {
-                if($v->id == $price)
-                {
-                    $v->min = intval($v->min>0 ? $v->min : 1);
-                    $xs->addRange('unit' , 1, 1);
-                    $xs->addRange('price',
-                        intval($v->min),
-                        intval($v->max>0?$v->max:0)
-                    );
-                    if($v->min)
-                    {
-                        $criteria->addCondition('price>=:min');
-                        $criteria->params[':min'] = $v->min;
+                $areas = Yii::app()->params['area'];
+                $jzlbs = Yii::app()->params['jzlb'];
+                $zxzts = Yii::app()->params['zxzt'];
+                $xmtss = Yii::app()->params['xmts'];
+                $wylxs = Yii::app()->params['wylx'];
+                $xszts = Yii::app()->params['xszt'];
+                // foreach ($areas as $k => $v) {
+                //     if(strstr($value['area'],$k))
+                //         $tmp['area'] = $v;
+                //     if(strstr($value['street'],$k))
+                //         $tmp['street'] = $v;
+                // }
+                foreach ($jzlbs as $k => $v) {
+                    if(isset($tmp['jzlb'])&&strstr($tmp['jzlb'],$k))
+                        $tmp_jzlb[] = $v;
+                }
+                foreach ($zxzts as $k => $v) {
+                    if(isset($tmp['zxzt'])&&strstr($tmp['zxzt'],$k))
+                        $tmp_zxzt[] = $v;
+                }
+                foreach ($xmtss as $k => $v) {
+                    if(isset($tmp['xmts'])&&strstr($tmp['xmts'],$k))
+                        $tmp_xmts[] = $v;
+                }
+                foreach ($wylxs as $k => $v) {
+                    if(isset($tmp['wylx'])&&strstr($tmp['wylx'],$k))
+                        $tmp_wylx[] = $v;
+                }
+                foreach ($xszts as $k => $v) {
+                    if(isset($tmp['xszt'])&&strstr($tmp['xszt'],$k))
+                        $tmp['xszt'] = $v;
+                }
+                if(strstr($tmp['image'],'http')){
+                    $tmp['image'] = $this->sfImage($tmp['image'],$tmp['image']);
+                }
+                $tmp['image'] && $tmp['image'] = ImageTools::fixImage($tmp['image']).'?imageMogr2/auto-orient/gravity/NorthWest/crop/!800x500-10-10/blur/1x0/quality/75';
+                // if(!is_numeric($tmp['area']))
+                //     continue;
+                if(!isset($tmp_jzlb))
+                    $tmp['jzlb'] = [];
+                else
+                    $tmp['jzlb'] = $tmp_jzlb;
+                if(!isset($tmp_zxzt))
+                    $tmp['zxzt'] = [];
+                else
+                    $tmp['zxzt'] = $tmp_zxzt;
+                if(!isset($tmp_xmts))
+                    $tmp['xmts'] = [];
+                else
+                    $tmp['xmts'] = $tmp_xmts;
+                if(!isset($tmp_wylx))
+                    $tmp['wylx'] = [];
+                else
+                    $tmp['wylx'] = $tmp_wylx;
+                if(!isset($tmp_xszt))
+                    $tmp['sale_status'] = 2;
+                else
+                    $tmp['sale_status'] = $tmp_xszt;
+                unset($tmp_jzlb);
+                unset($tmp_zxzt);
+                unset($tmp_xmts);
+                unset($tmp_wylx);
+                unset($tmp_xszt);
+
+                if($tmp['price']) {
+                    if(strstr($tmp['price'],'套')){
+                        $tmp['unit'] = 2;
+                    } else {
+                        $tmp['unit'] = 1;
                     }
-                    if($v->max)
-                    {
-                        $criteria->addCondition('price<=:max');
-                        $criteria->params[':max'] = $v->max;
+                    preg_match_all('/[0-9|.]+/', $tmp['price'], $pricefs);
+                    if(isset($pricefs[0][0]) && $tmp['price'] = intval($pricefs[0][0])) ;
+                }
+
+                $data[] = $tmp;
+            }
+        } elseif($type=='hx') {
+            $sql = "select m.* from plot_hx m where m.deleted=0 and image!='' order by m.id asc limit $pageOff,100";
+            $criteria = new CDbCriteria();
+            $criteria->order = 'id asc';
+            $count = PlotHxExt::model()->undeleted()->count($criteria);
+            if($page>($count/100)+1)
+                return false;
+            $houseInfo = Yii::app()->db->createCommand($sql)->queryAll();
+            foreach ($houseInfo as $key => $value) {
+                
+                if(strstr($value['image'],'http')) {
+                    continue;
+                }
+                $tmp['image'] = ImageTools::fixImage($value['image']);
+                $tmp['bedroom'] = $value['bedroom'];
+                $tmp['livingroom'] = $value['livingroom'];
+                $tmp['bathroom'] = $value['bathroom'];
+                $tmp['size'] = $value['size'];
+                if($sat = $value['sale_status']) {
+                    if($sat == '在售') {
+                        $tmp['sale_status'] = 1;
+                    } elseif($sat == '售完') {
+                        $tmp['sale_status'] = 0;
+                    } elseif($sat == '待售') {
+                        $tmp['sale_status'] = 2;
                     }
                 }
+                $tmp['hid'] = $value['hid'];
+
+                $tmp['title'] = $value['title'];
+                $data[] = $tmp;
+            }
+        } elseif($type=='image') {
+            $sql = "select m.* from plot_image m where m.deleted=0 and url!='' order by m.id asc limit $pageOff,100";
+            $criteria = new CDbCriteria();
+            $criteria->order = 'id asc';
+            $count = PlotImageExt::model()->undeleted()->count($criteria);
+            if($page>($count/100)+1)
+                return false;
+            $houseInfo = Yii::app()->db->createCommand($sql)->queryAll();
+            foreach ($houseInfo as $key => $value) {
+                
+                if(strstr($value['url'],'http')) {
+                    continue;
+                }
+                $tmp['url'] = ImageTools::fixImage($value['url']).'?imageMogr2/auto-orient/gravity/NorthWest/crop/!800x500-10-10/blur/1x0/quality/75';
+                $tmp['type'] = 18;
+                $tmp['hid'] = $value['hid'];
+
+                $tmp['title'] = $value['title'];
+                $data[] = $tmp;
             }
         }
-        if($wuye||$tese||$area)
-        {
-            //旧版迅搜的bug，无法将小数位多的数字导入，会失去经度，只能在数据库端做限制了
-            $xs->addRange('map_lat', floatval($mapArea['lat2']), floatval($mapArea['lat1']));
-            $xs->addRange('map_lng', floatval($mapArea['lng2']), floatval($mapArea['lng1']));
-            if($wuye)
-                $xs->addQueryString('wylx:'.intval($wuye), XS_CMD_QUERY_OP_AND);
-            if($tese)
-                $xs->addQueryString('xmts:'.intval($tese), XS_CMD_QUERY_OP_AND);
-            if($area)
-                $xs->addQueryString('area:'.intval($area), XS_CMD_QUERY_OP_AND);
-            $xs->addRange('status',1,1);
-            $xs->addRange('is_new',1,1);
-            $xs->setLimit(80);
-            $result = $xs->search();
-            // var_dump($result);die;
-            $ids = array();
-            foreach($result as $v)
-            {
-                $ids[] = $v->id;
-            }
-            $criteria->addInCondition('id', $ids);
-        }
-
-        $criteria->addBetweenCondition('map_lat', $mapArea['lat2'], $mapArea['lat1']);
-        $criteria->addBetweenCondition('map_lng', $mapArea['lng2'], $mapArea['lng1']);
-
-        $model = PlotExt::model()->normal()->isNew();
-        $plots = $model->findAll($criteria);
-        $data = array();
-        foreach($plots as $v)
-        {
-            $data[] = array(
-                'name' => $v->title,
-                'sale_status' => $v->xszt ? $v->xszt->name : '',
-                'url' => $this->createUrl('/home/plot/index', ['py'=>$v->pinyin]),
-                'image' => ImageTools::fixImage($v->image),
-                'price' => $v->price,
-                'unit' => PlotPriceExt::$unit[$v->unit],
-                'open_time' => $v->open_time ? date('Y-m-d',$v->open_time) : '暂无',
-                'address' => $v->address,
-                'phone' => $v->sale_tel,
-                'lng' => $v->map_lng,
-                'lat' => $v->map_lat,
-                'link' => array(
-                    '[楼盘信息]'=>$this->createUrl('/home/plot/index',['py'=>$v->pinyin]),
-                    '[户型图]'=>$this->createUrl('/home/plot/huxing', ['py'=>$v->pinyin]),
-                    '[相册]'=>$this->createUrl('/home/plot/album', ['py'=>$v->pinyin]),
-                    '[楼盘资讯]'=>$this->createUrl('/home/plot/news',['py'=>$v->pinyin]),
-                    '[问答]'=>$this->createUrl('/home/plot/faq',['py'=>$v->pinyin]),
-                )
-            );
-        }
-        echo CJSON::encode($data);
-    }
-
-    /**
-     * autocomplete查找楼盘
-     * @param  string $kw 查找关键字
-     */
-    public function actionAjaxGetPlot($kw)
-    {
-        $criteria = new CDbCriteria(array(
-            'limit' => 15
-        ));
-        $xs = Yii::app()->search->house_plot;
-        $xs->setScwsMulti(15);
-        $xs->setQuery($kw);
-        //
-        //基本条件
-        $xs->addRange('status', 1, 1);
-        $xs->addRange('deleted', 0, 0);
-        $xs->addRange('is_new', 1, 1);
-
-        $xs->setLimit(15);
-        $docs = $xs->search();
-
-        $ids = [];
-        foreach($docs as $v) {
-            $ids[] = $v['id'];
-        }
-
-        $criteria->addInCondition('id', $ids);
-        $plots = PlotExt::model()->normal()->isNew()->findAll($criteria);
-        $data = array();
-        foreach($plots as $v)
-        {
-            $data[] = array(
-                'name' => $v->title,
-                'recordname'=>$v->data_conf['recordname'],
-                'sale_status' => $v->xszt ? $v->xszt->name : '',
-                'url' => $this->createUrl('/home/plot/index', ['py'=>$v->pinyin]),
-                'image' => ImageTools::fixImage($v->image),
-                'price' => $v->price,
-                'area' => $v->areaInfo?$v->areaInfo->name:'未知',
-                'unit' => PlotPriceExt::$unit[$v->unit],
-                'open_time' => $v->open_time ? date('Y-m-d') : '暂无',
-                'address' => $v->address,
-                'phone' => $v->sale_tel,
-                'lng' => $v->map_lng,
-                'lat' => $v->map_lat,
-                'link' => array(
-                    '[楼盘信息]'=>$this->createUrl('/home/plot/index',['py'=>$v->pinyin]),
-                    '[户型图]'=>$this->createUrl('/home/plot/huxing', ['py'=>$v->pinyin]),
-                    '[相册]'=>$this->createUrl('/home/plot/album', ['py'=>$v->pinyin]),
-                    '[楼盘资讯]'=>$this->createUrl('/home/plot/news',['py'=>$v->pinyin]),
-                    '[问答]'=>$this->createUrl('/home/plot/faq',['py'=>$v->pinyin]),
-                )
-            );
-        }
-        echo CJSON::encode($data);
-    }
-
-    /**
-     * 根据地图某点获取附近的范围
-     * @param string $lat
-     * @param string $lng
-     * @param number $distance
-     * @return multitype:string
-     */
-    private function getNearDistance($lat = '', $lng = '' , $distance = 0) {
-        $earth_radius = 6378137;
-
-        //$distance = $distance / 10;
-        $dlng = 2 * asin(sin($distance / (2 * $earth_radius)) / cos(deg2rad($lat)));
-        $dlng = rad2deg($dlng);
-        $dlat = $distance/$earth_radius;
-        $dlat = rad2deg($dlat);
-
-        return array(
-            'lat1'=>sprintf('%.7f', ($lat+$dlat)),
-            'lat2'=>sprintf('%.7f', ($lat-$dlat)),
-            'lng1'=>sprintf('%.7f', ($lng+$dlng)),
-            'lng2'=>sprintf('%.7f', ($lng-$dlng)),
-        );
-    }
-
-    public function actionTest($page=1)
-    {
-        echo '[{"id":303475,"title":"\u5c6f\u6eaa\u533a\u575e\u5c71\u5df7\u7535\u4fe1\u5927\u697c\u65c1 3\u5ba41\u53851\u536b 80\u33a1","phone":"18655902772","username":"\u7a0b\u5148\u751f","uid":2357314,"account":"anistoncc","price":1200,"size":80,"category":1,"hid":"219","plot_name":"\u672a\u77e5\u5c0f\u533a","floor":"5","total_floor":"2","created":"1452646397","source":1,"sale_time":"1452646397","area":1,"street":"","updated":"1452646397","expire_time":"1455238397","refresh_time":"1452646397","bedroom":"3","livingroom":"1","bathroom":"1","content":"1\u3001\u95f9\u4e2d\u53d6\u9759\uff1a\u4f4d\u4e8e\u5c6f\u6eaa\u533a\u7edd\u5bf9\u5e02\u4e2d\u5fc3\uff0c\u4f46\u623f\u5c4b\u6240\u5904\u4f4d\u7f6e\u5b89\u9759\u4e0d\u5435\u95f9\uff0c\u65e0\u566a\u97f3\uff0c\u9002\u5b9c\u5c45","status":"1","sale_status":1,"data_conf":{"tags":[179,177,182,180,178,181]},"hits":"6","ip":"","image":"","image_count":0,"decoration":114,"towards":0,"wuye_fee":"0","top":"0","appoint_time":"0","address":"\u79fb\u52a8\u624b\u673a\u5927\u4e16\u754c\u5bf9\u9762\uff0c\u7535\u4fe1\u5927\u697c\u9694\u58c1\u5df7\u5b50\u5185","age":"0","sort":"0","contacted":"0","hurry":"0","sid":"0","year":"","month":"","day":"","recommend":"0","images":[],"pay_type":{"jiao":"0","ya":"0"},"rent_type":186}]';
-        exit;
+        echo json_encode($data);
     }
 }
