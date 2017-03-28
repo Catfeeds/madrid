@@ -664,8 +664,8 @@ class HouseController extends AdminController{
 	public function actionTohj($hid='')
 	{
 		$token = '000d811b3d06f933d9316b04359d0f1e';
-		$value = PlotExt::model()->findByPk($hid);
-		$value = $value->attributes;
+		$plot = PlotExt::model()->findByPk($hid);
+		$value = $plot->attributes;
         $data_conf = json_decode($value['data_conf'],true);
         // va
         unset($value['data_conf']);
@@ -766,13 +766,67 @@ class HouseController extends AdminController{
         }
         $tmp['area'] = trim($value['area']);
         $tmp['street'] = trim($value['street']);
-        $res = HttpHelper::post('http://house.shangxiaban.cn/rest/importOnePlot',$tmp);
+        $res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importOnePlot',$tmp);
         // var_dump($res['content']);exit;
         $res = json_decode($res['content'],true);
-        if(array_keys($res['data'])[0]=='error')
+        if(array_keys($res['data'])[0]=='error'){
         	$this->setMessage($res['data']['error'],'error');
-        else
+        	return;
+        // if(1==2){
+        }else{
+        	if($hxs = $plot->hxs) {
+        		$tmp = [];
+        		foreach ($hxs as $t => $hx) {
+        			if(!$hx->image||strstr($hx->image,'http'))
+        				continue;
+        			$tmp["images[$t]"] = ImageTools::fixImage($hx->image).'?imageMogr2/auto-orient/gravity/NorthWest/crop/!800x500-10-10/blur/1x0/quality/75';
+        			$tmp["hids[$t]"] = $hx->hid;
+        			$tmp["bedrooms[$t]"] = $hx->bedroom;
+        			$tmp["titles[$t]"] = $hx->title;
+        			$tmp["livingrooms[$t]"] = $hx->livingroom;
+        			$tmp["bathrooms[$t]"] = $hx->bathroom;
+        			$tmp["sizes[$t]"] = $hx->size;
+        			// $tmp["sale_statuss[$t]"] = $hx->sale_status;
+        			if($sat = $hx['sale_status']) {
+	                    if($sat == '在售') {
+	                        $tmp["sale_statuss[$t]"] = 1;
+	                    } elseif($sat == '售完') {
+	                        $tmp["sale_statuss[$t]"] = 0;
+	                    } elseif($sat == '待售') {
+	                        $tmp["sale_statuss[$t]"] = 2;
+	                    }
+	                }
+        		}
+        		$res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importPlotHx',$tmp);
+		        // var_dump($res);exit;
+		        $res = json_decode($res['content'],true);
+		        // var_dump($res);exit;
+		        if(array_keys($res['data'])[0]=='error'){
+		        	$this->setMessage($res['data']['error'],'error');
+		        	return;
+		        } elseif($imgs = $plot->images) {
+		        	$tmp = [];
+	        		foreach ($imgs as $t => $hx) {
+	        			if(!$hx->url||strstr($hx->url,'http'))
+	        				continue;
+	        			$tmp["urls[$t]"] = ImageTools::fixImage($hx->url).'?imageMogr2/auto-orient/gravity/NorthWest/crop/!800x500-10-10/blur/1x0/quality/75';
+	        			// $tmp["urls[$t]"] = $hx->url;
+	        			$tmp["hids[$t]"] = $hx->hid;
+	        			$tmp["types[$t]"] = 18;
+	        			$tmp["titles[$t]"] = $hx->title;
+	        		}
+	        		$res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importPlotImg',$tmp);
+			        // var_dump($res['content']);exit;
+			        $res = json_decode($res['content'],true);
+			        if(array_keys($res['data'])[0]=='error'){
+			        	$this->setMessage($res['data']['error'],'error');
+			        	return;
+	        		}
+	        	}
+        	}
+		        	
         	$this->setMessage('导入成功','success');
+        }
 	}
 
 
