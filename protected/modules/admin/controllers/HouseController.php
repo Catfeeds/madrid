@@ -256,6 +256,33 @@ class HouseController extends AdminController{
 					$plot->manage_company = $arss[0][1];
 				}
 			}
+			// 楼栋总数
+			preg_match_all('/楼栋总数[.|\s|\S]+栋/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				preg_match_all('/[0-9]+/', $areas, $arss);
+				// var_dump($areas);exit;
+				if(isset($arss[0][0])) {
+					// var_dump($arss[0][1]);exit;
+					$plot->building_num = $arss[0][0];
+				}
+			}
+			// 总户数
+			preg_match_all('/list-right">[0-9]+户/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				preg_match_all('/[0-9]+/', $areas, $arss);
+				// var_dump($areas);exit;
+				if(isset($arss[0][0])) {
+					// var_dump($arss[0][1]);exit;
+					$plot->household_num = $arss[0][0];
+				}
+			}
+			// 楼层状况
+			preg_match_all('/list-right-floor.+</', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				$zk = str_replace('list-right-floor">', '', $areas);
+				$zk = str_replace('<', '', $zk);
+				$plot->floor_desc = $zk;
+			}
 
 		}
 		// 交通、配套部分
@@ -312,6 +339,15 @@ class HouseController extends AdminController{
 					// var_dump();exit;
 					$plot->street = str_replace('楼盘', '', $arss[0][1]);
 				}
+			}
+		}
+		// 产权年限
+		preg_match_all('/产权年限[\s|\S|.]+[0-9]0年/', $result, $xqghs);
+		if(isset($xqghs[0][0]) && $xqghs = $xqghs[0][0]) {
+			// var_dump($xqghs);exit;
+			preg_match_all('/[0-9]+/',$xqghs,$ars);
+			if(isset($ars[0][0])) {
+				$plot->property_years = $ars[0][0].'年';
 			}
 		}
 		// 封面
@@ -494,14 +530,14 @@ class HouseController extends AdminController{
 		if(!$url || !$code)
 			return true;
 		$typeArr = [
-			// '903'=>'实景图',
+			'903'=>'实景图',
 			'904'=>'效果图',
-			// '901'=>'交通图',
-			// '907'=>'配套图',
-			// '905'=>'样板间',
+			'901'=>'交通图',
+			'907'=>'配套图',
+			'905'=>'样板间',
 		];
 		foreach (array_keys($typeArr) as $typeid) {
-			foreach ([1,2] as $page) {
+			foreach ([1] as $page) {
 				// var_dump($url."?newcode=$code&type=$typeid&nextpage=$page");exit;
 				$getUrl = $url."?newcode=$code&type=$typeid&nextpage=$page";
 				$res = HttpHelper::get($getUrl);
@@ -813,7 +849,7 @@ class HouseController extends AdminController{
 	        			$tmp["urls[$t]"] = ImageTools::fixImage($hx->url).'?imageMogr2/auto-orient/gravity/NorthWest/crop/!800x500-10-10/blur/1x0/quality/75';
 	        			// $tmp["urls[$t]"] = $hx->url;
 	        			$tmp["hids[$t]"] = $hx->hid;
-	        			$tmp["types[$t]"] = 18;
+	        			$tmp["types[$t]"] = Yii::app()->params['imageTag'][$hx->type];
 	        			$tmp["titles[$t]"] = $hx->title;
 	        		}
 	        		$res = HttpHelper::post('http://fangcc.cn/rest/importPlotImg',$tmp);

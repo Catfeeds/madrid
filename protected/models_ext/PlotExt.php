@@ -26,6 +26,10 @@ class PlotExt extends Plot{
         'manage_fee'=>'',
         'manage_company'=>'',
         'developer'=>'',
+        'property_years'=>'',
+        'household_num'=>'',
+        'building_num'=>'',
+        'floor_desc'=>'',
         // 'transit'=>'',
         // 'content'=>'',
         // 'peripheral'=>'',
@@ -33,6 +37,7 @@ class PlotExt extends Plot{
         'jzlb'=>'',
         'xmts'=>'',
         'zxzt'=>'',
+        ''
     ];
 
 

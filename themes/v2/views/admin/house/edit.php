@@ -3,6 +3,7 @@
 	?>
 <?php $form = $this->beginWidget('HouseForm', array('htmlOptions' => array('class' => 'form-horizontal'))) ?>
 <?php foreach (PlotExt::$tags as $key => $value) {?>
+	<?php if(isset(Yii::app()->params['plotAttr'][$key])):?>
 	<div class="form-group">
 	    <label class="col-md-2 control-label"><?=Yii::app()->params['plotAttr'][$key]?></label>
 	    <div class="col-md-4">
@@ -15,7 +16,7 @@
 	    </div>
 	    <div class="col-md-2"><?php echo $form->error($house, $key) ?></div>
 	</div>
-<?php }?>
+<?php endif;}?>
 <div class="form-group">
 	    <label class="col-md-2 control-label"></label>
 	    <div class="col-md-4">
