@@ -766,7 +766,7 @@ class HouseController extends AdminController{
         }
         $tmp['area'] = trim($value['area']);
         $tmp['street'] = trim($value['street']);
-        $res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importOnePlot',$tmp);
+        $res = HttpHelper::post('http://fangcc.cn/rest/importOnePlot',$tmp);
         // var_dump($res['content']);exit;
         $res = json_decode($res['content'],true);
         if(array_keys($res['data'])[0]=='error'){
@@ -797,7 +797,7 @@ class HouseController extends AdminController{
 	                    }
 	                }
         		}
-        		$res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importPlotHx',$tmp);
+        		$res = HttpHelper::post('http://fangcc.cn/rest/importPlotHx',$tmp);
 		        // var_dump($res);exit;
 		        $res = json_decode($res['content'],true);
 		        // var_dump($res);exit;
@@ -815,7 +815,7 @@ class HouseController extends AdminController{
 	        			$tmp["types[$t]"] = 18;
 	        			$tmp["titles[$t]"] = $hx->title;
 	        		}
-	        		$res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importPlotImg',$tmp);
+	        		$res = HttpHelper::post('http://fangcc.cn/rest/importPlotImg',$tmp);
 			        // var_dump($res['content']);exit;
 			        $res = json_decode($res['content'],true);
 			        if(array_keys($res['data'])[0]=='error'){
