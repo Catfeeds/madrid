@@ -17,6 +17,27 @@
 	    <div class="col-md-2"><?php echo $form->error($house, $key) ?></div>
 	</div>
 <?php endif;}?>
+	<div class="form-group">
+	    <label class="col-md-2 control-label"><?='交通情况'?></label>
+	    <div class="col-md-4">
+	    	<?php echo $form->textField($house, 'transit', array('class' => 'form-control')); ?>
+	    </div>
+	    <div class="col-md-2"><?php echo $form->error($house, 'transit') ?></div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-2 control-label"><?='周边配套'?></label>
+	    <div class="col-md-4">
+	    	<?php echo $form->textField($house, 'peripheral', array('class' => 'form-control')); ?>
+	    </div>
+	    <div class="col-md-2"><?php echo $form->error($house, 'peripheral') ?></div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-2 control-label"><?='简介'?></label>
+	    <div class="col-md-4">
+	    	<?php echo $form->textField($house, 'content', array('class' => 'form-control')); ?>
+	    </div>
+	    <div class="col-md-2"><?php echo $form->error($house, 'content') ?></div>
+	</div>
 <div class="form-group">
 	    <label class="col-md-2 control-label"></label>
 	    <div class="col-md-4">
