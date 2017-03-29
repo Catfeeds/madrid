@@ -46,20 +46,20 @@ class HouseController extends AdminController{
 		$result = $this->characet($result);
 		// 标题
 		preg_match_all('/<h1>[.|\s|\S]+h1>/', $result, $titleTag);
-		preg_match_all('/">.+<\/a><!--/', $titleTag[0][0], $titleTag2);
-		// var_dump($titleTag2);
+		preg_match_all('/">.+<\/a>/', $titleTag[0][0], $titleTag2);
+		// var_dump($titleTag);exit;
 		$title = str_replace('">', '', $titleTag2[0][0]);
-		$title = str_replace('</a><!--', '', $title);
+		$title = str_replace('</a>', '', $title);
 		// 编码装换
 		$title = $this->characet($title);
-		$plot->title = $title;
+		$plot->title = $title;//var_dump($plot->title);exit;
 		// 拼音
 		// $plot->pinyin = $this->Pinyin($title,1);
 		// var_dump(strpos($result, '常州'),$result);exit;
 		// str_replace('销售信息', 'xsxx', $result);
 		// var_dump($result);exit;
 		// 基本信息+销售信息
-		preg_match_all('/<div class="main_1200">[.|\s|\s]+<!--[.|\s|\S]+list-right c00">.+/', $result, $xsTags);
+		preg_match_all('/基本信息<\/h3>[.|\s|\S]+销售信息结束/', $result, $xsTags);
 		$xxs = $xsTags[0][0];
 		$xxs = $this->characet($xxs);
 		// var_dump($xxs);exit;
@@ -128,21 +128,31 @@ class HouseController extends AdminController{
 		$plot->developer = trim($kfs);
 		// 楼盘地址
 		$addr = '';
-		preg_match_all('/list-right-text">[\x{4e00}-\x{9fa5}|0-9]+/u', $xxs, $adds);
+		preg_match_all('/楼盘地址[.|\s|\S]+基本信息结束/', $xxs, $adds);
 			// var_dump($adds);exit;
 		if(isset($adds[0][0]) && $adds = $adds[0][0]) {
-			$addr = str_replace('list-right-text">', '', $adds);
+			preg_match_all('/[\x{4e00}-\x{9fa5}|0-9|#]+/u', $adds, $dzs);
+			if(isset($dzs[0]) && isset($dzs[0][1])) {
+				$plot->address = $dzs[0][1];
+			}
 		}
-		$plot->address = $addr;
+		// $plot->address = $addr;
 		// 销售状态
 		$xszt = '';
-		preg_match_all('/销售状态：<\/div>[\s]+<div class="list-right">[\s].+<\/div>/', $xxs, $xszts);
+		preg_match_all('/销售状态[.|\s|\S]+在售<\/div>/', $xxs, $xszts);
 		if(isset($xszts[0][0]) && $xszts = $xszts[0][0]) {
-			// var_dump($xszts);exit;
-			preg_match_all('/[\x{4e00}-\x{9fa5}]+/u', $xszts, $xsztarr);
-			$xszt = $xsztarr[0][1];
+			$plot->sale_status = '在售';
+		}else{
+			preg_match_all('/销售状态[.|\s|\S]+待售<\/div>/', $xxs, $xszts);
+			if(isset($xszts[0][0]) && $xszts = $xszts[0][0]) {
+				$plot->sale_status = '待售';
+			} else {
+				preg_match_all('/销售状态[.|\s|\S]+售完<\/div>/', $xxs, $xszts);
+				if(isset($xszts[0][0]) && $xszts = $xszts[0][0]) {
+					$plot->sale_status = '售完';
+				}
+			}
 		}
-		$plot->sale_status = $xszt;
 		// 开盘时间
 		// 销售状态
 		$kpsj = '';
@@ -209,11 +219,11 @@ class HouseController extends AdminController{
 		}
 		$plot->zxzt = $xszt;
 		// 售楼电话
-		preg_match_all('/c00">.+</', $xxs, $jfsjs);
+		preg_match_all('/">400.+/', $xxs, $jfsjs);
 		if(isset($jfsjs[0][0]) && $kpsjs = $jfsjs[0][0]) { 
-			$phone = str_replace('c00">', '', $kpsjs);
+			$phone = str_replace('</div>', '', $kpsjs);
 			// var_dump($phone);
-			$phone = trim($phone,'<');
+			$phone = trim($phone,'">');
 		}
 		$plot->sale_tel = $phone;
 		// 小区规划部分
@@ -284,6 +294,75 @@ class HouseController extends AdminController{
 				$plot->floor_desc = $zk;
 			}
 
+		}else {
+			preg_match_all('/楼盘情况开始[.|\s|\S]+楼盘情况结束/', $result, $xqghs);
+			if(isset($xqghs[0][0]) && $xqghs = $xqghs[0][0]) {
+			preg_match_all('/占地面积：[.|\s|\S|0-9]+平方米<\/div>/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				preg_match_all('/[0-9]+/',$areas,$ars);
+				if(isset($ars[0][0]))
+					$plot->size = $ars[0][0];
+				if(isset($ars[0][1]))
+					$plot->buildsize = $ars[0][1];
+			}
+			// 容积率绿化率
+			preg_match_all('/率：[.|\s|\S]+="list-right">[0-9|.]+[.|\s|\S]+容积率详情/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				preg_match_all('/[0-9|.]+<a/',$areas,$ars);
+				if(isset($ars[0][0])){
+					$plot->capacity = trim($ars[0][0],'<a');
+				}
+				preg_match_all('/[0-9|.]+%/',$areas,$ars);
+				if(isset($ars[0][0])){
+					// var_dump(expression)
+					$plot->green = trim($ars[0][0],'%');
+				}
+			}
+			// 物业费
+			preg_match_all('/[0-9|.]+元\//', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				// var_dump($areas);exit;
+					$plot->manage_fee = trim($areas,'元\/');
+			}
+			// 物业公司
+			preg_match_all('/物业公司：[.|\s|\S]+<\/a/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				preg_match_all('/[\x{4e00}-\x{9fa5}]+/u', $areas, $arss);
+				// var_dump($areas);exit;
+				if(isset($arss[0][1])) {
+					// var_dump($arss[0][1]);exit;
+					$plot->manage_company = $arss[0][1];
+				}
+			}
+			// 楼栋总数
+			preg_match_all('/楼栋总数[.|\s|\S]+栋/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				preg_match_all('/[0-9]+/', $areas, $arss);
+				// var_dump($areas);exit;
+				if(isset($arss[0][0])) {
+					// var_dump($arss[0][1]);exit;
+					$plot->building_num = $arss[0][0];
+				}
+			}
+			// 总户数
+			preg_match_all('/list-right">[0-9]+户/', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				preg_match_all('/[0-9]+/', $areas, $arss);
+				// var_dump($areas);exit;
+				if(isset($arss[0][0])) {
+					// var_dump($arss[0][1]);exit;
+					$plot->household_num = $arss[0][0];
+				}
+			}
+			// 楼层状况
+			preg_match_all('/list-right-floor.+</', $xqghs, $areas);
+			if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+				$zk = str_replace('list-right-floor">', '', $areas);
+				$zk = str_replace('<', '', $zk);
+				$plot->floor_desc = $zk;
+			}
+
+		}
 		}
 		// 交通、配套部分
 		preg_match_all('/交通配套开始[.|\s|\S]+交通配套结束/', $result, $xqghs);
@@ -313,6 +392,41 @@ class HouseController extends AdminController{
 					$plot->peripheral = trim($ars);
 				}
 			}
+		} else {
+			preg_match_all('/配套信息开始[.|\s|\S]+配套信息结束/', $result, $pts);
+			if(isset($pts[0][0]) && $pts = $pts[0][0]) {
+				preg_match_all('/交通状况[.|\s|\S]+项目简介开始/', $pts, $areas);
+				if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+					preg_match_all('/交通状况[.|\s|\S]+<\/div>/',$areas,$ars);
+					if(isset($ars[0][0])) {
+						$ss = str_replace('</div>', '', $ars[0][0]);
+						$ss = str_replace('交通状况</h3>', '', $ss);
+						$plot->transit = trim($ss);
+					}
+				}
+				preg_match_all('/物业公司[.|\s|\S]+padd/', $pts, $areas);
+				if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+					preg_match_all('/[\x{4e00}-\x{9fa5}]+/u',$areas,$ars);
+					if(isset($ars[0][0])) {
+						$plot->manage_company = $ars[0][1];
+					}
+				}
+				preg_match_all('/<h3>周边配套<\/h3>[.|\s|\S]+class="set/', $pts, $areas);
+				if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+					$pt = str_replace('<h3>周边配套</h3>', '', $areas);
+					$pt = str_replace('<p>', '', $pt);
+					$pt = str_replace('</p>', '', $pt);
+					$pt = str_replace('<div class="set', '', $pt);
+					$plot->peripheral = trim($pt);
+				}
+				// 物业费
+				preg_match_all('/[0-9|.]+元\//', $pts, $areas);
+				if(isset($areas[0][0]) && $areas = $areas[0][0]) {
+					// var_dump($areas);exit;
+						$plot->manage_fee = trim($areas,'元\/');
+				}
+			}
+
 		}
 		// 项目简介
 		// intro">[.|\s|\S]+项目
@@ -331,15 +445,17 @@ class HouseController extends AdminController{
 		preg_match_all('/header_mnav[.|\s|\S]+面包屑/', $result, $xqghs);
 		if(isset($xqghs[0][0]) && $xqghs = $xqghs[0][0]) {
 			// var_dump($xqghs);exit;
-			preg_match_all('/title=.+<\/a>/',$xqghs,$ars);
+			preg_match_all('/<\/a>[\s]>[.|\s|\S]+<\/a>/',$xqghs,$ars);
 			if(isset($ars[0][0])) {
 				preg_match_all('/[\x{4e00}-\x{9fa5}]+/u', $ars[0][0], $arss);
 				// var_dump($arss);exit;
-				if(isset($arss[0][1])) {
+				if(isset($arss[0][0])) {
 					// var_dump();exit;
-					$plot->street = str_replace('楼盘', '', $arss[0][1]);
+					$plot->street = str_replace('新楼盘', '', $arss[0][0]);
 				}
 			}
+		}else{
+
 		}
 		// 产权年限
 		preg_match_all('/产权年限[\s|\S|.]+[0-9]0年/', $result, $xqghs);
@@ -366,6 +482,14 @@ class HouseController extends AdminController{
 			$jps = trim($jps,"'");
 			$plot->area = $jps;
 			// $jps = Yii::app()->file->fetch($jps);
+		} else {
+			preg_match_all('/SouFunSearch.city.+/', $result, $jps);
+			if(isset($jps[0][0]) && $jps = $jps[0][0]) {
+				$jps = str_replace('SouFunSearch.city = "', '', $jps);
+				$jps = str_replace('";', '', $jps);
+				// $jps = trim($jps,"'");
+				$plot->area = $jps;
+			}
 		}
 		// 地图数据
 		preg_match_all('/SouFunSearch\.newhouseDomain.+/', $result, $jps);
@@ -382,7 +506,16 @@ class HouseController extends AdminController{
 				$code = str_replace("newcode='", '', $jxs);
 				$code = str_replace("';", '', $code);
 				$code = trim($code);
+			} else {
+				preg_match_all('/currNewcode.+/', $result, $jxs);
+			if(isset($jxs[0][0]) && $jxs = $jxs[0][0]) { 
+				$code = str_replace("currNewcode = '", '', $jxs);
+				$code = str_replace("';", '', $code);
+				$code = trim($code);
+			} 
 			}
+
+			// var_dump($code);exit;
 			if($jx && $code) {
 				// 路由拼凑
 				$mapurl = "http://ditu.fang.com/?c=channel&a=xiaoquNew&newcode=$code&city=$jx";
@@ -424,13 +557,16 @@ class HouseController extends AdminController{
 				$hxurl = $urlar[0] . 'com/' . $urls;
 			}
 		}
+		$urlarrr = explode('/', trim($url,'http://'));
+		$hxurl = 'http://'.$urlarrr[0].'/photo/list_900_'.$code.'.htm';
+		// var_dump($plot->attributes);exit;
 		
 		// var_dump($hxurl);exit;
 		if($plot->save()) {
 			if(isset($hxurl) && $hxurl)
 				$this->fetchHx($hxurl,$plot->id);
 			// 抓取相册
-			$imageurl = isset($urlar[0])?($urlar[0] . 'com/house/ajaxrequest/photolist_get.php'):'';
+			$imageurl = 'http://'.$urlarrr[0] . '/house/ajaxrequest/photolist_get.php';
 			if($imageurl) {
 				$this->fetchImage($imageurl,$code,$plot->id);
 			}
