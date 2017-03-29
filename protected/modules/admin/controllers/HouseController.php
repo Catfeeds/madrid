@@ -435,6 +435,8 @@ class HouseController extends AdminController{
 				$this->fetchImage($imageurl,$code,$plot->id);
 			}
 			$this->setMessage('保存成功','success');
+		} else{
+			$this->setMessage(current(current($plot->getErrors())),'success');
 		}
 		
 	}

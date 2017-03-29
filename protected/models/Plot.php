@@ -35,10 +35,10 @@ class Plot extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('peripheral, content, created', 'required'),
+			array('created', 'required'),
 			array('deleted, created, updated', 'numerical', 'integerOnly'=>true),
 			array('title, area, street, image', 'length', 'max'=>255),
-			array('transit, data_conf', 'safe'),
+			array('transit, peripheral, content, data_conf', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title, area, street, image, transit, peripheral, content, data_conf, deleted, created, updated', 'safe', 'on'=>'search'),
