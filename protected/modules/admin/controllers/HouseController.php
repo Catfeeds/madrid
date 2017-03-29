@@ -754,6 +754,7 @@ class HouseController extends AdminController{
             }
             preg_match_all('/[0-9|.]+/', $tmp['price'], $pricefs);
             if(isset($pricefs[0][0]) && $tmp['price'] = intval($pricefs[0][0])) ;
+            else $tmp['price'] = 0;
         }
         $tmp['token'] = $token;
         foreach ($tmp as $k => $v) {
