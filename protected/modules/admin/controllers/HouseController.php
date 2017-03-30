@@ -902,7 +902,7 @@ class HouseController extends AdminController{
         if(strstr($tmp['image'],'http')){
             $tmp['image'] = $this->sfImage($tmp['image'],$tmp['image']);
         }
-        $tmp['image'] && $tmp['image'] = ImageTools::fixImage($tmp['image']);
+        $tmp['image'] && $tmp['image'] = trim(Yii::app()->file->host,'/').$tmp['image'];
         // if(!is_numeric($tmp['area']))
         //     continue;
         if(!isset($tmp_jzlb))
