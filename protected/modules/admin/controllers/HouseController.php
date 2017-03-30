@@ -501,16 +501,7 @@ class HouseController extends AdminController{
 				$plot->area = $jps;
 			}
 		}
-		// 地图数据
-		preg_match_all('/SouFunSearch\.newhouseDomain.+/', $result, $jps);
-		if(isset($jps[0][0]) && $jps = $jps[0][0]) {
-			// 城市简写
-			preg_match_all('/newhouse\..+fang/', $jps, $jxs);
-			if(isset($jxs[0][0]) && $jxs = $jxs[0][0]) { 
-				$jx = str_replace("newhouse.", '', $jxs);
-				$jx = str_replace(".fang", '', $jx);
-			}
-			// 楼盘id
+		// 楼盘id
 			preg_match_all('/newcode=.+/', $result, $jxs);
 			if(isset($jxs[0][0]) && $jxs = $jxs[0][0]) { 
 				$code = str_replace("newcode='", '', $jxs);
@@ -524,8 +515,17 @@ class HouseController extends AdminController{
 				$code = trim($code);
 			} 
 			}
+		// 地图数据
+		preg_match_all('/SouFunSearch\.newhouseDomain.+/', $result, $jps);
+		if(isset($jps[0][0]) && $jps = $jps[0][0]) {
+			// 城市简写
+			preg_match_all('/newhouse\..+fang/', $jps, $jxs);
+			if(isset($jxs[0][0]) && $jxs = $jxs[0][0]) { 
+				$jx = str_replace("newhouse.", '', $jxs);
+				$jx = str_replace(".fang", '', $jx);
+			}
+			
 
-			// var_dump($code);exit;
 			if($jx && $code) {
 				// 路由拼凑
 				$mapurl = "http://ditu.fang.com/?c=channel&a=xiaoquNew&newcode=$code&city=$jx";
@@ -557,6 +557,7 @@ class HouseController extends AdminController{
 				}
 			}
 		}
+		// var_dump($code);exit();
 		// 抓取户型图
 		preg_match_all('/<a.+padding:0 11px;">户型/', $result, $jxs);
 		if(isset($jxs[0][0]) && $jxs = $jxs[0][0]) {
