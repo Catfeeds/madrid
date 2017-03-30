@@ -46,13 +46,23 @@ class HouseController extends AdminController{
 		$result = $this->characet($result);
 		// 标题
 		preg_match_all('/<h1>[.|\s|\S]+h1>/', $result, $titleTag);
-		preg_match_all('/">.+<\/a>/', $titleTag[0][0], $titleTag2);
-		// var_dump($titleTag);exit;
-		$title = str_replace('">', '', $titleTag2[0][0]);
-		$title = str_replace('</a>', '', $title);
-		// 编码装换
-		$title = $this->characet($title);
-		$plot->title = $title;//var_dump($plot->title);exit;
+		// preg_match_all('/">.+<\/a>/', $titleTag[0][0], $titleTag2);
+		if(isset($titleTag[0][0])) {
+			preg_match_all('/title=.+target/', $titleTag[0][0], $tt);
+			if(isset($tt[0][0])) {
+				// var_dump(1);exit;
+				$title = str_replace('title="', '', $tt[0][0]);
+				$title = str_replace('" target', '', $title);
+				$title = $this->characet($title);
+				$plot->title = $title;
+			}
+		}
+		// var_dump($title);exit;
+		// $title = str_replace('">', '', $titleTag2[0][0]);
+		// $title = str_replace('</a>', '', $title);
+		// // 编码装换
+		// $title = $this->characet($title);
+		// $plot->title = $title;//var_dump($plot->title);exit;
 		// 拼音
 		// $plot->pinyin = $this->Pinyin($title,1);
 		// var_dump(strpos($result, '常州'),$result);exit;
