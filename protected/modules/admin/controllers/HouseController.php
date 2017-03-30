@@ -902,7 +902,7 @@ class HouseController extends AdminController{
         if(strstr($tmp['image'],'http')){
             $tmp['image'] = $this->sfImage($tmp['image'],$tmp['image']);
         }
-        $tmp['image'] && $tmp['image'] = ImageTools::fixImage($tmp['image']).'?imageMogr2/auto-orient/gravity/NorthWest/crop/!800x500-10-10/blur/1x0/quality/75';
+        $tmp['image'] && $tmp['image'] = ImageTools::fixImage($tmp['image']).'?imageMogr2/thumbnail/!80p/gravity/NorthWest/crop/600x348/blur/1x0/quality/75|imageslim';
         // if(!is_numeric($tmp['area']))
         //     continue;
         if(!isset($tmp_jzlb))
@@ -965,7 +965,7 @@ class HouseController extends AdminController{
         		foreach ($hxs as $t => $hx) {
         			if(!$hx->image||strstr($hx->image,'http'))
         				continue;
-        			$tmp["images[$t]"] = ImageTools::fixImage($hx->image).'?imageMogr2/auto-orient/gravity/NorthWest/crop/!800x500-10-10/blur/1x0/quality/75';
+        			$tmp["images[$t]"] = ImageTools::fixImage($hx->image);
         			$tmp["hids[$t]"] = $hx->hid;
         			$tmp["bedrooms[$t]"] = $hx->bedroom;
         			$tmp["titles[$t]"] = $hx->title;
@@ -995,7 +995,7 @@ class HouseController extends AdminController{
 	        		foreach ($imgs as $t => $hx) {
 	        			if(!$hx->url||strstr($hx->url,'http'))
 	        				continue;
-	        			$tmp["urls[$t]"] = ImageTools::fixImage($hx->url).'?imageMogr2/auto-orient/gravity/NorthWest/crop/!800x500-10-10/blur/1x0/quality/75';
+	        			$tmp["urls[$t]"] = ImageTools::fixImage($hx->url).'?imageMogr2/thumbnail/!80p/gravity/NorthWest/crop/600x348/blur/1x0/quality/75|imageslim';
 	        			// $tmp["urls[$t]"] = $hx->url;
 	        			$tmp["hids[$t]"] = $hx->hid;
 	        			$tmp["types[$t]"] = Yii::app()->params['imageTag'][$hx->type];

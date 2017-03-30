@@ -2,6 +2,20 @@
 	$this->pageTitle='楼盘详情';
 	?>
 <?php $form = $this->beginWidget('HouseForm', array('htmlOptions' => array('class' => 'form-horizontal'))) ?>
+<div class="form-group">
+	    <label class="col-md-2 control-label"><?='区域'?></label>
+	    <div class="col-md-4">
+	    	<?php echo $form->textField($house, 'area', array('class' => 'form-control')); ?>
+	    </div>
+	    <div class="col-md-2"><?php echo $form->error($house, 'area') ?></div>
+	</div>
+	<div class="form-group">
+	    <label class="col-md-2 control-label"><?='街道'?></label>
+	    <div class="col-md-4">
+	    	<?php echo $form->textField($house, 'street', array('class' => 'form-control')); ?>
+	    </div>
+	    <div class="col-md-2"><?php echo $form->error($house, 'street') ?></div>
+	</div>
 <?php foreach (PlotExt::$tags as $key => $value) {?>
 	<?php if(isset(Yii::app()->params['plotAttr'][$key])):?>
 	<div class="form-group">
