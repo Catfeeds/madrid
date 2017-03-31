@@ -806,11 +806,15 @@ class HouseController extends AdminController{
         $res = HttpHelper::post('http://fangcc.cn/rest/importOnePlot',$tmp);
         // var_dump($res['content']);exit;
         $res = json_decode($res['content'],true);
-        if(array_keys($res['data'])[0]=='error'){
+        if(isset($res['data']) && array_keys($res['data'])[0]=='error'){
         	$this->setMessage($res['data']['error'],'error');
         	return;
         // if(1==2){
-        }else{
+        }elseif(array_keys($res)[0]=='error'){
+        	$this->setMessage($res['error'],'error');
+        	return;
+        }
+        else{
         	if($hxs = $plot->hxs) {
         		$tmp = [];
         		foreach ($hxs as $t => $hx) {
