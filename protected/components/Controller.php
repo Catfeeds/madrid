@@ -234,13 +234,13 @@ class Controller extends CController
      */
     public function createQnKey()
     {
-        $auth = new Auth(Yii::app()->file->accessKey,Yii::app()->file->secretKey);
+        $auth = new Auth(Yii::app()->fccfile->accessKey,Yii::app()->fccfile->secretKey);
         $policy = array(
             'mimeLimit'=>'image/*',
             'fsizeLimit'=>10000000,
-            'saveKey'=>Yii::app()->file->createQiniuKey(),
+            'saveKey'=>Yii::app()->fccfile->createQiniuKey(),
         );
-        $token = $auth->uploadToken(Yii::app()->file->bucket,null,3600,$policy);
+        $token = $auth->uploadToken(Yii::app()->fccfile->bucket,null,3600,$policy);
         return $token;
     }
 
@@ -277,7 +277,7 @@ class Controller extends CController
 		if (! file_exists ( $path )) 
         	mkdir ( "$path", 0777, true );
 		file_put_contents($path.$name, $file_contents);
-		$fileName = Yii::app()->file->getFilePath().str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
+		$fileName = Yii::app()->fccfile->getFilePath().str_replace('.', '', microtime(1)) . rand(100000,999999).'.jpg';
 
 		$upManager = new UploadManager();
 		try{
@@ -302,7 +302,7 @@ class Controller extends CController
 	    return $arr['str'];
 	}
 
-	  	function characet($data)
+  	function characet($data)
   	{
 	  	if( !empty($data) ){
 		    $fileType = mb_detect_encoding($data , array('UTF-8','GBK','LATIN1','BIG5')) ;
@@ -312,5 +312,11 @@ class Controller extends CController
 		}
 		return $data;
 	}
+// fccfile:
+//   accessKey: 455piu_kXpr34_uoWwF-f4M5hBrcALf5fFf5T8WR
+//   secretKey: xHJuZghwAQjC9A1p7D-6_fMN37Jce2RqRA4qo36C
+//   bucket: house-lejia5
+//   enableCloudStorage: true
+//   host: http://omvvphb5p.bkt.clouddn.com/
 
 }
