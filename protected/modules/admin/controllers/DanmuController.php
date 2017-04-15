@@ -111,6 +111,6 @@ class DanmuController extends AdminController {
         }
         unset($data);
         ExcelHelper::write_browser(date('YmdHis'),$fileds,$content);
-        Yii::app()->end();
+        // Yii::app()->end();
     }
 }
