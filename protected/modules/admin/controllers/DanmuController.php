@@ -100,7 +100,7 @@ class DanmuController extends AdminController {
     {
         set_time_limit(0);
         $criteria->select = 'time,content';
-        $criteria->limit = 5000;//限制最多3000
+        $criteria->limit = 10000;//限制最多3000
         $data = DanmuExt::model()->sorted()->findAll($criteria);
         //excel列名
         $fileds = array('时间','内容');
