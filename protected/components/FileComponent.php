@@ -56,6 +56,14 @@ class FileComponent extends CApplicationComponent
      */
     private $_multi=false;
 
+    public $fccaccessKey = '455piu_kXpr34_uoWwF-f4M5hBrcALf5fFf5T8WR';
+
+    public $fccsecretKey = 'xHJuZghwAQjC9A1p7D-6_fMN37Jce2RqRA4qo36C';
+
+    public $fccbucket = 'house-lejia5';
+
+    private $_fcccloudHost = 'http://omvvphb5p.bkt.clouddn.com/';
+
     /**
      * 获得随机文件名，用于要上传的文件
      * @return string 文件名
@@ -409,6 +417,13 @@ class FileComponent extends CApplicationComponent
     {
         $this->_cloudHost = $value;
     }
+    /**
+     * 设置云存储访问域名主机
+     */
+    public function setFcccloudHost($value)
+    {
+        $this->_fcccloudHost = $value;
+    }
 
     /**
      * 设置本地存储访问主机
@@ -442,6 +457,14 @@ class FileComponent extends CApplicationComponent
     public function getCloudHost()
     {
         return $this->_cloudHost;
+    }
+
+    /**
+     * @return string 获得云存储访问域名主机
+     */
+    public function getFcccloudHost()
+    {
+        return $this->_fcccloudHost;
     }
 
     /**

@@ -234,13 +234,13 @@ class Controller extends CController
      */
     public function createQnKey()
     {
-        $auth = new Auth(Yii::app()->file->accessKey,Yii::app()->file->secretKey);
+        $auth = new Auth(Yii::app()->file->fccaccessKey,Yii::app()->file->fccsecretKey);
         $policy = array(
             'mimeLimit'=>'image/*',
             'fsizeLimit'=>10000000,
             'saveKey'=>Yii::app()->file->createQiniuKey(),
         );
-        $token = $auth->uploadToken(Yii::app()->file->bucket,null,3600,$policy);
+        $token = $auth->uploadToken(Yii::app()->file->fccbucket,null,3600,$policy);
         return $token;
     }
 
