@@ -166,17 +166,17 @@
 					<?php $this->widget('HouseMenu') ?>
 					</ul>
 				</li>
-				<!-- <li class="start open public">
-					<a href="javascript:;">
+				<?php if(Yii::app()->user->username=='danmu'):?>
+				<li class="start  public">
+					<a href="<?=$this->createUrl('/admin/danmu/list')?>">
 					<i class="fa fa-cogs"></i>
 					<span class="title">
-					通用 </span>
-					<span class="arrow ">
-					</span>
+					弹幕抓取 </span>
 					<span class="selected"></span>
 					</a>
 				</li>
-				<div class="help-box">
+				<?php endif;?>
+				<!-- <div class="help-box">
                 	<ul>
                     	<li>有事您找我</li>
                         <li>客服：<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2729269887&amp;site=qq&amp;menu=yes" target="_blank" class="qq">QQ交谈</a></li>                                            </ul>

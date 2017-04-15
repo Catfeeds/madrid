@@ -36,4 +36,9 @@ class NewsController extends HomeController{
 		}
 		$this->render('info',['info'=>$info]);
 	}
+
+	public function actionTest()
+	{
+		$this->render('test');
+	}
 }
