@@ -56,13 +56,13 @@ class FileComponent extends CApplicationComponent
      */
     private $_multi=false;
 
-    public $fccaccessKey = '455piu_kXpr34_uoWwF-f4M5hBrcALf5fFf5T8WR';
+    public $fccaccessKey = 'A8UIugwDbZa0bw0KcWahRv9EMcKzDO_O-3n2Ah8q';
 
-    public $fccsecretKey = 'xHJuZghwAQjC9A1p7D-6_fMN37Jce2RqRA4qo36C';
+    public $fccsecretKey = '5pXninfbX6trKPKoEZu4ySAQvpqYvn8xCP06-Arj';
 
-    public $fccbucket = 'house-lejia5';
+    public $fccbucket = 'lejia';
 
-    private $_fcccloudHost = 'http://omvvphb5p.bkt.clouddn.com/';
+    private $_fcccloudHost = 'http://oofuaem2b.bkt.clouddn.com/';
 
     /**
      * 获得随机文件名，用于要上传的文件
