@@ -21,6 +21,20 @@ class ImageTools extends CComponent
 	}
 
 	/**
+	 * 缩放图像
+	 * @param  string  $value  图片资源数据（如七牛的key值）
+	 * @param  integer $width  图片宽度
+	 * @param  integer $height 图片高度
+	 * @param  integer $mode   图片剪裁模式，0为正方形剪裁，1为等比剪裁缩放
+	 * @return string
+	 */
+	public static function fixImagefcc($value, $width=0, $height=0, $mode=1)
+	{
+		if(strpos($value, 'http')!==false && strpos($value, 'hualongxiang')===false || empty($value)) return $value;
+		return (strpos($value, 'http')===false && Yii::app()->file->enableCloudStorage) ? self::qiniuImagefcc($value, $width, $height, $mode) : self::localImage($value, $width, $height);
+	}
+
+	/**
 	 * 添加七牛水印
 	 * @param  string $url 七牛图片地址
 	 * @return string      带水印的图片地址
@@ -53,6 +67,27 @@ class ImageTools extends CComponent
 	private static function qiniuImage($key, $width=0, $height=0, $mode=1)
 	{
 		$url = Yii::app()->file->host . ltrim($key,'\/');
+		$op = array();
+		if($width>0) $op = array('w',$width);
+		if($height>0) $op = array_merge($op, array('h',$height));
+		if(!empty($op)) {
+			if(strstr($url,'?vframe')) //判断是否为视频截图
+				$url.='|imageView2/'.$mode.'/'.implode('/', $op).'/interlace/1/q/100';
+			else
+				$url .= '?imageView2/'.$mode.'/'.implode('/', $op).'/interlace/1/q/100';
+		}
+		return $url;
+	}
+	/**
+	 * 七牛缩放图像
+	 * @param  string  $key    七牛存储的key值
+	 * @param  integer $width  图片宽度
+	 * @param  integer $height 图片高度
+	 * @return string
+	 */
+	private static function qiniuImagefcc($key, $width=0, $height=0, $mode=1)
+	{
+		$url = Yii::app()->file->fcccloudHost . ltrim($key,'\/');
 		$op = array();
 		if($width>0) $op = array('w',$width);
 		if($height>0) $op = array_merge($op, array('h',$height));

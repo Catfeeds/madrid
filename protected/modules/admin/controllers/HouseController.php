@@ -969,7 +969,7 @@ class HouseController extends AdminController{
         		foreach ($hxs as $t => $hx) {
         			if(!$hx->image||strstr($hx->image,'http'))
         				continue;
-        			$tmp["images[$t]"] = ImageTools::fixImage($hx->image);
+        			$tmp["images[$t]"] = ImageTools::fixImagefcc($hx->image);
         			$tmp["hids[$t]"] = $hx->hid;
         			$tmp["bedrooms[$t]"] = $hx->bedroom;
         			$tmp["titles[$t]"] = $hx->title;
@@ -999,7 +999,7 @@ class HouseController extends AdminController{
 	        		foreach ($imgs as $t => $hx) {
 	        			if(!$hx->url||strstr($hx->url,'http'))
 	        				continue;
-	        			$tmp["urls[$t]"] = ImageTools::fixImage($hx->url);
+	        			$tmp["urls[$t]"] = ImageTools::fixImagefcc($hx->url);
 	        			// $tmp["urls[$t]"] = $hx->url;
 	        			$tmp["hids[$t]"] = $hx->hid;
 	        			$tmp["types[$t]"] = Yii::app()->params['imageTag'][$hx->type];
