@@ -1,32 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "plot".
+ * This is the model class for table "plot_wd".
  *
- * The followings are the available columns in table 'plot':
+ * The followings are the available columns in table 'plot_wd':
  * @property integer $id
- * @property string $title
- * @property string $area
- * @property string $street
- * @property string $image
- * @property string $transit
- * @property string $peripheral
- * @property string $content
- * @property string $url
- * @property integer $code
- * @property string $data_conf
+ * @property integer $pid
+ * @property string $question
+ * @property integer $time
  * @property integer $deleted
  * @property integer $created
  * @property integer $updated
  */
-class Plot extends CActiveRecord
+class PlotWd extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'plot';
+		return 'plot_wd';
 	}
 
 	/**
@@ -38,12 +31,11 @@ class Plot extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('created', 'required'),
-			array('code, deleted, created, updated', 'numerical', 'integerOnly'=>true),
-			array('title, area, street, image, url', 'length', 'max'=>255),
-			array('transit, peripheral, content, data_conf', 'safe'),
+			array('pid, time, deleted, created, updated', 'numerical', 'integerOnly'=>true),
+			array('question', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, area, street, image, transit, peripheral, content, url, code, data_conf, deleted, created, updated', 'safe', 'on'=>'search'),
+			array('id, pid, question, time, deleted, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,16 +57,9 @@ class Plot extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'title' => 'Title',
-			'area' => 'Area',
-			'street' => 'Street',
-			'image' => 'Image',
-			'transit' => 'Transit',
-			'peripheral' => 'Peripheral',
-			'content' => 'Content',
-			'url' => 'Url',
-			'code' => 'Code',
-			'data_conf' => 'Data Conf',
+			'pid' => 'Pid',
+			'question' => 'Question',
+			'time' => 'Time',
 			'deleted' => 'Deleted',
 			'created' => 'Created',
 			'updated' => 'Updated',
@@ -100,16 +85,9 @@ class Plot extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('area',$this->area,true);
-		$criteria->compare('street',$this->street,true);
-		$criteria->compare('image',$this->image,true);
-		$criteria->compare('transit',$this->transit,true);
-		$criteria->compare('peripheral',$this->peripheral,true);
-		$criteria->compare('content',$this->content,true);
-		$criteria->compare('url',$this->url,true);
-		$criteria->compare('code',$this->code);
-		$criteria->compare('data_conf',$this->data_conf,true);
+		$criteria->compare('pid',$this->pid);
+		$criteria->compare('question',$this->question,true);
+		$criteria->compare('time',$this->time);
 		$criteria->compare('deleted',$this->deleted);
 		$criteria->compare('created',$this->created);
 		$criteria->compare('updated',$this->updated);
@@ -123,7 +101,7 @@ class Plot extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Plot the static model class
+	 * @return PlotWd the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

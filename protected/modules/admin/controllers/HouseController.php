@@ -571,8 +571,12 @@ class HouseController extends AdminController{
 		$urlarrr = explode('/', trim($url,'http://'));
 		$hxurl = 'http://'.$urlarrr[0].'/photo/list_900_'.$code.'.htm';
 		// var_dump($plot->attributes);exit;
+		// 抓取资讯
+		$newsurl = 'http://'.$urlarrr[0].'//house/'.$code.'/dongtai.htm';
 		
 		// var_dump($hxurl);exit;
+		$plot->code = $code;
+		$plot->url = 'http://'.$urlarrr[0];
 		if($plot->save()) {
 			if(isset($hxurl) && $hxurl)
 				$this->fetchHx($hxurl,$plot->id);
@@ -581,10 +585,76 @@ class HouseController extends AdminController{
 			if($imageurl) {
 				$this->fetchImage($imageurl,$code,$plot->id);
 			}
+			$this->fetchNews($newsurl,$plot->id);
 			$this->setMessage('保存成功','success');
 		} else{
 			$this->setMessage(current(current($plot->getErrors())),'success');
 		}
+		
+	}
+
+	public function fetchNews($url='',$hid='')
+	{
+		if(!$url)
+			return true;
+		$res = HttpHelper::get($url);
+		$totalHtml = $res['content'];
+		preg_match_all('/<body[.|\s|\S]+body>/', $totalHtml, $results);
+		// 去除script标签
+		$result = str_replace('script', '', $results[0][0]);
+
+		$result = $this->characet($result);
+		preg_match_all('/动态列表 begin-->[.|\s|\S]+动态列表/', $result, $urls);
+		if(isset($urls[0][0]) && $urls = $urls[0][0]) {
+			preg_match_all('/<h1><a href=".+/', $urls, $sizss);
+			if(isset($sizss[0])&&count($sizss[0])) {
+				$uarr = [];
+				foreach ($sizss[0] as $u) {
+					preg_match_all('/http.+htm/', $u, $uu);
+					list($l,$t) = explode('_blank', $u);
+					$t = str_replace('">', '', $t);
+					$t = str_replace('</a></h1>', '', $t);
+					isset($uu[0][0]) && $uarr[] = ['url'=>$uu[0][0],'title'=>$t];
+				}
+				if($uarr) {
+					foreach ($uarr as $u) {
+						$res = HttpHelper::get($u['url']);
+						$totalHtml1 = $res['content'];
+						preg_match_all('/<body[.|\s|\S]+body>/', $totalHtml1, $results);
+						// 去除script标签
+						$result = str_replace('script', '', $results[0][0]);
+						$title = $u['title'];
+						$preg = '/atc-wrapper[.|\s|\S]+fy-wrapper/';
+						preg_match_all($preg, $result, $newss);
+						if(isset($newss[0][0])&&$newss = $newss[0][0]) {
+							$news = new PlotNewsExt;
+							$news->title = $u['title'];
+							// 资讯时间
+							preg_match_all('/<\/span>[.|\s|\S]+<\/h2>/', $newss, $times);
+							if(isset($times[0][0])&&$times = $times[0][0]) {
+								$times = str_replace('</span>', '', $times);
+								$times = str_replace('</h2>', '', $times);
+								$news->time = strtotime(trim($times));
+							}
+							// 资讯内容
+							preg_match_all('/leftboxcom">[.|\s|\S]+<\/div>/', $newss, $times);
+							if(isset($times[0][0])&&$times = $times[0][0]) {
+								$times = str_replace('leftboxcom">', '', $times);
+								$times = str_replace('</div>', '', $times);
+								$times = trim($times);
+
+								// 图片干掉
+								$times = preg_replace('/<img.+["|\s]\/>/', '', $times);
+// var_dump($times);exit;
+								$news->content = $this->characet(trim($times)) ;
+								$news->pid = $hid;
+								$news->save();
+							}
+						}
+					}
+				}
+			}
+		} 
 		
 	}
 
@@ -745,6 +815,26 @@ class HouseController extends AdminController{
 		$criteria->params[':hid'] = $hid;
 		$houses = PlotHxExt::model()->undeleted()->getList($criteria,20);
 		$this->render('hxlist',['infos'=>$houses->data,'pager'=>$houses->pagination,'house'=>$house]);
+	}
+
+	/**
+	 * [actionList 动态列表]
+	 * @param  string $title [description]
+	 * @return [type]        [description]
+	 */
+	public function actionNewslist($hid='')
+	{
+		// $_SERVER['HTTP_REFERER']='http://www.baidu.com';
+		$house = PlotExt::model()->findByPk($hid);
+		if(!$house){
+			$this->redirect('/admin');
+		}
+		$criteria = new CDbCriteria;
+		$criteria->order = 'updated desc,id desc';
+		$criteria->addCondition('pid=:hid');
+		$criteria->params[':hid'] = $hid;
+		$houses = PlotNewsExt::model()->undeleted()->getList($criteria,20);
+		$this->render('newslist',['infos'=>$houses->data,'pager'=>$houses->pagination,'house'=>$house]);
 	}
 
 	/**
@@ -1017,6 +1107,30 @@ class HouseController extends AdminController{
 		        	
         	$this->setMessage('导入成功','success');
         }
+	}
+
+	public function actionDelNews($id='')
+	{
+		$news = PlotNewsExt::model()->findByPk($id);
+		$news->deleted = 1;
+		$news->save();
+		$this->setMessage('操作成功','success');
+	}
+
+	public function actionDelPrice($id='')
+	{
+		$news = PlotPriceExt::model()->findByPk($id);
+		$news->deleted = 1;
+		$news->save();
+		$this->setMessage('操作成功','success');
+	}
+
+	public function actionDelWd($id='')
+	{
+		$news = PlotWdExt::model()->findByPk($id);
+		$news->deleted = 1;
+		$news->save();
+		$this->setMessage('操作成功','success');
 	}
 
 
