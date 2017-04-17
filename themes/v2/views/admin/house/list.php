@@ -37,6 +37,8 @@
                 <a href="<?=$this->createUrl('imagelist',['hid'=>$v->id])?>" class="btn btn-xs red">相册</a>
             	<a href="<?=$this->createUrl('hxlist',['hid'=>$v->id])?>" class="btn btn-xs yellow">户型</a>
                 <a href="<?=$this->createUrl('newslist',['hid'=>$v->id])?>" class="btn btn-xs blue">动态</a>
+                <a href="<?=$this->createUrl('pricelist',['hid'=>$v->id])?>" class="btn btn-xs blue">价格走势</a>
+                <a href="<?=$this->createUrl('wdslist',['hid'=>$v->id])?>" class="btn btn-xs blue">问答</a>
                 <a href="<?php echo $this->createUrl('edit',array('id'=>$v->id,'referrer'=>Yii::app()->request->url)) ?>" class="btn default btn-xs green"><i class="fa fa-edit"></i> 编辑 </a>
                 <?php echo CHtml::htmlButton('删除', array('data-toggle'=>'confirmation', 'class'=>'btn btn-xs red', 'data-title'=>'确认删除？', 'data-btn-ok-label'=>'确认', 'data-btn-cancel-label'=>'取消', 'data-popout'=>true,'ajax'=>array('url'=>$this->createUrl('ajaxDel'),'type'=>'get','success'=>'function(data){location.reload()}','data'=>array('id'=>$v->id))));?>
             </td>

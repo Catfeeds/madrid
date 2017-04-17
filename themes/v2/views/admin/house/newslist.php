@@ -2,6 +2,7 @@
 	$this->pageTitle='动态列表';
 	?>
 	<h2><?=$house->title?></h2>
+    <h2><?php echo CHtml::ajaxLink('抓取楼盘动态',$this->createUrl('moreNews'), array('type'=>'get', 'data'=>array('id'=>$house->id),'success'=>'function(data){location.reload()}'), array('class'=>'btn default')); ?></h2>
 <table class="table table-bordered table-striped table-condensed flip-content">
     <thead class="flip-content">
         <tr>

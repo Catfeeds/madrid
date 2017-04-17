@@ -92,6 +92,9 @@ class PlotExt extends Plot{
         return array(
             'hxs'=>array(self::HAS_MANY, 'PlotHxExt', 'hid'),
             'images'=>array(self::HAS_MANY, 'PlotImageExt', 'hid'),
+            'news'=>array(self::HAS_MANY, 'PlotNewsExt', 'pid','condition'=>'news.deleted=0'),
+            'wds'=>array(self::HAS_MANY, 'PlotWdExt', 'pid','condition'=>'wds.deleted=0'),
+            'prices'=>array(self::HAS_MANY, 'PlotPriceExt', 'pid','condition'=>'prices.deleted=0'),
         );
     }
 

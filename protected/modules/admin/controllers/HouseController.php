@@ -573,6 +573,8 @@ class HouseController extends AdminController{
 		// var_dump($plot->attributes);exit;
 		// 抓取资讯
 		$newsurl = 'http://'.$urlarrr[0].'//house/'.$code.'/dongtai.htm';
+		// 抓取房价走势
+		$pricesurl = 'http://'.$urlarrr[0].'//house/'.$code.'/fangjia.htm';
 		
 		// var_dump($hxurl);exit;
 		$plot->code = $code;
@@ -586,11 +588,110 @@ class HouseController extends AdminController{
 				$this->fetchImage($imageurl,$code,$plot->id);
 			}
 			$this->fetchNews($newsurl,$plot->id);
+			$this->fetchPrices($pricesurl,$plot->id);
 			$this->setMessage('保存成功','success');
 		} else{
 			$this->setMessage(current(current($plot->getErrors())),'success');
 		}
 		
+	}
+
+	public function actionMoreNews($id)
+	{
+		$plot = PlotExt::model()->findByPk($id);
+		if($plot->news) {
+			$this->setMessage('已抓取过','error');
+			return;
+		}
+		$url = $plot->url;
+		$code = $plot->code;
+		$newsurl = "$url/house/$code/dongtai.htm";
+		$this->fetchNews($newsurl,$id);
+		// $this->setMessage('抓取成功');
+
+	}
+
+	public function actionMorePrices($id)
+	{
+		$plot = PlotExt::model()->findByPk($id);
+		if($plot->prices) {
+			$this->setMessage('已抓取过','error');
+			return;
+		}
+		$url = $plot->url;
+		$code = $plot->code;
+		$newsurl = "$url/house/$code/fangjia.htm";
+		$this->fetchPrices($newsurl,$id);
+		// $this->setMessage('抓取成功');
+
+	}
+
+	public function actionMoreWds($id)
+	{
+		$plot = PlotExt::model()->findByPk($id);
+		if($plot->wds) {
+			$this->setMessage('已抓取过','error');
+			return;
+		}
+		$url = $plot->url;
+		$code = $plot->code;
+		$newsurl = "$url/house/dianping";
+		$this->fetchWds($newsurl,$id);
+		// $this->setMessage('抓取成功');
+
+	}
+
+	public function fetchPrices($url='',$hid='')
+	{
+		if(!$url)
+			return true;
+		$res = HttpHelper::get($url);
+		$totalHtml = $res['content'];
+		preg_match_all('/<body[.|\s|\S]+body>/', $totalHtml, $results);
+		// 去除script标签
+		$result = str_replace('script', '', $results[0][0]);
+
+		$result = $this->characet($result);
+		preg_match_all('/价格表格[.|\s|\S]+价格表格/', $result, $tables);
+		if(isset($tables[0][0]) && $tables = $tables[0][0]) {
+			preg_match_all('/<td.+/', $tables, $tds);
+			if(isset($tds[0][0])) {
+				$arrr = implode('<br>', $tds[0]);
+				$ars = explode('class', $arrr);
+				if($ars) {
+					// var_dump($ars); exit;
+					foreach ($ars as $key => $value) {
+						if(strstr($value,'元')) {
+							preg_match_all('/td>[0-9|.]+元\/[\x{4e00}-\x{9fa5}]+<\/td>/u', $value, $prs);
+							if(isset($prs[0][0]) && $prs = $prs[0][0]) {
+								$plotprice = new PlotPriceExt;
+								$plotprice->pid = $hid;
+								// 价格
+								$price = str_replace('td>', '', $prs);
+								$price = str_replace('</td>', '', $price);
+								$plotprice->price = trim($price,'</');
+								// 日期
+								preg_match_all('/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/', $value, $dts);
+								if(isset($dts[0][0]) && $dts = $dts[0][0]) {
+									$plotprice->time = strtotime($dts);
+								}
+								// 描述
+								if(isset($ars[$key+1])) {
+									preg_match_all('/payDeion[^(td)]+/', $ars[$key+1], $dess);
+									if(isset($dess[0][0]) && $dess = $dess[0][0]) {
+										$dess = str_replace('payDeion">', '', $dess);
+										$dess = str_replace('</', '', $dess);
+										$plotprice->description = trim($dess);
+									}
+								}
+								$plotprice->save();
+							}
+						}
+					}
+				}
+			}
+		}
+		$this->setMessage('抓取成功');
 	}
 
 	public function fetchNews($url='',$hid='')
@@ -645,7 +746,7 @@ class HouseController extends AdminController{
 
 								// 图片干掉
 								$times = preg_replace('/<img.+["|\s]\/>/', '', $times);
-// var_dump($times);exit;
+
 								$news->content = $this->characet(trim($times)) ;
 								$news->pid = $hid;
 								$news->save();
@@ -835,6 +936,46 @@ class HouseController extends AdminController{
 		$criteria->params[':hid'] = $hid;
 		$houses = PlotNewsExt::model()->undeleted()->getList($criteria,20);
 		$this->render('newslist',['infos'=>$houses->data,'pager'=>$houses->pagination,'house'=>$house]);
+	}
+
+	/**
+	 * [actionList 价格列表]
+	 * @param  string $title [description]
+	 * @return [type]        [description]
+	 */
+	public function actionPricelist($hid='')
+	{
+		// $_SERVER['HTTP_REFERER']='http://www.baidu.com';
+		$house = PlotExt::model()->findByPk($hid);
+		if(!$house){
+			$this->redirect('/admin');
+		}
+		$criteria = new CDbCriteria;
+		$criteria->order = 'updated desc,id desc';
+		$criteria->addCondition('pid=:hid');
+		$criteria->params[':hid'] = $hid;
+		$houses = PlotPriceExt::model()->undeleted()->getList($criteria,20);
+		$this->render('pricelist',['infos'=>$houses->data,'pager'=>$houses->pagination,'house'=>$house]);
+	}
+
+	/**
+	 * [actionList 问答列表]
+	 * @param  string $title [description]
+	 * @return [type]        [description]
+	 */
+	public function actionWdslist($hid='')
+	{
+		// $_SERVER['HTTP_REFERER']='http://www.baidu.com';
+		$house = PlotExt::model()->findByPk($hid);
+		if(!$house){
+			$this->redirect('/admin');
+		}
+		$criteria = new CDbCriteria;
+		$criteria->order = 'updated desc,id desc';
+		$criteria->addCondition('pid=:hid');
+		$criteria->params[':hid'] = $hid;
+		$houses = PlotPricesExt::model()->undeleted()->getList($criteria,20);
+		$this->render('wdslist',['infos'=>$houses->data,'pager'=>$houses->pagination,'house'=>$house]);
 	}
 
 	/**
