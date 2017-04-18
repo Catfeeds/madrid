@@ -575,6 +575,8 @@ class HouseController extends AdminController{
 		$newsurl = 'http://'.$urlarrr[0].'//house/'.$code.'/dongtai.htm';
 		// 抓取房价走势
 		$pricesurl = 'http://'.$urlarrr[0].'//house/'.$code.'/fangjia.htm';
+		// 抓取问答
+		$wdsurl = 'http://'.$urlarrr[0].'	/dianping.htm';
 		
 		// var_dump($hxurl);exit;
 		$plot->code = $code;
@@ -589,6 +591,7 @@ class HouseController extends AdminController{
 			}
 			$this->fetchNews($newsurl,$plot->id);
 			$this->fetchPrices($pricesurl,$plot->id);
+			$this->fetchWds($wdsurl,$plot->id);
 			$this->setMessage('保存成功','success');
 		} else{
 			$this->setMessage(current(current($plot->getErrors())),'success');
@@ -635,7 +638,7 @@ class HouseController extends AdminController{
 		}
 		$url = $plot->url;
 		$code = $plot->code;
-		$newsurl = "$url/house/dianping";
+		$newsurl = "$url/dianping";
 		$this->fetchWds($newsurl,$id);
 		// $this->setMessage('抓取成功');
 
@@ -757,6 +760,40 @@ class HouseController extends AdminController{
 			}
 		} 
 		
+	}
+
+	public function fetchWds($url='',$hid='')
+	{
+		// var_dump($url);exit;
+		if(!$url)
+			return true;
+		$res = HttpHelper::get($url);
+		$totalHtml = $res['content'];
+		preg_match_all('/<body[.|\s|\S]+body>/', $totalHtml, $results);
+		// 去除script标签
+		$result = str_replace('script', '', $results[0][0]);
+
+		$result = $this->characet($result);
+
+		preg_match_all('/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]/', $result, $times);
+		// var_dump($result);exit;
+		preg_match_all('/dp_content_[0-9]+.+/', $result, $ww);
+		if(isset($ww[0][0])&&$ww = $ww[0]) {
+			foreach ($ww as $key => $value) {
+				preg_match_all('/>.+</', $value, $words);
+				if(isset($words[0][0])&&$words = $words[0][0]) {
+					$wd = new PlotWdExt;
+					$words = trim($words,'<');
+					$words = trim($words,'>');
+					$wd->pid = $hid;
+					$wd->question = $words;
+					$wd->time = strtotime($times[0][$key]);
+					$wd->save();
+				}
+				
+			}
+		}
+		$this->setMessage('抓取成功');
 	}
 
 	/**
@@ -974,8 +1011,8 @@ class HouseController extends AdminController{
 		$criteria->order = 'updated desc,id desc';
 		$criteria->addCondition('pid=:hid');
 		$criteria->params[':hid'] = $hid;
-		$houses = PlotPricesExt::model()->undeleted()->getList($criteria,20);
-		$this->render('wdslist',['infos'=>$houses->data,'pager'=>$houses->pagination,'house'=>$house]);
+		$houses = PlotWdExt::model()->undeleted()->getList($criteria,20);
+		$this->render('wdlist',['infos'=>$houses->data,'pager'=>$houses->pagination,'house'=>$house]);
 	}
 
 	/**
