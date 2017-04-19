@@ -1355,7 +1355,38 @@ class HouseController extends AdminController{
 			$tmp["titles[$t]"] = $v->title;
 		}
 		$res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importPlotNews',$tmp);
-        var_dump($res['content']);exit;
+        // var_dump($res['content']);exit;
+        $res = json_decode($res['content'],true);
+        if(array_keys($res['data'])[0]=='error'){
+        	$this->setMessage($res['data']['error'],'error');
+        	return;
+		}
+		$this->setMessage('导入成功');
+	}
+
+	public function actionEWds($id='')
+	{
+		$prices = PlotExt::model()->findByPk($id)->wds;
+		if($prices) {
+			$this->exportWds($prices);
+		} else{
+			$this->setMessage('没有数据','error');
+		}
+	}
+
+	public function exportWds($prices=[])
+	{
+		$tmp = [];
+		foreach ($prices as $t => $v) {
+			$tmp["hids[$t]"] = $v->pid;
+			$tmp["ids[$t]"] = $v->id;
+			$tmp["cids[$t]"] = 46;
+			$tmp["questions[$t]"] = $v->question;
+			$tmp["times[$t]"] = $v->time;
+			// $tmp["titles[$t]"] = $v->title;
+		}
+		$res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importPlotWds',$tmp);
+        // var_dump($res['content']);exit;
         $res = json_decode($res['content'],true);
         if(array_keys($res['data'])[0]=='error'){
         	$this->setMessage($res['data']['error'],'error');
