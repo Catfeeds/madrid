@@ -1242,12 +1242,89 @@ class HouseController extends AdminController{
 			        if(array_keys($res['data'])[0]=='error'){
 			        	$this->setMessage($res['data']['error'],'error');
 			        	return;
+	        		} elseif($prices = $plot->prices) {
+	        			$this->exportPrices($prices);
 	        		}
 	        	}
         	}
 		        	
         	$this->setMessage('导入成功','success');
         }
+	}
+
+	public function actionEPrices($id='')
+	{
+		$prices = PlotExt::model()->findByPk($id)->prices;
+		if($prices) {
+			$this->exportPrices($prices);
+		} else{
+			$this->setMessage('没有数据','error');
+		}
+	}
+
+	public function exportPrices($prices=[])
+	{
+		$tmp = [];
+		foreach ($prices as $t => $v) {
+			preg_match_all('/[0-9]+/', $v->price, $pss);
+			if(isset($pss[0][0]))
+				$tmp["prices[$t]"] = $pss[0][0]; 
+			else
+				continue;
+			$tmp["hids[$t]"] = $v->pid;
+			$price = $v->price;
+			if(strstr($v->price,'套')) {
+				$tmp["units[$t]"] = 2;
+				$tmp["jglbs[$t]"] = 79;
+			} else {
+				$tmp["units[$t]"] = 1;
+				$tmp["jglbs[$t]"] = 76;
+			}
+			
+
+			$tmp["descriptions[$t]"] = $v->description;
+			$tmp["times[$t]"] = $v->time;
+			// $tmp["titles[$t]"] = $v->title;
+		}
+		$res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importPlotPrices',$tmp);
+        // var_dump($res['content']);exit;
+        $res = json_decode($res['content'],true);
+        if(array_keys($res['data'])[0]=='error'){
+        	$this->setMessage($res['data']['error'],'error');
+        	return;
+		}
+		$this->setMessage('导入成功');
+	}
+
+	public function actionENews($id='')
+	{
+		$prices = PlotExt::model()->findByPk($id)->news;
+		if($prices) {
+			$this->exportNews($prices);
+		} else{
+			$this->setMessage('没有数据','error');
+		}
+	}
+
+	public function exportNews($prices=[])
+	{
+		$tmp = [];
+		foreach ($prices as $t => $v) {
+			$tmp["hids[$t]"] = $v->pid;
+			$tmp["ids[$t]"] = $v->id;
+			$tmp["cids[$t]"] = 2;
+			$tmp["contents[$t]"] = $v->content;
+			$tmp["times[$t]"] = $v->time;
+			$tmp["titles[$t]"] = $v->title;
+		}
+		$res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importPlotNews',$tmp);
+        var_dump($res['content']);exit;
+        $res = json_decode($res['content'],true);
+        if(array_keys($res['data'])[0]=='error'){
+        	$this->setMessage($res['data']['error'],'error');
+        	return;
+		}
+		$this->setMessage('导入成功');
 	}
 
 	public function actionDelNews($id='')

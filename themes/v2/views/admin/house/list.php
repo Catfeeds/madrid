@@ -20,7 +20,7 @@
             <th class="text-center">标题</th>
             <th class="text-center">区域</th>
             <th class="text-center">创建时间</th>
-            <!-- <th class="text-center">状态</th> -->
+            <th class="text-center">导入价格信息问答</th>
             <th class="text-center">操作</th>
         </tr>
     </thead>
@@ -31,6 +31,11 @@
             <td  class="text-center"><?php echo $v->title ?></td>
             <td class="text-center"><?php echo $v->area.'-'.$v->street; ?></td>
             <td class="text-center"><?php echo date('Y-m-d',$v->created); ?></td>
+            <td class="text-center">
+                <?php echo CHtml::ajaxLink('导入价格',$this->createUrl('ePrices'), array('type'=>'get', 'data'=>array('id'=>$v->id),'success'=>'function(data){location.reload()}'), array('class'=>'btn btn-xs default')); ?>
+                <?php echo CHtml::ajaxLink('导入动态',$this->createUrl('eNews'), array('type'=>'get', 'data'=>array('id'=>$v->id),'success'=>'function(data){location.reload()}'), array('class'=>'btn btn-xs default')); ?>
+                <?php echo CHtml::ajaxLink('导入问答',$this->createUrl('eWds'), array('type'=>'get', 'data'=>array('id'=>$v->id),'success'=>'function(data){location.reload()}'), array('class'=>'btn btn-xs default')); ?>
+            </td>
             <td  class="text-center">
                 <a href="<?=$this->createUrl('dealimage',['hid'=>$v->id])?>" class="btn btn-xs default">处理图片</a>
                 <?php echo CHtml::ajaxLink('导入到新系统',$this->createUrl('tohj'), array('type'=>'get', 'data'=>array('hid'=>$v->id),'success'=>'function(data){location.reload()}'), array('class'=>'btn btn-xs default')); ?>
