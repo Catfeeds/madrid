@@ -1323,7 +1323,7 @@ class HouseController extends AdminController{
 			$tmp["times[$t]"] = $v->time;
 			// $tmp["titles[$t]"] = $v->title;
 		}
-		$res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importPlotPrices',$tmp);
+		$res = HttpHelper::post('http://www.fangcc.cn/rest/importPlotPrices',$tmp);
         // var_dump($res['content']);exit;
         $res = json_decode($res['content'],true);
         if(array_keys($res['data'])[0]=='error'){
@@ -1354,7 +1354,7 @@ class HouseController extends AdminController{
 			$tmp["times[$t]"] = $v->time;
 			$tmp["titles[$t]"] = $v->title;
 		}
-		$res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importPlotNews',$tmp);
+		$res = HttpHelper::post('http://www.fangcc.cn/rest/importPlotNews',$tmp);
         // var_dump($res['content']);exit;
         $res = json_decode($res['content'],true);
         if(array_keys($res['data'])[0]=='error'){
@@ -1383,9 +1383,9 @@ class HouseController extends AdminController{
 			$tmp["cids[$t]"] = 46;
 			$tmp["questions[$t]"] = $v->question;
 			$tmp["times[$t]"] = $v->time;
-			// $tmp["titles[$t]"] = $v->title;
+			$tmp["answers[$t]"] = '感谢您的点评！';
 		}
-		$res = HttpHelper::post('http://myhouse.hualongxiang.com/rest/importPlotWds',$tmp);
+		$res = HttpHelper::post('http://www.fangcc.cn/rest/importPlotWds',$tmp);
         // var_dump($res['content']);exit;
         $res = json_decode($res['content'],true);
         if(array_keys($res['data'])[0]=='error'){
