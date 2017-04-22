@@ -1170,7 +1170,7 @@ class HouseController extends AdminController{
         if(strstr($tmp['image'],'http')){
             $tmp['image'] = $this->sfImage($tmp['image'],$tmp['image']);
         }
-        $tmp['image'] && $tmp['image'] = trim(Yii::app()->file->host,'/').$tmp['image'];
+        $tmp['image'] && $tmp['image'] = ImageTools::fixImagefcc($tmp['image'],600,400);;
         // if(!is_numeric($tmp['area']))
         //     continue;
         if(!isset($tmp_jzlb))
@@ -1380,7 +1380,7 @@ class HouseController extends AdminController{
 		foreach ($prices as $t => $v) {
 			$tmp["hids[$t]"] = $v->pid;
 			$tmp["ids[$t]"] = $v->id;
-			$tmp["cids[$t]"] = 46;
+			$tmp["cids[$t]"] = 47;
 			$v->question = preg_replace('/href="[^>]+"/', '', $v->question);
 
 			$tmp["questions[$t]"] = $v->question;
