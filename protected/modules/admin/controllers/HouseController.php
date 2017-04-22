@@ -1381,6 +1381,8 @@ class HouseController extends AdminController{
 			$tmp["hids[$t]"] = $v->pid;
 			$tmp["ids[$t]"] = $v->id;
 			$tmp["cids[$t]"] = 46;
+			$v->question = preg_replace('/href="[^>]+"/', '', $v->question);
+
 			$tmp["questions[$t]"] = $v->question;
 			$tmp["times[$t]"] = $v->time;
 			$tmp["answers[$t]"] = '感谢您的点评！';
@@ -1411,7 +1413,7 @@ class HouseController extends AdminController{
 		$this->setMessage('操作成功','success');
 	}
 
-	public function actionDelWd($id='')
+	public function actionDelWds($id='')
 	{
 		$news = PlotWdExt::model()->findByPk($id);
 		$news->deleted = 1;
