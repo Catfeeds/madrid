@@ -568,7 +568,8 @@ class HouseController extends AdminController{
 				$hxurl = $urlar[0] . 'com/' . $urls;
 			}
 		}
-		$urlarrr = explode('/', trim($url,'http://'));
+		$al = str_replace('http://', '', $url);
+		$urlarrr = explode('/', $al);
 		$hxurl = 'http://'.$urlarrr[0].'/photo/list_900_'.$code.'.htm';
 		// var_dump($plot->attributes);exit;
 		// 抓取资讯
@@ -1350,6 +1351,7 @@ class HouseController extends AdminController{
 			$tmp["hids[$t]"] = $v->pid;
 			$tmp["ids[$t]"] = $v->id;
 			$tmp["cids[$t]"] = 2;
+			$v->content = preg_replace('/href="[^>]+"/', '', $v->content);
 			$tmp["contents[$t]"] = $v->content;
 			$tmp["times[$t]"] = $v->time;
 			$tmp["titles[$t]"] = $v->title;
