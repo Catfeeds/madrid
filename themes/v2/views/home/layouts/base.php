@@ -74,7 +74,7 @@
                 $('#qrcode').append('<img src="<?=ImageTools::fixImage(SiteExt::getAttr('qjpz','wxQr'),220,220)?>">');
             }
             $(document).ready(function(){
-                $('.hide').next().remove();
+                // $('.hide').next().remove();
             });
         </script>
         <div class="hide">
