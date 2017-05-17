@@ -37,7 +37,8 @@ class PlotExt extends Plot{
         'jzlb'=>'',
         'xmts'=>'',
         'zxzt'=>'',
-        ''
+        'is_new'=>'',
+        // ''
     ];
 
 

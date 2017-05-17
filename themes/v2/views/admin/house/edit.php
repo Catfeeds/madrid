@@ -3,6 +3,14 @@
 	?>
 <?php $form = $this->beginWidget('HouseForm', array('htmlOptions' => array('class' => 'form-horizontal'))) ?>
 <div class="form-group">
+	    <label class="col-md-2 control-label"><?='是否新盘'?></label>
+	    <div class="col-md-4">
+	    <div class="radio-list">
+	    	<?php echo $form->RadioButtonList($house, 'is_new', [0=>'否','1'=>'是'],array('class'=>'radio-inline', 'separator'=>'&nbsp;&nbsp;','template'=>'<label>{input} {label}</label>')); ?>
+	    </div></div>
+	    <div class="col-md-2"><?php echo $form->error($house, 'area') ?></div>
+	</div>
+<div class="form-group">
 	    <label class="col-md-2 control-label"><?='区域'?></label>
 	    <div class="col-md-4">
 	    	<?php echo $form->textField($house, 'area', array('class' => 'form-control')); ?>

@@ -13,22 +13,31 @@ class AdminIdentity extends CUserIdentity
 	public function authenticate()
 	{
 		//内置帐号
-		if($this->username=='house' && ($this->password=='house2017'))
+		if($this->username=='tivon' && ($this->password=='tivon123'))
 		{
 			$this->errorCode = self::ERROR_NONE;
-			$this->setState('id',1);
-			$this->setState('username','admin');
+			// $this->setState('id',1);
+			$this->setState('username','tivon');
 			$this->setState('avatar','');
 			return $this->errorCode;
-		}
-
-		if($this->username=='danmu' && ($this->password=='danmu2017'))
+		} elseif($this->username=='danmu' && ($this->password=='danmu2017'))
 		{
 			$this->errorCode = self::ERROR_NONE;
-			$this->setState('id',2);
+			// $this->setState('id',2);
 			$this->setState('username','danmu');
 			$this->setState('avatar','');
 			return $this->errorCode;
+		} else {
+			if($pu = PlotUserExt::model()->undeleted()->find(['condition'=>'name=:name','params'=>[':name'=>$this->username]])) {
+				// var_dump($pu->pwd,md5($this->password));exit;
+				if(strtolower($pu->pwd) == md5($this->password)) {
+					$this->errorCode = self::ERROR_NONE;
+					$this->setState('id',$pu->id);
+					$this->setState('username',$pu->name);
+					$this->setState('avatar','');
+					return $this->errorCode;
+				}
+			}
 		}
 
 		$this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
