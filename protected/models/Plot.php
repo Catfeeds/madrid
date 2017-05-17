@@ -9,6 +9,7 @@
  * @property string $area
  * @property string $street
  * @property string $image
+ * @property integer $uid
  * @property string $transit
  * @property string $peripheral
  * @property string $content
@@ -38,12 +39,12 @@ class Plot extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('created', 'required'),
-			array('code, deleted, created, updated', 'numerical', 'integerOnly'=>true),
+			array('uid, code, deleted, created, updated', 'numerical', 'integerOnly'=>true),
 			array('title, area, street, image, url', 'length', 'max'=>255),
 			array('transit, peripheral, content, data_conf', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, area, street, image, transit, peripheral, content, url, code, data_conf, deleted, created, updated', 'safe', 'on'=>'search'),
+			array('id, title, area, street, image, uid, transit, peripheral, content, url, code, data_conf, deleted, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,6 +70,7 @@ class Plot extends CActiveRecord
 			'area' => 'Area',
 			'street' => 'Street',
 			'image' => 'Image',
+			'uid' => 'Uid',
 			'transit' => 'Transit',
 			'peripheral' => 'Peripheral',
 			'content' => 'Content',
@@ -104,6 +106,7 @@ class Plot extends CActiveRecord
 		$criteria->compare('area',$this->area,true);
 		$criteria->compare('street',$this->street,true);
 		$criteria->compare('image',$this->image,true);
+		$criteria->compare('uid',$this->uid);
 		$criteria->compare('transit',$this->transit,true);
 		$criteria->compare('peripheral',$this->peripheral,true);
 		$criteria->compare('content',$this->content,true);

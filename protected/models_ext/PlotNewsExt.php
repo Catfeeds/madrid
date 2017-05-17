@@ -11,7 +11,7 @@ class PlotNewsExt extends PlotNews{
     public function relations()
     {
         return array(
-            // 'baike'=>array(self::BELONGS_TO, 'BaikeExt', 'bid'),
+            'plot'=>array(self::BELONGS_TO, 'PlotExt', 'pid'),
         );
     }
 

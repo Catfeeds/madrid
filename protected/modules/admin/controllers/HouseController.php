@@ -1355,6 +1355,7 @@ class HouseController extends AdminController{
 			$tmp["contents[$t]"] = $v->content;
 			$tmp["times[$t]"] = $v->time;
 			$tmp["titles[$t]"] = $v->title;
+			$tmp["images[$t]"] = isset($v->plot->image)?ImageTools::fixImagefcc($v->plot->image):'';
 		}
 		$res = HttpHelper::post('http://www.fangcc.cn/rest/importPlotNews',$tmp);
         // var_dump($res['content']);exit;
@@ -1407,7 +1408,7 @@ class HouseController extends AdminController{
 		$this->setMessage('操作成功','success');
 	}
 
-	public function actionDelPrice($id='')
+	public function actionDelPrices($id='')
 	{
 		$news = PlotPriceExt::model()->findByPk($id);
 		$news->deleted = 1;
