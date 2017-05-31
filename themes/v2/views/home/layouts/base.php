@@ -16,6 +16,9 @@
 <link rel="stylesheet" type="text/css"  href="<?=Yii::app()->theme->baseUrl?>/static/vip/pc/css/376.css">
 <script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/static/vip/pc/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/static/vip/pc/js/org1480746227.js" data-main="<?=$this->banner?'baseMain':'indexMain'?>"></script>
+<style>
+    a[href="http://www.uemo.net"]{display:none}
+</style>
 </head>
     <body class="<?=$this->banner?>">
         <div id="header" class="<?=$this->banner?'':'index_nav'?>">
