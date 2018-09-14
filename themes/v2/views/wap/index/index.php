@@ -197,7 +197,7 @@
             <div id="contactlist">
                 <div id="contactinfo">
                     <h3 class="ellipsis name">常州马德里公馆</h3>
-                    <p class="ellipsis add"><span>地点：</span>常州市钟楼区龙江中路169号</p>
+                    <p class="ellipsis add"><span>地点：</span>常州新北区惠国路山水和园北门3-1</p>
                     <p class="ellipsis zip"><span>邮编：</span>213000</p>
                     <p class="ellipsis tel"><span>手机：</span><a href='tel:<?=SiteExt::getAttr('qjpz','sitePhone')?>'><?=SiteExt::getAttr('qjpz','sitePhone')?></a></p>
                     <p class="ellipsis mobile"><span>微信：</span>madrid_cz</p>

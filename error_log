@@ -1,0 +1,2 @@
+[Mon Aug 14 14:30:24.897115 2017] [:error] [pid 24165] [client 127.0.0.1:57201] PHP Fatal error:  Class 'SiteExt' not found in /usr/sites/house/protected/modules/home/components/HomeController.php on line 122
+[Mon Aug 14 14:30:24.927457 2017] [:error] [pid 24165] [client 127.0.0.1:57201] PHP Fatal error:  Class 'SiteExt' not found in /usr/sites/house/protected/modules/home/components/HomeController.php on line 122
