@@ -28,7 +28,7 @@ class AdminIdentity extends CUserIdentity
 			$this->setState('avatar','');
 			return $this->errorCode;
 		} else {
-			if($pu = PlotUserExt::model()->undeleted()->find(['condition'=>'name=:name','params'=>[':name'=>$this->username]])) {
+			if($pu = PlotUserExt::model()->find(['condition'=>'name=:name','params'=>[':name'=>$this->username]])) {
 				// var_dump($pu->pwd,md5($this->password));exit;
 				if(strtolower($pu->pwd) == md5($this->password)) {
 					$this->errorCode = self::ERROR_NONE;
